@@ -5,8 +5,11 @@ const nextConfig = {
   reactStrictMode: true,
   basePath: process.env.NODE_ENV === 'production' ? process.env.NEXT_PUBLIC_BASEPATH : "",
   i18n,
-  reactStrictMode: true,
-}
+  images: {
+    domains: ['enzpacmxxlkvnoyuqtyv.supabase.co'],
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
+
 

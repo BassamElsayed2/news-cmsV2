@@ -4,10 +4,15 @@ import "../styles/elements/_language-switcher.css"
 import ColorSwitcher from "../common/elements/color-switcher/ColorSwitcher";
 import { useRouter } from "next/router";
 import { appWithTranslation } from "next-i18next";
-import { useEffect } from "react";
 import { IntlProvider } from "next-intl";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { useState, useEffect } from 'react';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+
+
 function MyApp({ Component, pageProps }) {
   const {locale} = useRouter();
+    const [queryClient] = useState(() => new QueryClient())
   
   useEffect(() => {
     // ضبط الاتجاه بناءً على اللغة
@@ -20,9 +25,12 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
+     <QueryClientProvider client={queryClient}>
     <IntlProvider locale={locale} messages={pageProps.messages}>
       <Component {...pageProps} />
       </IntlProvider>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
     </>
   );
 }

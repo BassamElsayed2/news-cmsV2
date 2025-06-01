@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Tab from "react-bootstrap/Tab";
@@ -7,74 +7,80 @@ import { SectionTitleOne } from "../../elements/sectionTitle/SectionTitle";
 import { slugify } from "../../utils";
 import { useTranslation } from "next-i18next";
 import { useLocale } from "next-intl";
+import { useQuery } from "@tanstack/react-query";
+import { getNews } from "../../../../services/apiNews";
 
-const filters = [
-  {
-    id: 1,
-    cate: "Gadget",
-  },
-  {
-    id: 2,
-    cate: "Technology",
-  },
-  {
-    id: 3,
-    cate: "Design",
-  },
-  {
-    id: 4,
-    cate: "Products",
-  },
-];
+const PostSectionTen = () => {
+  const { data: postData = [], isLoading, error } = useQuery({
+    queryKey: ["news"],
+    queryFn: getNews,
+  });
 
-const defaultActiveCat = slugify(filters[0].cate);
+  const [activeNav, setActiveNav] = useState("");
+  const [tabPostData, setTabPostData] = useState([]);
+  const [categories, setCategories] = useState([]);
 
-const PostSectionTen = ({ postData }) => {
-  const defaultData = postData.filter(
-    (post) => slugify(post.cate) === defaultActiveCat
-  );
+  const locale = useLocale();
+  const { t } = useTranslation("common");
 
-  const [activeNav, setActiveNav] = useState(defaultActiveCat);
-  const [tabPostData, setTabPostData] = useState(defaultData);
+  useEffect(() => {
+    if (!Array.isArray(postData) || postData.length === 0) return;
 
-  const handleChange = (e) => {
-    let filterText = slugify(e.target.textContent);
-    setActiveNav(filterText);
+    const extracted = [...new Set(postData.map((post) => post.status).filter(Boolean))];
+    setCategories(["all", "normal", ...extracted]);
 
-    let tempData = [];
+    if (!activeNav) {
+      setActiveNav("all");
+    }
+  }, [postData]);
 
-    for (let i = 0; i < postData.length; i++) {
-      const element = postData[i];
-      let categories = element["cate"];
+  useEffect(() => {
+    if (!Array.isArray(postData) || postData.length === 0) return;
 
-      if (slugify(categories).includes(filterText)) {
-        tempData.push(element);
-      }
+    let filtered = [];
+
+    if (activeNav === "all") {
+      filtered = postData;
+    } else if (activeNav === "normal") {
+      filtered = postData.filter((post) => !post.status || post.status === "");
+    } else {
+      filtered = postData.filter(
+        (post) => post.status && slugify(post.status) === activeNav
+      );
     }
 
-    setTabPostData(tempData);
-  };
+    setTabPostData(filtered);
+  }, [postData, activeNav]);
+
+  if (isLoading) return <p>{t("loading")}</p>;
+  if (error) return <p>{t("loadingerror")}</p>;
+  if (!tabPostData.length) return <p>{t("noData")}</p>;
 
   const firstPost = tabPostData[0];
-const locale = useLocale()
-const { t } = useTranslation('common');
-console.log("Locale: ", locale);
+
+  const getImageSrc = (img) => {
+    if (Array.isArray(img)) return img[0] || "";
+    if (typeof img === "string") return img;
+    return "";
+  };
+console.log ("all", postData);
 
   return (
     <div className="axil-post-grid-area axil-section-gap bg-color-white">
       <div className="container">
-        <SectionTitleOne title={t('sectionTitle')} />
+        <SectionTitleOne title={t("sectionTitle")} />
         <div className="row">
           <div className="col-lg-12">
-            <Tab.Container id="axilTab" defaultActiveKey={activeNav}>
+            <Tab.Container id="axilTab" activeKey={activeNav} onSelect={(k) => setActiveNav(k)}>
               <Nav className="axil-tab-button nav nav-tabs mt--20">
-                {filters.map((data) => (
-                  <Nav.Item key={data.id}>
-                    <Nav.Link
-                      onClick={handleChange}
-                      eventKey={slugify(data.cate)}
-                    >
-                      {data.cate}
+                {categories.map((cate) => (
+                  <Nav.Item key={slugify(cate)}>
+                    <Nav.Link eventKey={slugify(cate)}>
+                      {cate === "all"
+                        ? "All"
+                        : cate === "normal"
+                        ? "Normal"
+                        : cate}
                     </Nav.Link>
                   </Nav.Item>
                 ))}
@@ -83,92 +89,158 @@ console.log("Locale: ", locale);
               <Tab.Content className="grid-tab-content mt--10">
                 <Tab.Pane className="single-post-grid" eventKey={activeNav}>
                   <div className="row mt--40">
-                    <div className="col-xl-5 col-lg-6 col-md-12 col-12">
-                      {tabPostData.slice(1, 5).map((data) => (
+                    {/* الصورة الكبيرة */}
+                    <div
+                      className="col-xl-7 col-lg-7 col-md-12 col-12 mb-4"
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <div
+                        className="content-block content-block post-grid post-grid-transparent"
+                        style={{
+                          boxShadow: "0 2px 8px rgb(0 0 0 / 0.1)",
+                          borderRadius: "8px",
+                          overflow: "hidden",
+                          height: "100%",
+                          display: "flex",
+                          flexDirection: "column",
+                        }}
+                      >
                         <div
-                          className="content-block post-medium post-medium-border border-thin"
-                          key={data.slug}
+                          className="post-thumbnail mb-3"
+                          style={{ position: "relative", height: "400px", width: "100%" }}
                         >
-                          <div className="post-thumbnail">
-                            <Link href={`/post/${data.slug}`}>
-                              <a>
+                          <Link href={`/post/${firstPost.slug}`}>
+                            <a style={{ display: "block", height: "100%", width: "100%" }}>
+                              {getImageSrc(firstPost.images) ? (
                                 <Image
-                                  src={data.featureImg}
-                                  alt={data.title}
-                                  height={100}
-                                  width={100}
+                                  src={getImageSrc(firstPost.images)}
+                                  alt={locale === "en" ? firstPost.title_en : firstPost.title_ar}
+                                  layout="fill"
+                                  objectFit="cover"
                                   priority={true}
+                                  style={{ borderRadius: "8px 8px 0 0" }}
                                 />
+                              ) : (
+                                <div
+                                  style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    backgroundColor: "#ccc",
+                                  }}
+                                />
+                              )}
+                            </a>
+                          </Link>
+                        </div>
+                        <div
+                          className="post-content px-3 pb-3"
+                          style={{ flexGrow: 1, display: "flex", flexDirection: "column", justifyContent: "center" }}
+                        >
+                          <div className="post-cat mb-2">
+                            <Link href={`/category/${slugify(firstPost.status || "")}`}>
+                              <a
+                                className="hover-flip-item-wrapper text-muted small"
+                                style={{ textTransform: "capitalize", fontWeight: "600" }}
+                              >
+                                <span>{firstPost.status || "Normal"}</span>
                               </a>
                             </Link>
                           </div>
-                          <div className="post-content">
-                            <div className="post-cat">
-                              <div className="post-cat-list">
-                                <Link href={`/category/${slugify(data.cate)}`}>
-                                  <a className="hover-flip-item-wrapper">
-                                    <span className="hover-flip-item">
-                                      <span data-text={data.cate}>
-                                        {data.cate}
-                                      </span>
-                                    </span>
-                                  </a>
-                                </Link>
-                              </div>
-                            </div>
-                            <h4 className="title">
-                              <Link href={`/post/${data.slug}`}>
-                                <a>{data.title}</a>
+                          <h3 className="title" style={{ fontWeight: "700", fontSize: "1.8rem" }}>
+                            <Link href={`/post/${firstPost.slug}`}>
+                              <a style={{ color: "#222", textDecoration: "none" }}>
+                                {locale === "en" ? firstPost.title_en : firstPost.title_ar}
+                              </a>
+                            </Link>
+                          </h3>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* باقي الأخبار */}
+                    <div
+                      className="col-xl-5 col-lg-5 col-md-12 col-12"
+                      style={{ display: "flex", flexDirection: "column", gap: "20px" }}
+                    >
+                      {tabPostData.slice(1, 5).map((data) => (
+                        <div
+                          className="content-block post-small d-flex align-items-center"
+                          key={data.slug}
+                          style={{
+                            boxShadow: "0 1px 6px rgb(0 0 0 / 0.1)",
+                            borderRadius: "8px",
+                            overflow: "hidden",
+                            padding: "10px",
+                            gap: "12px",
+                            backgroundColor: "#fafafa",
+                          }}
+                        >
+                          <div
+                            className="post-thumbnail"
+                            style={{
+                              flexShrink: 0,
+                              width: "120px",
+                              height: "90px",
+                              position: "relative",
+                              borderRadius: "6px",
+                              overflow: "hidden",
+                            }}
+                          >
+                            <Link href={`/post/${data.slug}`}>
+                              <a>
+                                {getImageSrc(data.images) ? (
+                                  <Image
+                                    src={getImageSrc(data.images)}
+                                    alt={locale === "en" ? data.title_en : data.title_ar}
+                                    layout="fill"
+                                    objectFit="cover"
+                                    className="rounded"
+                                  />
+                                ) : (
+                                  <div
+                                    style={{
+                                      width: "100%",
+                                      height: "100%",
+                                      backgroundColor: "#ddd",
+                                    }}
+                                  />
+                                )}
+                              </a>
+                            </Link>
+                          </div>
+                          <div className="post-content" style={{ flex: 1 }}>
+                            <div className="post-cat mb-1">
+                              <Link href={`/category/${slugify(data.status || "")}`}>
+                                <a
+                                  className="text-muted small"
+                                  style={{ textTransform: "capitalize", fontWeight: "600" }}
+                                >
+                                  {data.status || "Normal"}
+                                </a>
                               </Link>
-                            </h4>
+                            </div>
+                            <h5
+                              className="title mb-0"
+                              style={{
+                                fontWeight: "600",
+                                fontSize: "1.1rem",
+                                lineHeight: "1.3",
+                                color: "#333",
+                              }}
+                            >
+                              <Link href={`/post/${data.slug}`}>
+                                <a style={{ color: "#333", textDecoration: "none" }}>
+                                  {locale === "en" ? data.title_en : data.title_ar}
+                                </a>
+                              </Link>
+                            </h5>
                           </div>
                         </div>
                       ))}
-                    </div>
-                    <div className="col-xl-7 col-lg-6 col-md-12 col-12 mt_md--40 mt_sm--40">
-                      <div className="content-block content-block post-grid post-grid-transparent">
-                        {firstPost.featureImg ? (
-                          <div className="post-thumbnail">
-                            <Link href={`/post/${firstPost.slug}`}>
-                              <a>
-                                <Image
-                                  src={firstPost.featureImg}
-                                  alt={firstPost.title}
-                                  height={660}
-                                  width={705}
-                                  priority={true}
-                                />
-                              </a>
-                            </Link>
-                          </div>
-                        ) : (
-                          ""
-                        )}
-                        <div className="post-grid-content">
-                          <div className="post-content">
-                            <div className="post-cat">
-                              <div className="post-cat-list">
-                                <Link
-                                  href={`/category/${slugify(firstPost.cate)}`}
-                                >
-                                  <a className="hover-flip-item-wrapper">
-                                    <span className="hover-flip-item">
-                                      <span data-text={firstPost.cate}>
-                                        {firstPost.cate}
-                                      </span>
-                                    </span>
-                                  </a>
-                                </Link>
-                              </div>
-                            </div>
-                            <h3 className="title">
-                              <Link href={`/post/${firstPost.slug}`}>
-                                <a>{firstPost.title}</a>
-                              </Link>
-                            </h3>
-                          </div>
-                        </div>
-                      </div>
                     </div>
                   </div>
                 </Tab.Pane>

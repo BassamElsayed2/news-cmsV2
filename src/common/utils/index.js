@@ -1,60 +1,95 @@
-import React, { useEffect, useState } from 'react';
-import { DateTime } from 'luxon'
+import React, { useEffect } from 'react';
+import { DateTime } from 'luxon';
 
 const slugify = function(text) {
-    return text
-      .toString()
-      .toLowerCase()
-      .replace(/\s+/g, '-') // Replace spaces with -
-      .replace(/[^\w-]+/g, '') // Remove all non-word chars
-      .replace(/--+/g, '-') // Replace multiple - with single -
-      .replace(/^-+/, '') // Trim - from start of text
-      .replace(/-+$/, '') // Trim - from end of text
+  if (!text) return "";
+  return text
+    .toString()
+    .normalize("NFD") // فصل التشكيل والحروف المركبة
+    .replace(/[\u0300-\u036f]/g, "") // إزالة التشكيل
+    .toLowerCase()
+    .replace(/\s+/g, '-') 
+    .replace(/[^\w-]+/g, '') 
+    .replace(/--+/g, '-') 
+    .replace(/^-+/, '') 
+    .replace(/-+$/, '');
 }
 
 function removeDuplicates(originalArray, prop) {
-  var newArray = [];
-  var lookupObject  = {};
-
-  for(var i in originalArray) {
-     lookupObject[originalArray[i][prop]] = originalArray[i];
-  }
-
-  for(i in lookupObject) {
-      newArray.push(lookupObject[i]);
-  }
-   return newArray;
+  const lookupObject = {};
+  originalArray.forEach(item => {
+    lookupObject[item[prop]] = item;
+  });
+  return Object.values(lookupObject);
 }
 
 const SortingByDate = function(posts) {
-  return posts
-  .sort((post1, post2) => {
-
+  return posts.sort((post1, post2) => {
     const beforeDate = DateTime.fromFormat(post1.date, "LLL dd yyyy");
     const afterDate = DateTime.fromFormat(post2.date, "LLL dd yyyy");
-    return afterDate - beforeDate;
-    
-})
+    return afterDate - beforeDate; // نزولياً من الأحدث للأقدم
+  });
+}
+
+function filterPostsByActiveNav(postData, activeNav) {
+  if (!postData || !Array.isArray(postData)) return [];
+  return postData.filter((post) => {
+    const slug = slugify(post.status);
+    console.log("🔍 مقارنة:", slug, "==", activeNav);
+    return slug === activeNav;
+  });
+}
+
+function extractCategories(postData) {
+  if (!postData || !Array.isArray(postData)) return [];
+  const extracted = [...new Set(
+    postData.map((post) => {
+      console.log("📂 التصنيف الأصلي:", post.status);
+      console.log("🔗 بعد slugify:", slugify(post.status));
+      return post.status;
+    }).filter(Boolean)
+  )];
+  return extracted;
 }
 
 const HoverActiveClass = function(hoverRef) {
-	const [refLists, setrefLists] = useState([]);
-	
-	useEffect(() => {
-		const refContainer = hoverRef.current.childNodes;
-		setrefLists(refContainer);
-	}, []);
+  useEffect(() => {
+    if (!hoverRef.current) return;
 
-	refLists.forEach((f) => {
-		f.addEventListener("mouseenter", function () {
-			refLists.forEach((e) => {
-				var div = e.querySelector(".content-block");
-				div.classList.add("axil-control");
-				div.classList.remove("is-active");
-			});
-			this.querySelector(".content-block").classList.add("is-active");
-		})
-	});
+    const refContainer = Array.from(hoverRef.current.childNodes);
+    
+    function onMouseEnter() {
+      refContainer.forEach(e => {
+        const div = e.querySelector(".content-block");
+        if (div) {
+          div.classList.add("axil-control");
+          div.classList.remove("is-active");
+        }
+      });
+      const currentDiv = this.querySelector(".content-block");
+      if (currentDiv) {
+        currentDiv.classList.add("is-active");
+      }
+    }
+
+    refContainer.forEach(f => {
+      f.addEventListener("mouseenter", onMouseEnter);
+    });
+
+    // Cleanup لإزالة الـ event listeners عند فك المكون
+    return () => {
+      refContainer.forEach(f => {
+        f.removeEventListener("mouseenter", onMouseEnter);
+      });
+    };
+  }, [hoverRef]);
 }
 
-export {slugify, removeDuplicates, SortingByDate, HoverActiveClass};
+export { 
+  slugify, 
+  removeDuplicates, 
+  SortingByDate, 
+  filterPostsByActiveNav, 
+  extractCategories, 
+  HoverActiveClass 
+};
