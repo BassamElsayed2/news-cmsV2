@@ -3,7 +3,7 @@ import Image from "next/image";
 import { slugify } from "../../../utils";
 const PostLayoutTwo = ({ dataPost, postStart, show, bgColor }) => { 
   return (
-    <>
+    <> {/* hi* */}
       {dataPost.slice(postStart || 0, show).map((data) => (
         <div
           className={`content-block post-list-view axil-control mt--30 ${bgColor || ""} ${data.sticky === true ? "sticky": ""} ${data.postFormat === 'quote' ? "format-quote" : ""}`}
