@@ -63,7 +63,6 @@ const PostSectionTen = () => {
     if (typeof img === "string") return img;
     return "";
   };
-console.log ("all", postData);
 
   return (
     <div className="axil-post-grid-area axil-section-gap bg-color-white">
@@ -76,11 +75,7 @@ console.log ("all", postData);
                 {categories.map((cate) => (
                   <Nav.Item key={slugify(cate)}>
                     <Nav.Link eventKey={slugify(cate)}>
-                      {cate === "all"
-                        ? "All"
-                        : cate === "normal"
-                        ? "Normal"
-                        : cate}
+                      {cate === "all" ? "All" : cate === "normal" ? "Normal" : cate}
                     </Nav.Link>
                   </Nav.Item>
                 ))}
@@ -89,158 +84,91 @@ console.log ("all", postData);
               <Tab.Content className="grid-tab-content mt--10">
                 <Tab.Pane className="single-post-grid" eventKey={activeNav}>
                   <div className="row mt--40">
-                    {/* الصورة الكبيرة */}
-                    <div
-                      className="col-xl-7 col-lg-7 col-md-12 col-12 mb-4"
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <div
-                        className="content-block content-block post-grid post-grid-transparent"
-                        style={{
-                          boxShadow: "0 2px 8px rgb(0 0 0 / 0.1)",
-                          borderRadius: "8px",
-                          overflow: "hidden",
-                          height: "100%",
-                          display: "flex",
-                          flexDirection: "column",
-                        }}
-                      >
-                        <div
-                          className="post-thumbnail mb-3"
-                          style={{ position: "relative", height: "400px", width: "100%" }}
-                        >
-                          <Link href={`/post/${firstPost.slug}`}>
-                            <a style={{ display: "block", height: "100%", width: "100%" }}>
-                              {getImageSrc(firstPost.images) ? (
-                                <Image
-                                  src={getImageSrc(firstPost.images)}
-                                  alt={locale === "en" ? firstPost.title_en : firstPost.title_ar}
-                                  layout="fill"
-                                  objectFit="cover"
-                                  priority={true}
-                                  style={{ borderRadius: "8px 8px 0 0" }}
-                                />
-                              ) : (
-                                <div
-                                  style={{
-                                    width: "100%",
-                                    height: "100%",
-                                    backgroundColor: "#ccc",
-                                  }}
-                                />
-                              )}
-                            </a>
-                          </Link>
-                        </div>
-                        <div
-                          className="post-content px-3 pb-3"
-                          style={{ flexGrow: 1, display: "flex", flexDirection: "column", justifyContent: "center" }}
-                        >
-                          <div className="post-cat mb-2">
-                            <Link href={`/category/${slugify(firstPost.status || "")}`}>
-                              <a
-                                className="hover-flip-item-wrapper text-muted small"
-                                style={{ textTransform: "capitalize", fontWeight: "600" }}
-                              >
-                                <span>{firstPost.status || "Normal"}</span>
-                              </a>
-                            </Link>
-                          </div>
-                          <h3 className="title" style={{ fontWeight: "700", fontSize: "1.8rem" }}>
-                            <Link href={`/post/${firstPost.slug}`}>
-                              <a style={{ color: "#222", textDecoration: "none" }}>
-                                {locale === "en" ? firstPost.title_en : firstPost.title_ar}
-                              </a>
-                            </Link>
-                          </h3>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* باقي الأخبار */}
-                    <div
-                      className="col-xl-5 col-lg-5 col-md-12 col-12"
-                      style={{ display: "flex", flexDirection: "column", gap: "20px" }}
-                    >
+                    <div className="col-xl-5 col-lg-6 col-md-12 col-12">
                       {tabPostData.slice(1, 5).map((data) => (
-                        <div
-                          className="content-block post-small d-flex align-items-center"
-                          key={data.slug}
-                          style={{
-                            boxShadow: "0 1px 6px rgb(0 0 0 / 0.1)",
-                            borderRadius: "8px",
-                            overflow: "hidden",
-                            padding: "10px",
-                            gap: "12px",
-                            backgroundColor: "#fafafa",
-                          }}
-                        >
-                          <div
-                            className="post-thumbnail"
-                            style={{
-                              flexShrink: 0,
-                              width: "120px",
-                              height: "90px",
-                              position: "relative",
-                              borderRadius: "6px",
-                              overflow: "hidden",
-                            }}
-                          >
+                        <div className="content-block post-medium post-medium-border border-thin" key={data.slug}>
+                          <div className="post-thumbnail">
                             <Link href={`/post/${data.slug}`}>
                               <a>
                                 {getImageSrc(data.images) ? (
                                   <Image
                                     src={getImageSrc(data.images)}
                                     alt={locale === "en" ? data.title_en : data.title_ar}
-                                    layout="fill"
-                                    objectFit="cover"
-                                    className="rounded"
+                                    height={100}
+                                    width={100}
+                                    priority={true}
                                   />
                                 ) : (
                                   <div
                                     style={{
-                                      width: "100%",
-                                      height: "100%",
-                                      backgroundColor: "#ddd",
+                                      width: "100px",
+                                      height: "100px",
+                                      backgroundColor: "#ccc",
                                     }}
                                   />
                                 )}
                               </a>
                             </Link>
                           </div>
-                          <div className="post-content" style={{ flex: 1 }}>
-                            <div className="post-cat mb-1">
-                              <Link href={`/category/${slugify(data.status || "")}`}>
-                                <a
-                                  className="text-muted small"
-                                  style={{ textTransform: "capitalize", fontWeight: "600" }}
-                                >
-                                  {data.status || "Normal"}
-                                </a>
-                              </Link>
+                          <div className="post-content">
+                            <div className="post-cat">
+                              <div className="post-cat-list">
+                                <Link href={`/category/${slugify(data.status || "")}`}>
+                                  <a className="hover-flip-item-wrapper">
+                                    <span className="hover-flip-item">
+                                      <span data-text={data.status || "Normal"}>{data.status || "Normal"}</span>
+                                    </span>
+                                  </a>
+                                </Link>
+                              </div>
                             </div>
-                            <h5
-                              className="title mb-0"
-                              style={{
-                                fontWeight: "600",
-                                fontSize: "1.1rem",
-                                lineHeight: "1.3",
-                                color: "#333",
-                              }}
-                            >
+                            <h4 className="title">
                               <Link href={`/post/${data.slug}`}>
-                                <a style={{ color: "#333", textDecoration: "none" }}>
-                                  {locale === "en" ? data.title_en : data.title_ar}
-                                </a>
+                                <a>{locale === "en" ? data.title_en : data.title_ar}</a>
                               </Link>
-                            </h5>
+                            </h4>
                           </div>
                         </div>
                       ))}
+                    </div>
+                    <div className="col-xl-7 col-lg-6 col-md-12 col-12 mt_md--40 mt_sm--40">
+                      <div className="content-block content-block post-grid post-grid-transparent">
+                        {getImageSrc(firstPost.images) && (
+                          <div className="post-thumbnail">
+                            <Link href={`/post/${firstPost.slug}`}>
+                              <a>
+                                <Image
+                                  src={getImageSrc(firstPost.images)}
+                                  alt={locale === "en" ? firstPost.title_en : firstPost.title_ar}
+                                  height={660}
+                                  width={705}
+                                  priority={true}
+                                />
+                              </a>
+                            </Link>
+                          </div>
+                        )}
+                        <div className="post-grid-content">
+                          <div className="post-content">
+                            <div className="post-cat">
+                              <div className="post-cat-list">
+                                <Link href={`/category/${slugify(firstPost.status || "")}`}>
+                                  <a className="hover-flip-item-wrapper">
+                                    <span className="hover-flip-item">
+                                      <span data-text={firstPost.status || "Normal"}>{firstPost.status || "Normal"}</span>
+                                    </span>
+                                  </a>
+                                </Link>
+                              </div>
+                            </div>
+                            <h3 className="title">
+                              <Link href={`/post/${firstPost.slug}`}>
+                                <a>{locale === "en" ? firstPost.title_en : firstPost.title_ar}</a>
+                              </Link>
+                            </h3>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </Tab.Pane>
