@@ -4,8 +4,11 @@
   "about": "من نحن",
   "contact": "اتصل بنا",
   "search_placeholder": "بحث",
+  "loading": "جارٍ التحميل...",
+  "loadingerror": "حدث خطأ أثناء جلب البيانات ",
+  "noData": "لا توجد أخبار متاحة",
 
-  "sectionTitle": "أهم الأخبار",
+  "sectionTitle": "اخر الأخبار",
   "categories": {
     "Gadget": "أجهزة",
     "Technology": "تكنولوجيا",
