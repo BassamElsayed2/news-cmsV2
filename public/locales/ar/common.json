@@ -1,0 +1,18 @@
+{
+  "date_today": "{{date}}",
+  "advertisement": "إعلان",
+  "about": "من نحن",
+  "contact": "اتصل بنا",
+  "search_placeholder": "بحث",
+
+  "sectionTitle": "أهم الأخبار",
+  "categories": {
+    "Gadget": "أجهزة",
+    "Technology": "تكنولوجيا",
+    "Design": "تصميم",
+    "Products": "منتجات"
+  },
+  "post": {
+    "readMore": "اقرأ المزيد"
+  }
+}

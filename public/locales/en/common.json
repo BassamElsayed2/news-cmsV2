@@ -1,0 +1,18 @@
+{
+  "date_today": "{{date}}",
+  "advertisement": "Advertisement",
+  "about": "About",
+  "contact": "Contact",
+  "search_placeholder": "Search",
+
+  "sectionTitle": "Top Stories",
+  "categories": {
+    "Gadget": "Gadget",
+    "Technology": "Technology",
+    "Design": "Design",
+    "Products": "Products"
+  },
+  "post": {
+    "readMore": "Read More"
+  }
+}
