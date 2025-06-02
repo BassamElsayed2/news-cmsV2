@@ -7,6 +7,8 @@
   "loading": "Loading...",
   "loadingerror": "An error occurred while fetching data",
   "noData": "No news available",
+  "impTitle": "Important News",
+  "noImportantNews": "No important news currently.",
 
   "sectionTitle": "Latest News",
   "categories": {

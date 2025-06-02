@@ -78,12 +78,23 @@ const PostSectionTen = () => {
         <SectionTitleOne title={t("sectionTitle")} />
         <div className="row">
           <div className="col-lg-12">
-            <Tab.Container id="axilTab" activeKey={activeNav} onSelect={(k) => setActiveNav(k)}>
+            <Tab.Container
+              id="axilTab"
+              activeKey={activeNav}
+              onSelect={(k) => setActiveNav(k)}
+            >
               <Nav className="axil-tab-button nav nav-tabs mt--20">
-                {categories.map((cate) => (
-                  <Nav.Item key={slugify(cate)}>
-                    <Nav.Link eventKey={slugify(cate)}>
-                      {cate === "all" ? "All" : cate === "normal" ? "Normal" : cate}
+                {categories.map((catId, i) => (
+                  <Nav.Item key={i}>
+                    <Nav.Link eventKey={catId}>
+                      {catId === "all"
+                        ? locale === "en"
+                          ? "all"
+                          : "الكل"
+                        : renderCategoryName(
+                            postData.find((post) => post.category?.id === catId)
+                              ?.category
+                          )}
                     </Nav.Link>
                   </Nav.Item>
                 ))}
@@ -94,14 +105,21 @@ const PostSectionTen = () => {
                   <div className="row mt--40">
                     <div className="col-xl-5 col-lg-6 col-md-12 col-12">
                       {tabPostData.slice(-5).map((data) => (
-                        <div className="content-block post-medium post-medium-border border-thin" key={data.slug}>
+                        <div
+                          className="content-block post-medium post-medium-border border-thin"
+                          key={data.id}
+                        >
                           <div className="post-thumbnail">
                             <Link href={`/post/${data.slug}`}>
                               <a>
                                 {getImageSrc(data.images) ? (
                                   <Image
                                     src={getImageSrc(data.images)}
-                                    alt={locale === "en" ? data.title_en : data.title_ar}
+                                    alt={
+                                      locale === "en"
+                                        ? data.title_en
+                                        : data.title_ar
+                                    }
                                     height={100}
                                     width={100}
                                     priority={true}
@@ -118,21 +136,27 @@ const PostSectionTen = () => {
                               </a>
                             </Link>
                           </div>
-                          <div className="post-content">
+                          <div className="post-content mr--10">
                             <div className="post-cat">
                               <div className="post-cat-list">
-                                <Link href={`/category/${slugify(data.status || "")}`}>
+                                <Link href={`/category`}>
                                   <a className="hover-flip-item-wrapper">
-                                    <span className="hover-flip-item">
-                                      <span data-text={data.status || "Normal"}>{data.status || "Normal"}</span>
+                                    <span className="">
+                                      <span>
+                                        {renderCategoryName(data.category)}
+                                      </span>
                                     </span>
                                   </a>
                                 </Link>
                               </div>
                             </div>
                             <h4 className="title">
-                              <Link href={`/post/${data.slug}`}>
-                                <a>{locale === "en" ? data.title_en : data.title_ar}</a>
+                              <Link href={`/post`}>
+                                <a>
+                                  {locale === "en"
+                                    ? data.title_en
+                                    : data.title_ar}
+                                </a>
                               </Link>
                             </h4>
                           </div>
@@ -141,13 +165,17 @@ const PostSectionTen = () => {
                     </div>
                     <div className="col-xl-7 col-lg-6 col-md-12 col-12 mt_md--40 mt_sm--40">
                       <div className="content-block content-block post-grid post-grid-transparent">
-                        {getImageSrc(firstPost.images) && (
+                        {getImageSrc(firstPost?.images) && (
                           <div className="post-thumbnail">
-                            <Link href={`/post/${firstPost.slug}`}>
+                            <Link href={`/post`}>
                               <a>
                                 <Image
-                                  src={getImageSrc(firstPost.images)}
-                                  alt={locale === "en" ? firstPost.title_en : firstPost.title_ar}
+                                  src={getImageSrc(firstPost?.images)}
+                                  alt={
+                                    locale === "en"
+                                      ? firstPost?.title_en
+                                      : firstPost?.title_ar
+                                  }
                                   height={660}
                                   width={705}
                                   priority={true}
@@ -160,18 +188,30 @@ const PostSectionTen = () => {
                           <div className="post-content">
                             <div className="post-cat">
                               <div className="post-cat-list">
-                                <Link href={`/category/${slugify(firstPost.status || "")}`}>
+                                <Link
+                                  href={`/category/${slugify(
+                                    firstPost?.category?.name_en || ""
+                                  )}`}
+                                >
                                   <a className="hover-flip-item-wrapper">
-                                    <span className="hover-flip-item">
-                                      <span data-text={firstPost.status || "Normal"}>{firstPost.status || "Normal"}</span>
+                                    <span className="">
+                                      <span>
+                                        {renderCategoryName(
+                                          firstPost?.category
+                                        )}
+                                      </span>
                                     </span>
                                   </a>
                                 </Link>
                               </div>
                             </div>
                             <h3 className="title">
-                              <Link href={`/post/${firstPost.slug}`}>
-                                <a>{locale === "en" ? firstPost.title_en : firstPost.title_ar}</a>
+                              <Link href={`/post`}>
+                                <a>
+                                  {locale === "en"
+                                    ? firstPost?.title_en
+                                    : firstPost?.title_ar}
+                                </a>
                               </Link>
                             </h3>
                           </div>
