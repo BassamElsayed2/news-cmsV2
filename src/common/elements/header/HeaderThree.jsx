@@ -31,13 +31,12 @@ const HeaderThree = ({ darkLogo, lightLogo, postData }) => {
 
   const [togglaClass, setTogglaClass] = useState(false);
 
-   const toggleHandler = () => {
-        setTogglaClass(active => !active);
-   }
+  const toggleHandler = () => {
+    setTogglaClass((active) => !active);
+  };
 
+  const { t } = useTranslation("common");
 
-const { t } = useTranslation('common');
-  console.log("Translation: ", t('advertisement'));
   return (
     <>
       <header className="header axil-header header-style-3  header-light header-sticky">
@@ -56,17 +55,17 @@ const { t } = useTranslation('common');
                   <ul className="header-top-nav liststyle d-flex flrx-wrap align-items-center">
                     <li>
                       <Link href="#">
-                        <a>{t('advertisement')}</a>
+                        <a>{t("advertisement")}</a>
                       </Link>
                     </li>
                     <li>
                       <Link href="#">
-                        <a href="#">{t('about')}</a>
+                        <a href="#">{t("about")}</a>
                       </Link>
                     </li>
                     <li>
                       <Link href="#">
-                        <a>{t('contact')}</a>
+                        <a>{t("contact")}</a>
                       </Link>
                     </li>
                   </ul>
@@ -74,7 +73,7 @@ const { t } = useTranslation('common');
               </div>
               <div className="col-lg-6 col-md-4 col-sm-12">
                 <ul className="social-share-transparent md-size justify-content-center justify-content-md-end">
-               <LanguageSwitcher/>
+                  <LanguageSwitcher />
                 </ul>
               </div>
             </div>
@@ -84,33 +83,38 @@ const { t } = useTranslation('common');
         <div className="header-middle">
           <div className="container">
             <div className="row align-items-center">
-                <div className="col-lg-3 col-md-4 col-sm-6">
-                    <div className="logo">
-                        <Link href="/">
-                            <a>
-                                <Image
-                                className="dark-logo"
-                                width={141}
-                                height={37}
-                                src={(colorMode === "Dark" ? lightLogo || "/images/logo/logo-white2.webp" : darkLogo || "/images/logo/logo-black.webp") || "/images/logo/logo-black.webp" }
-                                alt="Blogar logo"
-                                />
-                            </a>
-                        </Link>
-                    </div>
-                </div>     
-                <div className="col-lg-9 col-md-8 col-sm-6">
-                    <div className="banner-add text-end">
-                    <a href="#">
-                        <Image
-                        src="/images/others/add-01.webp"
-                        width={728}
-                        height={92}
-                        alt="Add images"
-                        />
+              <div className="col-lg-3 col-md-4 col-sm-6">
+                <div className="logo">
+                  <Link href="/">
+                    <a>
+                      <Image
+                        className="dark-logo"
+                        width={141}
+                        height={37}
+                        src={
+                          (colorMode === "Dark"
+                            ? lightLogo || "/images/logo/logo-white2.webp"
+                            : darkLogo || "/images/logo/logo-black.webp") ||
+                          "/images/logo/logo-black.webp"
+                        }
+                        alt="Blogar logo"
+                      />
                     </a>
-                    </div>
+                  </Link>
                 </div>
+              </div>
+              <div className="col-lg-9 col-md-8 col-sm-6">
+                <div className="banner-add text-end">
+                  <a href="#">
+                    <Image
+                      src="/images/others/add-01.webp"
+                      width={728}
+                      height={92}
+                      alt="Add images"
+                    />
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -121,7 +125,7 @@ const { t } = useTranslation('common');
               <div className="col-xl-7 col-12">
                 <div className="mainmenu-wrapper d-none d-xl-block">
                   <nav className="mainmenu-nav">
-                  <Nav posts={postData}/>
+                    <Nav posts={postData} />
                   </nav>
                 </div>
               </div>
@@ -140,10 +144,17 @@ const { t } = useTranslation('common');
                     </div>
                   </form>
                   <div className="mobile-search-wrapper d-sm-none d-block">
-                    <button className="search-button-toggle" onClick={toggleHandler}>
+                    <button
+                      className="search-button-toggle"
+                      onClick={toggleHandler}
+                    >
                       <i className="fal fa-search" />
                     </button>
-                    <form className={`header-search-form ${togglaClass ? "open": ""}`}>
+                    <form
+                      className={`header-search-form ${
+                        togglaClass ? "open" : ""
+                      }`}
+                    >
                       <div className="axil-search form-group">
                         <button type="submit" className="search-button">
                           <i className="fal fa-search" />
