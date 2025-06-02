@@ -1,98 +1,152 @@
 import Link from "next/link";
 import Image from "next/image";
-import { slugify } from "../../utils";
+import { useRouter } from "next/router";
+import { useQueries } from "@tanstack/react-query";
+import { getCategoryById } from "../../../../services/apicatogry";
 
-const PostSectionNine = ({ postData, bgColor }) => {
+const PostSectionNine = ({ news, bgColor }) => {
+  const { locale } = useRouter();
 
+  // فلترة الأخبار العاجلة
+  const postData = news?.filter((item) => item.status === "urgent") || [];
+
+  // استخراج البوست الأساسي
   const firstPost = postData[0];
 
+  // تحديد البوستات التي نريد عرضها (الباقي بعد أول بوست)
+  const slicedPosts = postData.slice(1, 5);
+
+  // جلب بيانات الكاتيجوري لكل بوست
+  const categoriesQueries = useQueries({
+    queries: slicedPosts.map((post) => ({
+      queryKey: ["category", post.category_id],
+      queryFn: () => getCategoryById(post.category_id),
+      enabled: !!post.category_id,
+    })),
+  });
+
+  const firstCategory = categoriesQueries[0]?.data;
+
+  console.log("First Category: ", firstCategory);
   return (
     <div className={`axil-tech-post-banner ${bgColor || "bg-color-grey"}`}>
       <div className="container">
         <div className="row">
-          <div className="col-xl-6 col-md-12 col-12 mt--30">
-            <div className="content-block post-grid post-grid-transparent">
-            {firstPost.featureImg ? 
-              <div className="post-thumbnail">
-                <Link href={`/post/${firstPost.slug}`}>
-                  <a>
-                    <Image
-                      src={firstPost.featureImg}
-                      alt={firstPost.title}
-                      height={600}
-                      width={600}
-                      priority={true}
-                    />
-                  </a>
-                </Link>
-              </div>:""}
-              <div className="post-grid-content">
-                <div className="post-content">
-                  <div className="post-cat">
-                    <div className="post-cat-list">
-                      <Link href={`/category/${slugify(firstPost.cate)}`}>
-                        <a className="hover-flip-item-wrapper">
-                          <span className="hover-flip-item">
-                            <span data-text={firstPost.cate}>
-                              {firstPost.cate}
-                            </span>
-                          </span>
-                        </a>
-                      </Link>
-                    </div>
-                  </div>
-                  <h3 className="title">
-                    <Link href={`/post/${firstPost.slug}`}>
-                      <a>{firstPost.title}</a>
-                    </Link>
-                  </h3>
+          {/* عرض أول بوست إن وجد */}
+
+          {firstPost && (
+            <div className="col-xl-6 col-md-12 col-12 mt--30">
+              <div className="content-block post-grid post-grid-transparent">
+                <div className="post-thumbnail">
+                  <Link href={`/post/${firstPost.id}`}>
+                    <a>
+                      <Image
+                        src={firstPost.images?.[0] || "/"}
+                        height={600}
+                        width={600}
+                        priority={true}
+                        alt=""
+                      />
+                    </a>
+                  </Link>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-xl-6 col-lg-6 col-md-12 col-md-6 col-12">
-            <div className="row">
-              {postData.slice(1, 5).map((data) => (
-                <div className="col-lg-6 col-md-6 col-sm-6 col-12 mt--30" key={data.slug}>
-                  <div className="content-block post-default image-rounded">
-                  {data.featureImg ? 
-                    <div className="post-thumbnail">
-                      <Link href={`/post/${data.slug}`}>
-                      <a>
-                        <Image
-                          src={data.featureImg}
-                          alt={data.title}
-                          height={190}
-                          width={285}
-                          priority={true}
-                        />
-                      </a>
-                    </Link>
-                    </div>
-                    :""}
-                    <div className="post-content">
-                      <div className="post-cat">
-                        <div className="post-cat-list">
-                        <Link href={`/category/${slugify(data.cate)}`}>
+                <div className="post-grid-content">
+                  <div className="post-content">
+                    <div className="post-cat">
+                      <div className="post-cat-list">
+                        <Link href={`/`}>
                           <a className="hover-flip-item-wrapper">
                             <span className="hover-flip-item">
-                              <span data-text={data.cate}>
-                                {data.cate}
+                              <span
+                                data-text={
+                                  locale === "en"
+                                    ? firstCategory?.name_en
+                                    : firstCategory?.name_ar
+                                }
+                              >
+                                {locale === "en"
+                                  ? firstCategory?.name_en
+                                  : firstCategory?.name_ar}
                               </span>
                             </span>
                           </a>
                         </Link>
-                        </div>
                       </div>
-                      <h5 className="title">
-                      <Link href={`/post/${data.slug}`}>
-                        <a>{data.title}</a>
-                      </Link>
-                      </h5>
                     </div>
+                    <h3 className="title">
+                      <Link href={`/post/${firstPost.id}`}>
+                        <a>
+                          {locale === "en"
+                            ? firstPost.title_en
+                            : firstPost.title_ar}
+                        </a>
+                      </Link>
+                    </h3>
                   </div>
                 </div>
-               ))}
+              </div>
+            </div>
+          )}
+
+          {/* عرض باقي البوستات */}
+          <div className="col-xl-6 col-lg-6 col-md-12 col-md-6 col-12">
+            <div className="row">
+              {slicedPosts.map((data, index) => {
+                const categoryData = categoriesQueries[index]?.data;
+
+                return (
+                  <div
+                    className="col-lg-6 col-md-6 col-sm-6 col-12 mt--30"
+                    key={data.id}
+                  >
+                    <div className="content-block post-default image-rounded">
+                      <div className="post-thumbnail">
+                        <Link href={`/post/${data.id}`}>
+                          <a>
+                            <Image
+                              src={data.images?.[0] || "/"}
+                              height={190}
+                              width={285}
+                              priority={true}
+                              alt=""
+                            />
+                          </a>
+                        </Link>
+                      </div>
+                      <div className="post-content">
+                        <div className="post-cat">
+                          <div className="post-cat-list">
+                            <Link href={`/`}>
+                              <a className="hover-flip-item-wrapper">
+                                <span className="hover-flip-item">
+                                  <span
+                                    data-text={
+                                      locale === "en"
+                                        ? categoryData?.name_en
+                                        : categoryData?.name_ar
+                                    }
+                                  >
+                                    {locale === "en"
+                                      ? categoryData?.name_en
+                                      : categoryData?.name_ar}
+                                  </span>
+                                </span>
+                              </a>
+                            </Link>
+                          </div>
+                        </div>
+                        <h5 className="title">
+                          <Link href={`/post/${data.id}`}>
+                            <a>
+                              {locale === "en" ? data.title_en : data.title_ar}
+                            </a>
+                          </Link>
+                        </h5>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
