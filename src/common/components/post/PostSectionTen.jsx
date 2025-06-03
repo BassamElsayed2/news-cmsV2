@@ -92,9 +92,9 @@ const PostSectionTen = () => {
                           ? "all"
                           : "الكل"
                         : renderCategoryName(
-                            postData.find((post) => post.category?.id === catId)
-                              ?.category
-                          )}
+                          postData.find((post) => post.category?.id === catId)
+                            ?.category
+                        )}
                     </Nav.Link>
                   </Nav.Item>
                 ))}
@@ -139,11 +139,23 @@ const PostSectionTen = () => {
                           <div className="post-content mr--10">
                             <div className="post-cat">
                               <div className="post-cat-list">
-                                <Link href={`/category`}>
+                                <Link
+                                  href={`/category/${slugify(
+                                    firstPost?.category?.name_en || ""
+                                  )}`}
+                                >
                                   <a className="hover-flip-item-wrapper">
-                                    <span className="">
-                                      <span>
-                                        {renderCategoryName(data.category)}
+                                    <span className="hover-flip-item">
+                                      <span
+                                        data-text={
+                                          locale === "en"
+                                            ? firstPost?.category?.name_en
+                                            : firstPost?.category?.name_ar
+                                        }
+                                      >
+                                        {locale === "en"
+                                          ? firstPost?.category?.name_en
+                                          : firstPost?.category?.name_ar}
                                       </span>
                                     </span>
                                   </a>
@@ -188,17 +200,22 @@ const PostSectionTen = () => {
                           <div className="post-content">
                             <div className="post-cat">
                               <div className="post-cat-list">
-                                <Link
-                                  href={`/category/${slugify(
-                                    firstPost?.category?.name_en || ""
-                                  )}`}
+                                <Link href={`/category/${slugify(
+                                  firstPost?.category?.name_en || ""
+                                )}`}
                                 >
                                   <a className="hover-flip-item-wrapper">
-                                    <span className="">
-                                      <span>
-                                        {renderCategoryName(
-                                          firstPost?.category
-                                        )}
+                                    <span className="hover-flip-item">
+                                      <span
+                                        data-text={
+                                          locale === "en"
+                                            ? firstPost?.category?.name_en
+                                            : firstPost?.category?.name_ar
+                                        }
+                                      >
+                                        {locale === "en"
+                                          ? firstPost?.category?.name_en
+                                          : firstPost?.category?.name_ar}
                                       </span>
                                     </span>
                                   </a>
