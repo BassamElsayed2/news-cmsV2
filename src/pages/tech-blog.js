@@ -33,7 +33,7 @@ const TechBlog = ({ allPosts }) => {
       <PostSectionNine news={news} />
       <CategoryListSlide cateData={allPosts} />
       <PostSectionTen postData={allPosts} />
-      <PostSectionThree postData={videoPost} heading="Featured Video" />
+      <PostSectionThree postData={allPosts} heading="Featured Video"  />
       <PostSectionFour postData={techPost} adBanner={true} />
       <PostSectionEleven postData={allPosts} />
       <InstagramOne parentClass="bg-color-grey" />

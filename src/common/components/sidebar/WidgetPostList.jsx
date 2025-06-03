@@ -19,31 +19,39 @@ const formatDate = (dateString, lang) => {
 
 const WidgetPostList = () => {
   const { t, i18n } = useTranslation("common");
-  const [currentLang, setCurrentLang] = useState(null);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    setCurrentLang(i18n.language || "en");
-  }, [i18n.language]);
+    setIsClient(true);
+  }, []);
 
-  const { data: dataPost = [], isLoading, error } = useQuery({
+  const {
+    data: dataPost = [],
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ["news"],
     queryFn: getNews,
   });
 
-  if (isLoading) return <div>{t("loading") || "Loading..."}</div>;
-  if (error) return <div>{t("error") || "Error loading news."}</div>;
-  if (!currentLang) return null; // تجنب اختلاف المحتوى أثناء hydration
+  if (!isClient) {
+    return <div suppressHydrationWarning>{t("loading")}</div>; // يمنع التحذير
+  }
 
-  const importantPosts = dataPost.filter(post => post.status === "important");
+  if (isLoading) return <div>{t("loading")}</div>;
+  if (error) return <div>{t("error")}</div>;
+
+  const currentLang = i18n.language || "en";
+  const importantPosts = dataPost.filter((post) => post.status === "important");
 
   return (
-    <div className="axil-single-widget widget widget_postlist mb--30">
+    <div className="axil-single-widget widget widget_postlist mb--30 ">
       <h5 className="widget-title">{t("impTitle")}</h5>
       <div className="post-medium-block">
         {importantPosts.slice(0, 3).map((data) => (
           <div className="content-block post-medium mb--20" key={data.id}>
             {data.images?.length > 0 && (
-              <div className="post-thumbnail">
+              <div className="post-thumbnail ml--10">
                 <Link href={`/post/${data.id}`}>
                   <a>
                     <Image

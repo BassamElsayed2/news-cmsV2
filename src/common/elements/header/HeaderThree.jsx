@@ -7,6 +7,8 @@ import Nav from "./Nav";
 import { useTranslation } from "next-i18next";
 import LanguageSwitcher from "../LanguageSwitcher";
 import { useRouter } from "next/router";
+import { getAds } from "../../../../services/apiAds";
+import { useQuery } from "@tanstack/react-query";
 
 const HeaderThree = ({ darkLogo, lightLogo, postData }) => {
   const { locale } = useRouter();
@@ -36,6 +38,13 @@ const HeaderThree = ({ darkLogo, lightLogo, postData }) => {
   };
 
   const { t } = useTranslation("common");
+
+  const { data: ads } = useQuery({
+    queryKey: ["ads"],
+    queryFn: getAds,
+  });
+
+  const homeAds = ads?.filter((ad) => ad.location === "home");
 
   return (
     <>
@@ -105,14 +114,18 @@ const HeaderThree = ({ darkLogo, lightLogo, postData }) => {
               </div>
               <div className="col-lg-9 col-md-8 col-sm-6">
                 <div className="banner-add text-end">
-                  <a href="#">
-                    <Image
-                      src="/images/others/add-01.webp"
-                      width={728}
-                      height={92}
-                      alt="Add images"
-                    />
-                  </a>
+                  {homeAds && (
+                    <Link href={homeAds[0].link || "#"}>
+                      <a>
+                        <Image
+                          src={homeAds[0].image_url}
+                          width={728}
+                          height={92}
+                          alt={homeAds[0].title_en}
+                        />
+                      </a>
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useLocale } from "next-intl";
-import { useQuery, useQueries } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import Image from "next/image";
 import { Tab, Nav } from "react-bootstrap";
