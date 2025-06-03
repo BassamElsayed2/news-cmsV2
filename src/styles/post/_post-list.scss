@@ -1,6 +1,22 @@
 /*----------------------
 Post List Style  
 -------------------------*/
+.text-truncate-2 {
+  display: -webkit-box;
+-webkit-line-clamp: 2;
+line-clamp: 2;
+line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.5;
+  max-height: 3em;
+}
+
+
+
+
 .slick-layout-wrapper {
   margin: 0 -15px;
 }
@@ -244,17 +260,17 @@ Post List Style
       }
     }
 
-    .post-content {
-      padding-bottom: 50px;
-      .title {
-        margin-bottom: 0;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-      }
-    }
+        .post-content {
+            padding-bottom: 50px;
+            .title {
+                margin-bottom: 0;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 2; 
+                -webkit-box-orient: vertical;
+            }
+        }
 
     .post-thumbnail {
       margin: 0 -35px;
