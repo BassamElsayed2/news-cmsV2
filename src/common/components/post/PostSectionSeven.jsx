@@ -83,12 +83,12 @@ const PostSectionSeven = ({ postData }) => {
                         {tabPostData.slice(1, 3).map((data) => (
                           <div
                             className="col-xl-12 col-lg-12 col-md-6 col-12"
-                            key={data.slug}
+                            key={data.id}
                           >
                             <div className="content-block post-grid mt--30">
                             {data.featureImg ? 
                               <div className="post-thumbnail">
-                                <Link href={`/post/${data.slug}`}>
+                                <Link href={`/post/${data.id}`}>
                                   <a>
                                     <Image
                                       src={data.featureImg}
@@ -119,7 +119,7 @@ const PostSectionSeven = ({ postData }) => {
                                     </div>
                                   </div>
                                   <h4 className="title">
-                                    <Link href={`/post/${data.slug}`}>
+                                    <Link href={`/post/${data.id}`}>
                                       <a>{data.title}</a>
                                     </Link>
                                   </h4>
@@ -134,7 +134,7 @@ const PostSectionSeven = ({ postData }) => {
                       <div className="active show content-block post-grid post-grid-large mt--30">
                       {firstPost.featureImg ? 
                         <div className="post-thumbnail">
-                          <Link href={`/post/${firstPost.slug}`}>
+                          <Link href={`/post/${firstPost.id}`}>
                             <a>
                               <Image
                                 src={firstPost.featureImg}
@@ -165,7 +165,7 @@ const PostSectionSeven = ({ postData }) => {
                               </div>
                             </div>
                             <h3 className="title">
-                              <Link href={`/post/${firstPost.slug}`}>
+                              <Link href={`/post/${firstPost.id}`}>
                                 <a>{firstPost.title}</a>
                               </Link>
                             </h3>

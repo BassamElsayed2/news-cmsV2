@@ -82,7 +82,7 @@ const PostSectionFive = ({ postData }) => {
                       <div className="active show content-block post-grid post-grid-large mt--30">
                       {firstPost.featureImg ? 
                         <div className="post-thumbnail">
-                          <Link href={`/post/${firstPost.slug}`}>
+                          <Link href={`/post/${firstPost.id}`}>
                             <a>
                               <Image
                                 src={firstPost.featureImg}
@@ -113,7 +113,7 @@ const PostSectionFive = ({ postData }) => {
                               </div>
                             </div>
                             <h3 className="title">
-                              <Link href={`/post/${firstPost.slug}`}>
+                              <Link href={`/post/${firstPost.id}`}>
                                 <a>{firstPost.title}</a>
                               </Link>
                             </h3>
@@ -164,10 +164,10 @@ const PostSectionFive = ({ postData }) => {
                     <div className="col-xl-5 col-lg-5 col-md-12 col-12">
                       <div className="row">
 						{tabPostData.slice(1, 3).map((data) => (
-                        <div className="col-xl-12 col-lg-12 col-md-6 col-12" key={data.slug}>
+                        <div className="col-xl-12 col-lg-12 col-md-6 col-12" key={data.id}>
                           <div className="content-block post-grid mt--30">
                             <div className="post-thumbnail">
-							<Link href={`/post/${data.slug}`}>
+							<Link href={`/post/${data.id}`}>
 								<a>
 								<Image
 									src={data.featureImg}
@@ -197,7 +197,7 @@ const PostSectionFive = ({ postData }) => {
                                   </div>
                                 </div>
                                 <h4 className="title">
-									<Link href={`/post/${data.slug}`}>
+									<Link href={`/post/${data.id}`}>
 										<a>{data.title}</a>
 									</Link>
                                 </h4>
