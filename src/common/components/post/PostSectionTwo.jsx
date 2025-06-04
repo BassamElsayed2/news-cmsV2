@@ -147,7 +147,7 @@ const PostSectionTwo = ({ postData, adBanner, headingTitle }) => {
                       className="modern-post-activation slick-layout-wrapper axil-slick-arrow arrow-between-side"
                     >
                       {tabPostData.map((data) => (
-                        <div className="slick-single-layout" key={data.slug}>
+                        <div className="slick-single-layout" key={data.id}>
                           <div className="content-block modern-post-style text-center content-block-column">
                             <div className="post-content">
                               <div className="post-cat">
@@ -166,7 +166,7 @@ const PostSectionTwo = ({ postData, adBanner, headingTitle }) => {
                                 </div>
                               </div>
                               <h4 className="title">
-                                <Link href={`/post/${data.slug}`}>
+                                <Link href={`/post/${data.id}`}>
                                   <a>{data.title}</a>
                                 </Link>
                               </h4>
@@ -182,7 +182,7 @@ const PostSectionTwo = ({ postData, adBanner, headingTitle }) => {
                                     priority={true}
                                   />
                               </div>
-                              <Link href={`/post/${data.slug}`}>
+                              <Link href={`/post/${data.id}`}>
                                 <a>
                                   <Image
                                     src={data.featureImg}

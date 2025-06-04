@@ -1,20 +1,23 @@
 import Link from "next/link";
 import { slugify } from "../../../../utils";
 
-const PostTagShare = ({postTags}) => {
+const PostTagShare = ({ postTags }) => {
   return (
     <>
       <div className="tagcloud">
-        {postTags.tags.map((data, index) => (
-          <Link href={`/tag/${slugify(data)}`} key={index}>
-            <a>{data}</a>
-          </Link>
-        ))}
+        {Array.isArray(postTags?.tags) ? (
+          postTags.tags.map((data, index) => (
+            <Link href={`/tag/${slugify(data)}`} key={index}>
+              <a>{data}</a>
+            </Link>
+          ))
+        ) : (
+          <p>لا توجد وسوم</p> // أو ممكن تحذف السطر ده لو مش عايز تظهر حاجة
+        )}
       </div>
       <div className="social-share-block">
         <div className="post-like">
-          <link href="#" />
-          <a>
+          <a href="#">
             <i className="fal fa-thumbs-up" />
             <span>2.2k Like</span>
           </a>
