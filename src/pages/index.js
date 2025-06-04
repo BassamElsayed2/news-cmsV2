@@ -1,60 +1,58 @@
 import InstagramOne from "../common/components/instagram/InstagramOne";
-import FooterOne from "../common/elements/footer/FooterOne";
-import HeadTitle from "../common/elements/head/HeadTitle";
-import HeaderOne from "../common/elements/header/HeaderOne";
+import FooterThree from "../common/elements/footer/FooterThree";
 import { getAllPosts } from "../../lib/api";
-import PostSectionOne from "../common/components/post/PostSectionOne";
-import PostSectionTwo from "../common/components/post/PostSectionTwo";
+import HeaderThree from "../common/elements/header/HeaderThree";
+import HeadTitle from "../common/elements/head/HeadTitle";
+import { slugify, SortingByDate } from "../common/utils";
+import PostSectionNine from "../common/components/post/PostSectionNine";
+import CategoryListSlide from "../common/components/category/CategoryListSlide";
 import PostSectionThree from "../common/components/post/PostSectionThree";
-import CategoryList from "../common/components/category/CategoryList";
 import PostSectionFour from "../common/components/post/PostSectionFour";
-import SocialOne from "../common/components/social/SocialOne";
-import PostSectionFive from "../common/components/post/PostSectionFive";
-import PostSectionSix from "../common/components/post/PostSectionSix";
-import SliderOne from "../common/components/slider/SliderOne";
-import { useRouter } from "next/router";
-import { useTranslation } from "next-i18next";
+import PostSectionTen from "../common/components/post/PostSectionTen";
+import PostSectionEleven from "../common/components/post/PostSectionEleven";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useQuery } from "@tanstack/react-query";
+import { getNews } from "../../services/apiNews";
 
-const HomeDefault = ({ allPosts }) => {
+const TechBlog = ({ allPosts }) => {
+  const { data: news } = useQuery({
+    queryKey: ["news"],
+    queryFn: getNews,
+  });
+
+  const techPost = allPosts.filter(
+    (post) =>
+      slugify(post.cate) === "technology" || slugify(post.cate) === "leadership"
+  );
   const videoPost = allPosts.filter((post) => post.postFormat === "video");
-
-  const router = useRouter();
-  const { locale, locale: activeLocale, defaultLocale } = router;
-
-  const { t } = useTranslation("common");
 
   return (
     <>
-      <HeadTitle pageTitle="Home Default" />
-      <HeaderOne postData={allPosts} />
-      <SliderOne postData={allPosts} />
-      <PostSectionOne postData={allPosts} />
-      <PostSectionTwo postData={allPosts} adBanner={true} />
-      <CategoryList cateData={allPosts} />
-      <PostSectionSix postData={allPosts} />
-      <SocialOne />
-      <PostSectionFive postData={allPosts} />
-      <PostSectionFour postData={allPosts} adBanner={true} />
-      <PostSectionThree postData={videoPost} heading="Featured Video" />
+      <HeadTitle pageTitle="Tech Blog" />
+      <HeaderThree postData={allPosts} />
+      <PostSectionNine news={news} />
+      <CategoryListSlide cateData={allPosts} />
+      <PostSectionTen postData={allPosts} />
+      <PostSectionThree postData={allPosts} heading="Featured Video" />
+      <PostSectionFour postData={techPost} adBanner={true} />
+      <PostSectionEleven postData={allPosts} />
       <InstagramOne parentClass="bg-color-grey" />
-      <FooterOne />
+      <FooterThree />
     </>
   );
 };
 
-export default HomeDefault;
+export default TechBlog;
 
 export async function getStaticProps({ locale }) {
   const allPosts = getAllPosts([
-    "id",
+    "postFormat",
     "title",
     "featureImg",
-    "postFormat",
     "featured",
-    "slidePost",
     "date",
     "slug",
+    "pCate",
     "cate",
     "cate_img",
     "author_img",
@@ -64,6 +62,7 @@ export async function getStaticProps({ locale }) {
     "author_social",
   ]);
 
+  SortingByDate(allPosts);
   return {
     props: { allPosts, ...(await serverSideTranslations(locale, ["common"])) },
   };

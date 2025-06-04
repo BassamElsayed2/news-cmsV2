@@ -135,88 +135,11 @@ const HeaderThree = ({ darkLogo, lightLogo, postData }) => {
         <div className="header-bottom">
           <div className="container">
             <div className="row justify-content-between align-items-center">
-              <div className="col-xl-7 col-12">
+              <div className="d-flex justify-content-center">
                 <div className="mainmenu-wrapper d-none d-xl-block">
                   <nav className="mainmenu-nav">
                     <Nav posts={postData} />
                   </nav>
-                </div>
-              </div>
-              <div className="col-xl-5 col-12">
-                <div className="header-search d-flex flex-wrap align-items-center justify-content-center justify-content-xl-end">
-                  <form className="header-search-form d-sm-block d-none">
-                    <div className="axil-search form-group">
-                      <button type="submit" className="search-button">
-                        <i className="fal fa-search" />
-                      </button>
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Search"
-                      />
-                    </div>
-                  </form>
-                  <div className="mobile-search-wrapper d-sm-none d-block">
-                    <button
-                      className="search-button-toggle"
-                      onClick={toggleHandler}
-                    >
-                      <i className="fal fa-search" />
-                    </button>
-                    <form
-                      className={`header-search-form ${
-                        togglaClass ? "open" : ""
-                      }`}
-                    >
-                      <div className="axil-search form-group">
-                        <button type="submit" className="search-button">
-                          <i className="fal fa-search" />
-                        </button>
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder="Search"
-                        />
-                      </div>
-                    </form>
-                  </div>
-                  <ul className="metabar-block">
-                    <li className="icon">
-                      <Link href="#">
-                        <a>
-                          <i className="fas fa-bookmark" />
-                        </a>
-                      </Link>
-                    </li>
-                    <li className="icon">
-                      <Link href="#">
-                        <a>
-                          <i className="fas fa-bell" />
-                        </a>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="#">
-                        <a>
-                          <Image
-                            width={40}
-                            height={40}
-                            src="/images/others/author.webp"
-                            alt="Author Images"
-                          />
-                        </a>
-                      </Link>
-                    </li>
-                  </ul>
-                  {/* Start Hamburger Menu  */}
-                  <div className="hamburger-menu d-block d-xl-none">
-                    <div className="hamburger-inner">
-                      <div className="icon" onClick={MobileShowHandler}>
-                        <i className="fal fa-bars" />
-                      </div>
-                    </div>
-                  </div>
-                  {/* End Hamburger Menu  */}
                 </div>
               </div>
             </div>
