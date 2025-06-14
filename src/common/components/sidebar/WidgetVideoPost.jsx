@@ -6,7 +6,7 @@ const WidgetVideoPost = ({ postData }) => {
   const locale = useLocale();
 
   const videoPosts = postData?.filter((post) => post.yt_code);
-  console.log(videoPosts);
+
 
   return (
     <div className="axil-single-widget widget-style-2 widget widget_post mt--30">

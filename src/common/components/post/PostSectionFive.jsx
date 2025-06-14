@@ -82,7 +82,7 @@ const PostSectionFive = ({ postData }) => {
                       <div className="active show content-block post-grid post-grid-large mt--30">
                       {firstPost.featureImg ? 
                         <div className="post-thumbnail">
-                          <Link href={`/post/${firstPost.id}`}>
+                          <Link href={`/post/${firstPost.id}`} locale={locale}>
                             <a>
                               <Image
                                 src={firstPost.featureImg}
@@ -100,8 +100,7 @@ const PostSectionFive = ({ postData }) => {
                             <div className="post-cat">
                               <div className="post-cat-list">
                                 <Link
-                                  href={`/category/${slugify(firstPost.cate)}`}
-                                >
+                                  href={`/category/${slugify(firstPost.cate)}`} locale={locale}>
                                   <a className="hover-flip-item-wrapper">
                                     <span className="hover-flip-item">
                                       <span data-text={firstPost.cate}>
@@ -113,7 +112,7 @@ const PostSectionFive = ({ postData }) => {
                               </div>
                             </div>
                             <h3 className="title">
-                              <Link href={`/post/${firstPost.id}`}>
+                              <Link href={`/post/${firstPost.id}`}locale={locale}>
                                 <a>{firstPost.title}</a>
                               </Link>
                             </h3>
@@ -129,7 +128,7 @@ const PostSectionFive = ({ postData }) => {
                                 </div>
                                 <div className="content">
                                   <h6 className="post-author-name">
-                                    <Link href={`/author/${slugify(firstPost.author_name)}`}>
+                                    <Link href={`/author/${slugify(firstPost.author_name)}`}locale={locale}>
                                       <a className="hover-flip-item-wrapper">
                                         <span className="hover-flip-item">
                                           <span
@@ -167,7 +166,7 @@ const PostSectionFive = ({ postData }) => {
                         <div className="col-xl-12 col-lg-12 col-md-6 col-12" key={data.id}>
                           <div className="content-block post-grid mt--30">
                             <div className="post-thumbnail">
-							<Link href={`/post/${data.id}`}>
+							<Link href={`/post/${data.id}`}locale={locale}>
 								<a>
 								<Image
 									src={data.featureImg}
@@ -184,8 +183,7 @@ const PostSectionFive = ({ postData }) => {
                                 <div className="post-cat">
                                   <div className="post-cat-list">
 								  <Link
-									href={`/category/${slugify(data.cate)}`}
-									>
+									href={`/category/${slugify(data.cate)}`}locale={locale}>
 									<a className="hover-flip-item-wrapper">
 										<span className="hover-flip-item">
 										<span data-text={data.cate}>
@@ -197,7 +195,7 @@ const PostSectionFive = ({ postData }) => {
                                   </div>
                                 </div>
                                 <h4 className="title">
-									<Link href={`/post/${data.id}`}>
+									<Link href={`/post/${data.id}`}locale={locale}>
 										<a>{data.title}</a>
 									</Link>
                                 </h4>

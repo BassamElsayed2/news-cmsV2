@@ -19,7 +19,7 @@ const NewsDetailsPage = ({ postData = {}, allData = [] }) => {
   const postContent =
     postData?.content?.replaceAll("/images/", basePathLink + "/images/") || "";
 
-  console.log("ID:", id);
+
 
   return (
     <>
