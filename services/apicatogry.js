@@ -17,3 +17,4 @@ export async function getCategoryById(id) {
   if (error) throw error;
   return data;
 }
+

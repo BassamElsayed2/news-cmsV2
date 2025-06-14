@@ -1,15 +1,17 @@
+
 import { getAllPosts } from '../../../lib/api';
 import GalleryOne from '../../common/gallery/InstagramOne';
 import PostLayoutTwo from '../../common/components/post/layout/PostLayoutTwo';
 import BreadcrumbOne from '../../common/elements/breadcrumb/breadcrumbOne';
 import FooterOne from '../../common/elements/footer/FooterOne';
-import HeadTitle from "../../common/elements/head/HeadTitle";
-import HeaderOne from '../../common/elements/header/HeaderOne';
-import SidebarOne from "../../common/components/sidebar/SidebarOne";
-import { slugify } from '../../common/utils';
 
+import HeadTitle from "../../common/elements/head/HeadTitle";
+import HeaderOne from "../../common/elements/header/HeaderOne";
+import SidebarOne from "../../common/components/sidebar/SidebarOne";
+import { slugify } from "../../common/utils";
 
 const PostCategory = ({ postData, allPosts }) => {
+
 	
 	return (
 		<>
@@ -35,49 +37,49 @@ const PostCategory = ({ postData, allPosts }) => {
 	);
 }
 
+
 export default PostCategory;
 
-
 export async function getStaticProps({ params }) {
+  const postParams = params.slug;
 
-	const postParams = params.slug;
+  const allPosts = getAllPosts([
+    "slug",
+    "cate",
+    "cate_img",
+    "title",
+    "featureImg",
+    "date",
+    "post_views",
+    "read_time",
+    "author_name",
+    "author_social",
+  ]);
 
-	const allPosts = getAllPosts([
-		'slug',
-		'cate',
-		'cate_img',
-		'title',
-		'featureImg',
-		'date',
-		'post_views',
-		'read_time',
-		'author_name',
-		'author_social'
-	]);
-	
-	const getCategoryData = allPosts.filter(post => slugify(post.cate) === postParams);
-	const postData = getCategoryData;
-	
-	return {
-		props: {
-			postData,
-			allPosts
-		}
-	}
+  const getCategoryData = allPosts.filter(
+    (post) => slugify(post.cate) === postParams
+  );
+  const postData = getCategoryData;
+
+  return {
+    props: {
+      postData,
+      allPosts,
+    },
+  };
 }
 
-
 export async function getStaticPaths() {
-	const posts = getAllPosts(['cate']);
+  const posts = getAllPosts(["cate"]);
 
-	const paths = posts.map(post => ({
-		params: {
-			slug: slugify(post.cate)
-		}
-	}))
+  const paths = posts.map((post) => ({
+    params: {
+      slug: slugify(post.cate),
+    },
+  }));
 
-	return {
-		paths,
-		fallback: false,
-	}
+  return {
+    paths,
+    fallback: false,
+  };
 }

@@ -87,6 +87,7 @@ const CategoryListSlide = ({ cateData }) => {
               {categories?.map((data, index) => (
                 <div className="single-cat" key={index}>
                   <div className="inner">
+
                     <Link href={`/category/${data.slug}`}>
                       {/* <Link href={`/category/${data.slug}`}>  
                       مفروض دة ياخد بال status ?
