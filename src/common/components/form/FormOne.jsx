@@ -9,7 +9,6 @@ const Result = () => {
     </Alert>
   );
 };
-
 const FormOne = () => {
   const form = useRef();
 

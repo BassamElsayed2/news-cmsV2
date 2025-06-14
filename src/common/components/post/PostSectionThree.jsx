@@ -39,7 +39,7 @@ const PostSectionThree = ({ postData, adBanner, bgColor }) => {
             <div className="content-block post-default image-rounded mt--30">
               {firstPost?.images[0] ? (
                 <div className="post-thumbnail">
-                  <Link href={`/post/${firstPost?._id}`}>
+                  <Link href={`/post/${firstPost?._id}`}locale={locale}>
                     <a>
                       <Image
                         src={firstPost.images[0]}
@@ -50,7 +50,7 @@ const PostSectionThree = ({ postData, adBanner, bgColor }) => {
                       />
                     </a>
                   </Link>
-                  <Link href={`/post/${firstPost?._id}`}>
+                  <Link href={`/post/${firstPost?._id}`}locale={locale}>
                     <a className="video-popup position-top-center">
                       <span className="play-icon" />
                     </a>
@@ -62,7 +62,7 @@ const PostSectionThree = ({ postData, adBanner, bgColor }) => {
               <div className="post-content">
                 <div className="post-cat">
                   <div className="post-cat-list">
-                    <Link href={`/category`}>
+                    <Link href={`/category`}locale={locale}>
                       <a className="hover-flip-item-wrapper">
                         <span className="hover-flip-item">
                           <span data-text={firstPost?.category?.name_en}>
@@ -76,7 +76,7 @@ const PostSectionThree = ({ postData, adBanner, bgColor }) => {
                   </div>
                 </div>
                 <h3 className="title">
-                  <Link href={`/post/${firstPost?._id}`}>
+                  <Link href={`/post/${firstPost?._id}`}locale={locale}>
                     <a>
                       {locale === "ar"
                         ? firstPost?.title_ar
@@ -89,7 +89,7 @@ const PostSectionThree = ({ postData, adBanner, bgColor }) => {
                     <div className="post-meta">
                       <div className="content">
                         <h6 className="post-author-name">
-                          <Link href={`/author`}>
+                          <Link href={`/author`}locale={locale}>
                             <a className="hover-flip-item-wrapper">
                               <span className="hover-flip-item">
                                 <span data-text={firstPost?.author_name}>
@@ -129,7 +129,7 @@ const PostSectionThree = ({ postData, adBanner, bgColor }) => {
                   <div className="content-block post-default image-rounded mt--30">
                     {data.images[0] ? (
                       <div className="post-thumbnail">
-                       <Link href={`/post/${data._id}`}>
+                       <Link href={`/post/${data._id}`}locale={locale}>
                           <a>
                             <Image
                               src={data.images[0]}
@@ -140,7 +140,7 @@ const PostSectionThree = ({ postData, adBanner, bgColor }) => {
                             />
                           </a>
                         </Link>
-                       <Link href={`/post/${data._id}`}>
+                       <Link href={`/post/${data._id}`}locale={locale}>
                           <a className="video-popup size-medium position-top-center">
                             <span className="play-icon" />
                           </a>
@@ -152,7 +152,7 @@ const PostSectionThree = ({ postData, adBanner, bgColor }) => {
                     <div className="post-content">
                       <div className="post-cat">
                         <div className="post-cat-list">
-                          <Link href={`/category`}>
+                          <Link href={`/category/${data.slug}`}locale={locale}>
                             <a className="hover-flip-item-wrapper">
                               <span className="hover-flip-item">
                                 <span data-text={data.category?.name_en}>
@@ -166,7 +166,7 @@ const PostSectionThree = ({ postData, adBanner, bgColor }) => {
                         </div>
                       </div>
                       <h5 className="title">
-                       <Link href={`/post/${data._id}`}>
+                       <Link href={`/post/${data._id}`}locale={locale}>
                           <a>
                             {locale === "ar" ? data.title_ar : data.title_en}
                           </a>

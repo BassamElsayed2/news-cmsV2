@@ -27,8 +27,6 @@ const PostSectionNine = ({ news, bgColor }) => {
 
   const firstCategory = categoriesQueries[0]?.data;
 
-  console.log("First Post:", firstPost);
-  console.log("Sliced Posts:", slicedPosts);
 
   return (
     <div className={`axil-tech-post-banner ${bgColor || "bg-color-grey"}`}>
@@ -40,7 +38,7 @@ const PostSectionNine = ({ news, bgColor }) => {
             <div className="col-xl-6 col-md-12 col-12 mt--30">
               <div className="content-block post-grid post-grid-transparent">
                 <div className="post-thumbnail">
-                  <Link href={`/${locale}/post/${firstPost.id}`}>
+                  <Link href={`/${locale}/post/${firstPost.id}`}locale={locale}>
                     <a>
                       <Image
                         src={firstPost.images?.[0] || "/"}
@@ -56,7 +54,7 @@ const PostSectionNine = ({ news, bgColor }) => {
                   <div className="post-content">
                     <div className="post-cat">
                       <div className="post-cat-list">
-                        <Link href={`/`}>
+                        <Link href={`/`}locale={locale}>
                           <a className="hover-flip-item-wrapper">
                             <span className="hover-flip-item">
                               <span
@@ -76,7 +74,7 @@ const PostSectionNine = ({ news, bgColor }) => {
                       </div>
                     </div>
                     <h3 className="title">
-                      <Link href={`/${locale}/post/${firstPost.id}`}>
+                      <Link href={`/${locale}/post/${firstPost.id}`}locale={locale}>
                         <a>
                           {locale === "en"
                             ? firstPost.title_en
@@ -103,7 +101,7 @@ const PostSectionNine = ({ news, bgColor }) => {
                   >
                     <div className="content-block post-default image-rounded">
                       <div className="post-thumbnail">
-                        <Link href={`/${locale}/post/${data.id}`}>
+                        <Link href={`/${locale}/post/${data.id}`}locale={locale}>
                           <a>
                             <Image
                               src={data.images?.[0] || "/"}
@@ -118,7 +116,7 @@ const PostSectionNine = ({ news, bgColor }) => {
                       <div className="post-content">
                         <div className="post-cat">
                           <div className="post-cat-list">
-                            <Link href={`/`}>
+                            <Link href={`/`}locale={locale}>
                               <a className="hover-flip-item-wrapper">
                                 <span className="hover-flip-item">
                                   <span
@@ -138,7 +136,7 @@ const PostSectionNine = ({ news, bgColor }) => {
                           </div>
                         </div>
                         <h5 className="title">
-                          <Link href={`/post/${data.id}`}>
+                          <Link href={`/post/${data.id}`}locale={locale}>
                             <a>
                               {locale === "en" ? data.title_en : data.title_ar}
                             </a>

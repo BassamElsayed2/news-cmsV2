@@ -8,7 +8,6 @@ import Image from "next/image";
 import { Tab, Nav } from "react-bootstrap";
 
 import { getNews } from "../../../../services/apiNews";
-
 import { SectionTitleOne } from "../../elements/sectionTitle/SectionTitle";
 import { useTranslation } from "react-i18next";
 import { slugify } from "../../utils";
@@ -22,6 +21,9 @@ const PostSectionTen = () => {
     queryKey: ["news"],
     queryFn: getNews,
   });
+
+
+
 
   const [activeNav, setActiveNav] = useState("");
   const [tabPostData, setTabPostData] = useState([]);
@@ -72,6 +74,8 @@ const PostSectionTen = () => {
     return locale === "en" ? category.name_en : category.name_ar;
   };
 
+ 
+
   return (
     <div className="axil-post-grid-area axil-section-gap bg-color-white">
       <div className="container">
@@ -92,9 +96,9 @@ const PostSectionTen = () => {
                           ? "all"
                           : "الكل"
                         : renderCategoryName(
-                          postData.find((post) => post.category?.id === catId)
-                            ?.category
-                        )}
+                            postData.find((post) => post.category?.id === catId)
+                              ?.category
+                          )}
                     </Nav.Link>
                   </Nav.Item>
                 ))}
@@ -110,7 +114,7 @@ const PostSectionTen = () => {
                           key={data.id}
                         >
                           <div className="post-thumbnail">
-                            <Link href={`/post/${data.id}`}>
+                            <Link href={`/post/${data.id}`} locale={locale}>
                               <a>
                                 {getImageSrc(data.images) ? (
                                   <Image
@@ -143,6 +147,7 @@ const PostSectionTen = () => {
                                   href={`/category/${slugify(
                                     firstPost?.category?.name_en || ""
                                   )}`}
+                                  locale={locale}
                                 >
                                   <a className="hover-flip-item-wrapper">
                                     <span className="hover-flip-item">
@@ -163,7 +168,10 @@ const PostSectionTen = () => {
                               </div>
                             </div>
                             <h4 className="title">
-                             <Link href={`/post/${data.id}`}>
+                              <Link
+                                href={`/post/${data.id}`}
+                                locale={locale}
+                              >
                                 <a>
                                   {locale === "en"
                                     ? data.title_en
@@ -171,6 +179,19 @@ const PostSectionTen = () => {
                                 </a>
                               </Link>
                             </h4>
+
+                           <div className="content">
+  <p>
+    {(
+      locale === "en"
+        ? data.content_en
+        : data.content_ar
+    )
+      .replace(/<[^>]+>/g, "") // إزالة الوسوم
+      .slice(0, 100)}...        {/* قصّ المحتوى */}
+  </p>
+</div>
+
                           </div>
                         </div>
                       ))}
@@ -179,8 +200,10 @@ const PostSectionTen = () => {
                       <div className="content-block content-block post-grid post-grid-transparent">
                         {getImageSrc(firstPost?.images) && (
                           <div className="post-thumbnail">
-                            <Link href={`/post/${firstPost?.id}`}>
-
+                            <Link
+                              href={`/post/${firstPost?.id}`}
+                              locale={locale}
+                            >
                               <a>
                                 <Image
                                   src={getImageSrc(firstPost?.images)}
@@ -201,9 +224,11 @@ const PostSectionTen = () => {
                           <div className="post-content">
                             <div className="post-cat">
                               <div className="post-cat-list">
-                                <Link href={`/category/${slugify(
-                                  firstPost?.category?.name_en || ""
-                                )}`}
+                                <Link
+                                  href={`/category/${slugify(
+                                    firstPost?.category?.name_en || ""
+                                  )}`}
+                                  locale={locale}
                                 >
                                   <a className="hover-flip-item-wrapper">
                                     <span className="hover-flip-item">
@@ -224,7 +249,10 @@ const PostSectionTen = () => {
                               </div>
                             </div>
                             <h3 className="title">
-                             <Link href={`/post/${firstPost?.id}`}>
+                              <Link
+                                href={`/post/${firstPost?.id}`}
+                                locale={locale}
+                              >
                                 <a>
                                   {locale === "en"
                                     ? firstPost?.title_en
@@ -232,6 +260,8 @@ const PostSectionTen = () => {
                                 </a>
                               </Link>
                             </h3>
+
+                            
                           </div>
                         </div>
                       </div>
