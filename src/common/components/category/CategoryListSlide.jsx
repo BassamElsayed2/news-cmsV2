@@ -77,6 +77,7 @@ const CategoryListSlide = ({ cateData }) => {
         <SectionTitleTwo
           title={locale === "ar" ? "التصنيفات" : "Categories"}
           btnText={locale === "ar" ? "عرض الكل" : "See All Topics"}
+          btnUrl={`/${locale}/news`}
         />
         <div className="row">
           <div className="col-lg-12">
@@ -87,11 +88,7 @@ const CategoryListSlide = ({ cateData }) => {
               {categories?.map((data, index) => (
                 <div className="single-cat" key={index}>
                   <div className="inner">
-
-                    <Link href={`/category/${data.slug}`}>
-                      {/* <Link href={`/category/${data.slug}`}>  
-                      مفروض دة ياخد بال status ?
-                      */}
+                    <Link href={`/${locale}/news?category=${data.id}`}>
                       <a>
                         <div className="thumbnail">
                           <Image

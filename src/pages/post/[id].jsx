@@ -19,44 +19,40 @@ const NewsDetailsPage = ({ postData = {}, allData = [] }) => {
   const postContent =
     postData?.content?.replaceAll("/images/", basePathLink + "/images/") || "";
 
-  console.log("ID:", id);
-
   return (
     <>
-    {postData.featureImg ? <PostMetaOne metaData={postData} /> : ""}
-
       <div className="post-single-wrapper axil-section-gap bg-color-white">
         <div className="container">
           <div className="row">
             <div className="col-lg-8">
-            <PostMetaTwo metaData={postData} />
-            <div className="axil-post-details">
-              {postData?.videoLink ? (
-                <div className="embed-responsive embed-responsive-16by9">
-                  <iframe
-                    src={postData.videoLink}
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  ></iframe>
-                </div>
-              ) : null}
+              <PostMetaTwo metaData={postData} />
+              <div className="axil-post-details">
+                {postData?.videoLink ? (
+                  <div className="embed-responsive embed-responsive-16by9">
+                    <iframe
+                      src={postData.videoLink}
+                      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
+                  </div>
+                ) : null}
 
-              <div
-                className="post-details-content"
-                dangerouslySetInnerHTML={{ __html: postContent }}
-              ></div>
+                <div
+                  className="post-details-content"
+                  dangerouslySetInnerHTML={{ __html: postContent }}
+                ></div>
 
-              <PostTagShare postTags={postData} />
-              <PostAuthor dataAuthor={postData} />
-              <PostComment />
+                <PostTagShare postTags={postData} />
+                <PostAuthor dataAuthor={postData} />
+                <PostComment />
+              </div>
             </div>
-          </div>
-          <div className="col-lg-4">
-            <SidebarTwo dataPost={allData} tagData={postData} />
+            <div className="col-lg-4">
+              <SidebarTwo dataPost={allData} tagData={postData} />
+            </div>
           </div>
         </div>
       </div>
-    </div>
     </>
   );
 };

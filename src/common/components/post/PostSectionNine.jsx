@@ -27,9 +27,6 @@ const PostSectionNine = ({ news, bgColor }) => {
 
   const firstCategory = categoriesQueries[0]?.data;
 
-  console.log("First Post:", firstPost);
-  console.log("Sliced Posts:", slicedPosts);
-
   return (
     <div className={`axil-tech-post-banner ${bgColor || "bg-color-grey"}`}>
       <div className="container">
