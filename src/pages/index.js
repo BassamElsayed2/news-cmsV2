@@ -1,3 +1,6 @@
+
+import GalleryOne from "../common/gallery/InstagramOne";
+
 import FooterThree from "../common/elements/footer/FooterThree";
 import { getAllPosts } from "../../lib/api";
 import HeaderThree from "../common/elements/header/HeaderThree";
@@ -35,7 +38,11 @@ const TechBlog = ({ allPosts }) => {
       <PostSectionTen postData={allPosts} />
       <PostSectionThree postData={news} />
       <PostSectionFour postData={techPost} adBanner={true} />
-      <PostSectionEleven />
+
+      
+      <PostSectionEleven  />
+      
+
       <GalleryOne parentClass="bg-color-grey" />
       <FooterThree />
     </>

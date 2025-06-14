@@ -84,7 +84,7 @@ const PostSectionSix = ({ postData }) => {
                   <div className="col-lg-8">
 					<div className="row" ref={hoverRef}>
                     {tabPostData.slice(0, 4).map((data, index) => (
-						<div className="col-12" key={data.slug}>
+						<div className="col-12" key={data.id}>
 							<div className={`content-block trend-post post-order-list ${index === 0 ? "is-active" : "axil-control"}`}>
 								<div className="post-inner">
 								<span className="post-order-list">{index + 1}</span>
@@ -103,7 +103,7 @@ const PostSectionSix = ({ postData }) => {
 									</div>
 									</div>
 									<h3 className="title">
-									<Link href={`/post/${data.slug}`}>
+									<Link href={`/post/${data.id}`}>
 										<a>{data.title}</a>
 									</Link>
 									</h3>
@@ -141,7 +141,7 @@ const PostSectionSix = ({ postData }) => {
 								</div>
 								{data.featureImg ? 
 								<div className="post-thumbnail">
-									<Link href={`/post/${data.slug}`}>
+									<Link href={`/post/${data.id}`}>
 										<a>
 											<Image
 												src={data.featureImg}

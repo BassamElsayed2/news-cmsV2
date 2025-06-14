@@ -159,7 +159,7 @@ const PostSectionEleven = ({ filters = [] }) => {
                                   </div>
 
                                   <h4 className="title">
-                                    <Link href={`/post/${data.slug}`}>
+                                    <Link href={`/post/${data.id}`}>
                                       <a>
                                         {locale === "en"
                                           ? data.title_en
@@ -170,7 +170,7 @@ const PostSectionEleven = ({ filters = [] }) => {
                                 </div>
 
                                 <div className="post-thumbnail">
-                                  <Link href={`/post/${data.slug}`}>
+                                  <Link href={`/post/${data.id}`}>
                                     <a>
                                       <Image
                                         src={getImageSrc(data.images)}

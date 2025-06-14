@@ -16,13 +16,12 @@ export async function getNews() {
 }
 
 // get news by id
-
 export async function getNewsById(id) {
   const { data, error } = await supabase
     .from("news")
     .select("*")
     .eq("id", id)
-    .single();
+    .single(); // بيجيب عنصر واحد فقط
 
   if (error) throw error;
   if (!data) throw new Error("الخبر غير موجود");

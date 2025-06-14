@@ -50,11 +50,11 @@ const SliderOne = ({ postData }) => {
               <Slider {...slideSettings} className="slider-activation axil-slick-arrow">
                
                 {slidePost.slice(0, 3).map((data) => (
-                  <div className="content-block" key={data.slug}>
+                  <div className="content-block" key={data.id}>
                     {/* Start Post Thumbnail  */}
                     {data.featureImg ? 
                     <div className="post-thumbnail">
-                        <Link href={`/post/${data.slug}`}>
+                        <Link href={`/post/${data.id}`}>
                             <a>
                                 <Image
                                     src={data.featureImg}
@@ -84,7 +84,7 @@ const SliderOne = ({ postData }) => {
                         </div>
                       </div>
                       <h2 className="title">
-                            <Link href={`/post/${data.slug}`}>
+                            <Link href={`/post/${data.id}`}>
                                 <a>{data.title}</a>
                             </Link>
                       </h2>
@@ -129,7 +129,7 @@ const SliderOne = ({ postData }) => {
                             ))}
                         </ul>
                         <div className="read-more-button cerchio">
-                            <Link href={`/post/${data.slug}`}>
+                            <Link href={`/post/${data.id}`}>
                                 <a className="axil-button button-rounded hover-flip-item-wrapper">
                                     <span className="hover-flip-item">
                                         <span data-text="Read Post">Read Post</span>

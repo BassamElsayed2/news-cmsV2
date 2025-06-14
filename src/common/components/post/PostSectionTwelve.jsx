@@ -14,7 +14,7 @@ const PostSectionTwelve = ({ postData }) => {
             <div className="content-block post-grid post-grid-transparent post-overlay-bottom">
             {firstPost.featureImg ? 
               <div className="post-thumbnail">
-                <Link href={`/post/${firstPost.slug}`}>
+                <Link href={`/post/${firstPost.id}`}>
                   <a>
                     <Image
                       src={firstPost.featureImg}
@@ -42,7 +42,7 @@ const PostSectionTwelve = ({ postData }) => {
                     </div>
                   </div>
                   <h3 className="title">
-                    <Link href={`/post/${firstPost.slug}`}>
+                    <Link href={`/post/${firstPost.id}`}>
                       <a>{firstPost.title}</a>
                     </Link>
                   </h3>
@@ -53,11 +53,11 @@ const PostSectionTwelve = ({ postData }) => {
           <div className="col-lg-12 col-xl-6 col-md-12 col-12 mt_lg--20 mt_md--20 mt_sm--20">
             <div className="row row--10">
               {postData.slice(1, 5).map((data) => (
-                <div className="col-lg-6 col-md-6 col-sm-6 col-12 mt--20" key={data.slug}>
+                <div className="col-lg-6 col-md-6 col-sm-6 col-12 mt--20" key={data.id}>
                   <div className="content-block post-grid post-grid-transparent post-grid-small post-overlay-bottom">
                   {data.featureImg ? 
                     <div className="post-thumbnail">
-                      <Link href={`/post/${data.slug}`}>
+                      <Link href={`/post/${data.id}`}>
                       <a>
                         <Image
                           src={data.featureImg}
@@ -86,7 +86,7 @@ const PostSectionTwelve = ({ postData }) => {
 							</div>
 						</div>
 						<h5 className="title">
-						<Link href={`/post/${data.slug}`}>
+						<Link href={`/post/${data.id}`}>
 							<a>{data.title}</a>
 						</Link>
 						</h5>

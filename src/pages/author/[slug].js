@@ -1,10 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
-import { getAllPosts } from "../../../lib/api";
-import GalleryOne from "../../common/components/instagram/GalleryOne";
-import FooterOne from "../../common/elements/footer/FooterOne";
-import HeaderOne from "../../common/elements/header/HeaderOne";
-import PostLayoutTwo from "../../common/components/post/layout/PostLayoutTwo";
+
+import { getAllPosts } from '../../../lib/api';
+import GalleryOne from "../common/gallery/InstagramOne";
+import FooterOne from '../../common/elements/footer/FooterOne';
+import HeaderOne from '../../common/elements/header/HeaderOne';
+import PostLayoutTwo from '../../common/components/post/layout/PostLayoutTwo';
+
 import SidebarOne from "../../common/components/sidebar/SidebarOne";
 import { slugify } from "../../common/utils";
 import HeadTitle from "../../common/elements/head/HeadTitle";
@@ -70,20 +72,13 @@ const AuthorArchive = ({ authorData, allPosts }) => {
                 <h2 className="title mb--40">Articles By This Author</h2>
               </div>
             </div>
-            <div className="col-lg-8 col-xl-8">
-              <PostLayoutTwo dataPost={authorData} show="5" />
-            </div>
-            <div className="col-lg-4 col-xl-4 mt_md--40 mt_sm--40">
-              <SidebarOne dataPost={allPosts} />
-            </div>
-          </div>
-        </div>
-      </div>
-      <GalleryOne parentClass="bg-color-grey" />
-      <FooterOne />
-    </>
-  );
-};
+
+            <GalleryOne parentClass="bg-color-grey" />
+            <FooterOne />
+        </>
+    );
+}
+
 
 export default AuthorArchive;
 

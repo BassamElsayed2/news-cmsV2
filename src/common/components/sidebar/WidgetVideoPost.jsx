@@ -13,10 +13,12 @@ const WidgetVideoPost = ({ postData }) => {
       <h5 className="widget-title">Featured Videos</h5>
       <div className="video-post-wrapepr">
         {videoPosts?.slice(-3).map((data) => (
-          <div className="content-block image-rounded mt--20" key={data.slug}>
+
+          <div className="content-block image-rounded mt--20" key={data.id}>
             {data.images[0] ? (
               <div className="post-thumbnail">
-                <Link href={`/post`}>
+                <Link href={`/post/${data.id}`}>
+
                   <a>
                     <Image
                       src={data.images[0]}
@@ -27,7 +29,9 @@ const WidgetVideoPost = ({ postData }) => {
                     />
                   </a>
                 </Link>
-                <Link href={`/post`}>
+
+                <Link href={`/post/${data.id}`}>
+
                   <a className="video-popup size-medium position-top-center icon-color-secondary">
                     <span className="play-icon" />
                   </a>
@@ -38,7 +42,9 @@ const WidgetVideoPost = ({ postData }) => {
             )}
             <div className="post-content">
               <h6 className="title">
-                <Link href={`/post`}>
+
+                <Link href={`/post/${data.id}`}>
+
                   <a>{locale === "ar" ? data.title_ar : data.title_en}</a>
                 </Link>
               </h6>

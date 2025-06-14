@@ -1,5 +1,7 @@
-import React, { useState } from "react";
-import ReactPaginate from "react-paginate";
+
+import React, { useState } from 'react';
+import ReactPaginate from 'react-paginate';
+import GalleryOne from "../common/gallery/InstagramOne";
 
 import FooterThree from "../common/elements/footer/FooterThree";
 import HeaderOne from "../common/elements/header/HeaderOne";
@@ -52,17 +54,13 @@ const PostListPage = ({ allPosts }) => {
                 activeClassName={"current"}
               />
             </div>
-            <div className="col-lg-4 col-xl-4 mt_md--40 mt_sm--40">
-              <SidebarOne dataPost={allPosts} />
-            </div>
-          </div>
-        </div>
-      </div>
-      <GalleryOne parentClass="bg-color-grey" />
-      <FooterThree />
-    </>
-  );
-};
+
+            <GalleryOne parentClass="bg-color-grey" />
+            <FooterThree />
+        </>
+    );
+}
+
 
 export default PostListPage;
 

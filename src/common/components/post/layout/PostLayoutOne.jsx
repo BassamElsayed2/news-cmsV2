@@ -11,7 +11,7 @@ const PostLayoutOne = ({ postData, itemShow }) => {
       {featuredPost.slice(0, itemShow).map((data) => (
         <div
           className="col-lg-6 col-xl-6 col-md-12 col-12 mt--30"
-          key={data.slug}>
+          key={data.id}>
           <div className="content-block content-direction-column post-horizontal thumb-border-rounded">
             <div className="post-content">
               <div className="post-cat">
@@ -26,7 +26,7 @@ const PostLayoutOne = ({ postData, itemShow }) => {
                 </div>
               </div>
               <h4 className="title">
-                <Link href={`/post/${data.slug}`}>
+                <Link href={`/post/${data.id}`}>
                   <a>{data.title}</a>
                 </Link>
               </h4>
@@ -60,7 +60,7 @@ const PostLayoutOne = ({ postData, itemShow }) => {
             </div>
             {data.featureImg ? 
             <div className="post-thumbnail">
-              <Link href={`/post/${data.slug}`}>
+              <Link href={`/post/${data.id}`}>
                 <a>
                   <Image
                     src={data.featureImg}

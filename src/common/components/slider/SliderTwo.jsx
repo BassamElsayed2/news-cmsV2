@@ -44,13 +44,13 @@ const SliderTwo = ({postData}) => {
                 
                 <Slider asNavFor={nav2} ref={(slider1 => setNav1(slider1))} {...slideSettingsOne} className="slider-inner slick-nav-avtivation-new">
                     {postData.slice(1, 10).map((data, index) => (
-                    <div className="content-block post-medium post-medium-border" key={data.slug}>
+                    <div className="content-block post-medium post-medium-border" key={data.id}>
                         <div className="post-number">
                         <span>{index + 1}</span>
                         </div>
                         {data.featureImg ? 
                         <div className="post-thumbnail">
-                            <Link href={`/post/${data.slug}`}>
+                            <Link href={`/post/${data.id}`}>
                                 <a>
                                     <Image
                                         src={data.featureImg}
@@ -72,12 +72,12 @@ const SliderTwo = ({postData}) => {
                                 </div>
                             </div>
                             <h4 className="title">
-                                <Link href={`/post/${data.slug}`}>
+                                <Link href={`/post/${data.id}`}>
                                     <a>{data.title}</a>
                                 </Link>
                             </h4>
                             <div className="post-button">
-                                <Link href={`/post/${data.slug}`}>
+                                <Link href={`/post/${data.id}`}>
                                     <a className="axil-button button-rounded color-secondary-alt">
                                         Read More
                                     </a>
@@ -92,9 +92,9 @@ const SliderTwo = ({postData}) => {
               <div className="col-lg-6 order-1 order-lg-2">
                 <Slider asNavFor={nav1} ref={(slider2 => setNav2(slider2))} {...slideSettingsTwo} className="thumbnail-wrapper slick-for-avtivation-new">
                 {postData.slice(1, 10).map((data) => (
-                    <div className="thumbnail" key={data.slug}>
+                    <div className="thumbnail" key={data.id}>
                         {data.featureImg ? 
-                        <Link href={`/post/${data.slug}`}>
+                        <Link href={`/post/${data.id}`}>
                             <a>
                                 <Image
                                     src={data.featureImg}
