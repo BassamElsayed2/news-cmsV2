@@ -13,14 +13,12 @@ const PostSectionFour = ({ postData, adBanner }) => {
   const homeAds = ads?.filter((ad) => ad.location === "home") || [];
   const secondHomeAd = homeAds[1];
 
-  if (!secondHomeAd) return null;
-
   return (
     <div className="axil-post-list-area post-listview-visible-color axil-section-gap bg-color-white">
       <div className="container">
         <div className="row">
           <div className="col-lg-8 col-xl-8">
-            {adBanner && (
+            {secondHomeAd && (
               <AddBanner
                 img={secondHomeAd.image_url}
                 height="210"

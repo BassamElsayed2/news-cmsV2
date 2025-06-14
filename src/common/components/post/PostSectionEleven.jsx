@@ -89,7 +89,9 @@ const PostSectionEleven = ({ filters = [] }) => {
   return (
     <div className="axil-post-grid-area axil-section-gapTop bg-color-grey">
       <div className="container">
-        <SectionTitleOne title="أخبار سابقة" />
+        <SectionTitleOne
+          title={locale === "en" ? "Previous News" : "الأخبار السابقة"}
+        />
 
         <div className="row">
           <div className="col-lg-12">
