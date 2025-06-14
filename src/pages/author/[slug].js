@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { getAllPosts } from '../../../lib/api';
-import InstagramOne from '../../common/components/instagram/InstagramOne';
+import GalleryOne from "../common/gallery/InstagramOne";
 import FooterOne from '../../common/elements/footer/FooterOne';
 import HeaderOne from '../../common/elements/header/HeaderOne';
 import PostLayoutTwo from '../../common/components/post/layout/PostLayoutTwo';
@@ -73,7 +73,7 @@ const AuthorArchive = ({ authorData, allPosts }) => {
                     </div>
                 </div>
             </div>
-            <InstagramOne parentClass="bg-color-grey" />
+            <GalleryOne parentClass="bg-color-grey" />
             <FooterOne />
         </>
     );

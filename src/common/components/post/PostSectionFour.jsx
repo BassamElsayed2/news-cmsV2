@@ -10,23 +10,23 @@ const PostSectionFour = ({ postData, adBanner }) => {
     queryFn: getAds,
   });
 
-  const homeAds = ads?.filter((ad) => ad.location === "home");
+  const homeAds = ads?.filter((ad) => ad.location === "home") || [];
+  const secondHomeAd = homeAds[1];
+
+  
 
   return (
-    /* hi* */
     <div className="axil-post-list-area post-listview-visible-color axil-section-gap bg-color-white">
       <div className="container">
         <div className="row">
           <div className="col-lg-8 col-xl-8">
-            {adBanner === true && homeAds ? (
+            {secondHomeAd && (
               <AddBanner
-                img={homeAds[1].image_url}
+                img={secondHomeAd.image_url}
                 height="210"
                 width="810"
-                data={homeAds[1]}
+                data={secondHomeAd}
               />
-            ) : (
-              ""
             )}
             <PostLayoutTwo dataPost={postData} show="5" />
           </div>

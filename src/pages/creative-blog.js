@@ -5,7 +5,7 @@ import { getAllPosts } from '../../lib/api';
 import PostSectionTwo from "../common/components/post/PostSectionTwo";
 import PostSectionThree from "../common/components/post/PostSectionThree";
 import PostSectionFour from "../common/components/post/PostSectionFour";
-import InstagramOne from "../common/components/instagram/InstagramOne";
+import GalleryOne from "../common/gallery/InstagramOne";
 import SliderTwo from "../common/components/slider/SliderTwo";
 import HeadTitle from "../common/elements/head/HeadTitle";
 
@@ -19,7 +19,7 @@ const CreativeBlog = ({allPosts}) => {
         <PostSectionTwo postData={allPosts} />
         <PostSectionThree postData={allPosts} adBanner={true} bgColor="bg-color-grey" heading="Most Popular"/>
         <PostSectionFour postData={allPosts}/>
-        <InstagramOne parentClass="bg-color-grey" />
+        <GalleryOne parentClass="bg-color-grey" />
         <FooterTwo />
         </>
     );

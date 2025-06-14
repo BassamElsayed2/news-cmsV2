@@ -151,10 +151,10 @@ const Nav = ({ posts }) => {
                 <div className="axil-vertical-single">
                   <div className="row">
                     {tabPostData.slice(0, 4).map((data) => (
-                      <div className="col-lg-3" key={data.slug}>
+                      <div className="col-lg-3" key={data.id}>
                         <div className="content-block image-rounded">
                           <div className="post-thumbnail mb--20">
-                            <Link href={`/post/${data.slug}`}>
+                            <Link href={`/post/${data.id}`}>
                               <a>
                                 <Image
                                   src={data.featureImg}
@@ -181,7 +181,7 @@ const Nav = ({ posts }) => {
                               </div>
                             </div>
                             <h5 className="title">
-                              <Link href={`/post/${data.slug}`}>
+                              <Link href={`/post/${data.id}`}>
                                 <a>{data.title}</a>
                               </Link>
                             </h5>

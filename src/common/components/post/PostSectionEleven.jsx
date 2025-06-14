@@ -6,23 +6,27 @@ import Nav from "react-bootstrap/Nav";
 import { SectionTitleOne } from "../../elements/sectionTitle/SectionTitle";
 import { slugify } from "../../utils";
 import PostLayoutThree from "./layout/PostLayoutThree";
-import WidgetCategory from "../sidebar/WidgetCategory";
+
 import WidgetVideoPost from "../sidebar/WidgetVideoPost";
-import AddBanner from "../ad-banner/AddBanner";
+
 import { useQuery } from "@tanstack/react-query";
 import { getNews } from "../../../../services/apiNews";
 import { useLocale } from "next-intl";
-import { useTranslation } from "react-i18next";
+import { getAds } from "../../../../services/apiAds";
+import AddBanner from "../ad-banner/AddBanner";
 
-
-const PostSectionEleven = ({ postData = [], filters = [] }) => {
+const PostSectionEleven = ({ filters = [] }) => {
   const locale = useLocale();
-  const { t } = useTranslation("common");
+  const defaultActiveCat =
+    filters.length > 0 ? slugify(filters[0].cate) : "all";
 
-  const defaultActiveCat = filters.length > 0 ? slugify(filters[0].cate) : "all";
+  const { data: ads } = useQuery({
+    queryKey: ["ads"],
+    queryFn: getAds,
+  });
 
   const {
-    data: fetchedPosts = [],
+    data: fetchedPosts,
     isLoading,
     error,
   } = useQuery({
@@ -47,7 +51,7 @@ const PostSectionEleven = ({ postData = [], filters = [] }) => {
     if (!activeNav) {
       setActiveNav("all");
     }
-  }, [fetchedPosts]);
+  }, [fetchedPosts, activeNav]);
 
   useEffect(() => {
     if (!Array.isArray(fetchedPosts) || fetchedPosts.length === 0) return;
@@ -65,6 +69,9 @@ const PostSectionEleven = ({ postData = [], filters = [] }) => {
     setTabPostData(filtered);
   }, [fetchedPosts, activeNav]);
 
+  const homeAds = ads?.filter((ad) => ad.location === "home") || [];
+  const thirdHomeAd = homeAds[2];
+
   const getImageSrc = (img) => {
     if (Array.isArray(img)) return img[0] || "";
     if (typeof img === "string") return img;
@@ -78,8 +85,6 @@ const PostSectionEleven = ({ postData = [], filters = [] }) => {
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error loading data.</p>;
-
-  const firstPost = tabPostData[0];
 
   return (
     <div className="axil-post-grid-area axil-section-gapTop bg-color-grey">
@@ -101,8 +106,8 @@ const PostSectionEleven = ({ postData = [], filters = [] }) => {
                         ? "All"
                         : "الكل"
                       : locale === "en"
-                        ? categoryObj?.name_en
-                        : categoryObj?.name_ar;
+                      ? categoryObj?.name_en
+                      : categoryObj?.name_ar;
 
                   return (
                     <Nav.Item key={catId}>
@@ -129,7 +134,9 @@ const PostSectionEleven = ({ postData = [], filters = [] }) => {
                                 <div className="post-content">
                                   <div className="post-cat">
                                     <div className="post-cat-list">
-                                      <Link href={`/category/${slugify(data.cate)}`}>
+                                      <Link
+                                        href={`/category/${slugify(data.cate)}`}
+                                      >
                                         <a className="hover-flip-item-wrapper">
                                           <span className="hover-flip-item">
                                             <span
@@ -173,8 +180,10 @@ const PostSectionEleven = ({ postData = [], filters = [] }) => {
                                         height={338}
                                         width={600}
                                         priority
+                                        style={{
+                                          objectFit: "cover",
+                                        }}
                                       />
-
                                     </a>
                                   </Link>
                                 </div>
@@ -188,7 +197,7 @@ const PostSectionEleven = ({ postData = [], filters = [] }) => {
                     <div className="col-lg-8 col-xl-8 mt--30">
                       <PostLayoutThree
                         dataPost={tabPostData}
-                        postStart={2}     
+                        postStart={2}
                         show={3}
                         bgColor="with-bg-solid"
                       />
@@ -196,7 +205,7 @@ const PostSectionEleven = ({ postData = [], filters = [] }) => {
 
                     <div className="col-lg-4 col-xl-4 mt--30 mt_md--40 mt_sm--40">
                       <div className="sidebar-inner">
-                        <WidgetVideoPost postData={tabPostData} />
+                        <WidgetVideoPost postData={fetchedPosts} />
                       </div>
                     </div>
                   </div>
@@ -206,20 +215,20 @@ const PostSectionEleven = ({ postData = [], filters = [] }) => {
           </div>
         </div>
 
-        <div className="row">
-          <div className="col-lg-12">
-            <AddBanner
-              img="/images/add-banner/banner-03.webp"
-              height="200"
-              width="1230"
-              pClass="mt--30"
-            />
+        {thirdHomeAd && (
+          <div className="row">
+            <div className="col-lg-12">
+              <AddBanner
+                img={thirdHomeAd.image}
+                height="200"
+                width="1230"
+                pClass="mt--30"
+              />
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
-
-
   );
 };
 

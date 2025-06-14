@@ -5,7 +5,7 @@ export async function getAds() {
 
   if (error) {
     console.error("فشل في جلب البيانات:", error.message);
-    throw new Error("فشل في تحميل المعرض");
+    throw new Error("فشل في تحميل الاعلانات");
   }
 
   return data;

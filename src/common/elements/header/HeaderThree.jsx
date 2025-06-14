@@ -114,7 +114,7 @@ const HeaderThree = ({ darkLogo, lightLogo, postData }) => {
               </div>
               <div className="col-lg-9 col-md-8 col-sm-6">
                 <div className="banner-add text-end">
-                  {homeAds && (
+                  {homeAds?.[0] && (
                     <Link href={homeAds[0].link || "#"}>
                       <a>
                         <Image

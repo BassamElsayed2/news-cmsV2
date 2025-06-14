@@ -110,7 +110,7 @@ const PostSectionTen = () => {
                           key={data.id}
                         >
                           <div className="post-thumbnail">
-                            <Link href={`/post/${data.slug}`}>
+                            <Link href={`/post/${data.id}`}>
                               <a>
                                 {getImageSrc(data.images) ? (
                                   <Image
@@ -163,7 +163,7 @@ const PostSectionTen = () => {
                               </div>
                             </div>
                             <h4 className="title">
-                              <Link href={`/post`}>
+                             <Link href={`/post/${data.id}`}>
                                 <a>
                                   {locale === "en"
                                     ? data.title_en
@@ -179,7 +179,8 @@ const PostSectionTen = () => {
                       <div className="content-block content-block post-grid post-grid-transparent">
                         {getImageSrc(firstPost?.images) && (
                           <div className="post-thumbnail">
-                            <Link href={`/post`}>
+                            <Link href={`/post/${firstPost?.id}`}>
+
                               <a>
                                 <Image
                                   src={getImageSrc(firstPost?.images)}
@@ -223,7 +224,7 @@ const PostSectionTen = () => {
                               </div>
                             </div>
                             <h3 className="title">
-                              <Link href={`/post`}>
+                             <Link href={`/post/${firstPost?.id}`}>
                                 <a>
                                   {locale === "en"
                                     ? firstPost?.title_en

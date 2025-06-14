@@ -1,4 +1,4 @@
-import InstagramOne from "../common/components/instagram/InstagramOne";
+import GalleryOne from "../../common/gallery/InstagramOne";
 import BreadcrumbTwo from "../common/elements/breadcrumb/breadcrumbTwo";
 import FooterThree from "../common/elements/footer/FooterThree";
 import HeaderOne from "../common/elements/header/HeaderOne";
@@ -53,7 +53,7 @@ const AboutUs = ({allPosts}) => {
                 </div>
             </div>
 
-            <InstagramOne parentClass="bg-color-grey" />
+            <GalleryOne parentClass="bg-color-grey" />
             <FooterThree />
         </>
     );

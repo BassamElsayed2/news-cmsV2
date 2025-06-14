@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import InstagramOne from "../common/components/instagram/InstagramOne";
+import GalleryOne from "../common/gallery/InstagramOne";
 import SocialOne from "../common/components/social/SocialOne";
 import FooterThree from "../common/elements/footer/FooterThree";
 import HeaderTwo from "../common/elements/header/HeaderTwo";
@@ -36,7 +36,7 @@ const SeoBlog = ({allPosts}) => {
       <CategoryListSlide cateData={allPosts} />
       <PostSectionFour postData={seoPost} adBanner={true}/>
       <SocialOne />
-      <InstagramOne parentClass="bg-color-grey"/>
+      <GalleryOne parentClass="bg-color-grey"/>
 			<FooterThree />
         </>
      );
