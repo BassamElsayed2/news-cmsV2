@@ -14,7 +14,7 @@ const PostSectionTwelve = ({ postData }) => {
             <div className="content-block post-grid post-grid-transparent post-overlay-bottom">
             {firstPost.featureImg ? 
               <div className="post-thumbnail">
-                <Link href={`/post/${firstPost.id}`}>
+                <Link href={`/post/${firstPost.id}`}locale={locale}>
                   <a>
                     <Image
                       src={firstPost.featureImg}
@@ -30,7 +30,7 @@ const PostSectionTwelve = ({ postData }) => {
                 <div className="post-content">
                   <div className="post-cat">
                     <div className="post-cat-list">
-                      <Link href={`/category/${slugify(firstPost.cate)}`}>
+                      <Link href={`/category/${slugify(firstPost.cate)}`}locale={locale}>
                         <a className="hover-flip-item-wrapper">
                           <span className="hover-flip-item">
                             <span data-text={firstPost.cate}>
@@ -42,7 +42,7 @@ const PostSectionTwelve = ({ postData }) => {
                     </div>
                   </div>
                   <h3 className="title">
-                    <Link href={`/post/${firstPost.id}`}>
+                    <Link href={`/post/${firstPost.id}`}locale={locale}>
                       <a>{firstPost.title}</a>
                     </Link>
                   </h3>
@@ -57,7 +57,7 @@ const PostSectionTwelve = ({ postData }) => {
                   <div className="content-block post-grid post-grid-transparent post-grid-small post-overlay-bottom">
                   {data.featureImg ? 
                     <div className="post-thumbnail">
-                      <Link href={`/post/${data.id}`}>
+                      <Link href={`/post/${data.id}`}locale={locale}>
                       <a>
                         <Image
                           src={data.featureImg}
@@ -74,7 +74,7 @@ const PostSectionTwelve = ({ postData }) => {
 						<div className="post-content">
 						<div className="post-cat">
 							<div className="post-cat-list">
-							<Link href={`/category/${slugify(data.cate)}`}>
+							<Link href={`/category/${slugify(data.cate)}`}locale={locale}>
 							<a className="hover-flip-item-wrapper">
 								<span className="hover-flip-item">
 								<span data-text={data.cate}>
@@ -86,7 +86,7 @@ const PostSectionTwelve = ({ postData }) => {
 							</div>
 						</div>
 						<h5 className="title">
-						<Link href={`/post/${data.id}`}>
+						<Link href={`/post/${data.id}`}locale={locale}>
 							<a>{data.title}</a>
 						</Link>
 						</h5>

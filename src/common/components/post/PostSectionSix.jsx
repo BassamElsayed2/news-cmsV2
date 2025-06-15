@@ -91,7 +91,7 @@ const PostSectionSix = ({ postData }) => {
 								<div className="post-content">
 									<div className="post-cat">
 									<div className="post-cat-list">
-										<Link href={`/category/${slugify(data.cate)}`}>
+										<Link href={`/category/${slugify(data.cate)}`}locale={locale}>
 										<a className="hover-flip-item-wrapper">
 											<span className="hover-flip-item">
 											<span data-text={data.cate}>
@@ -103,7 +103,7 @@ const PostSectionSix = ({ postData }) => {
 									</div>
 									</div>
 									<h3 className="title">
-									<Link href={`/post/${data.id}`}>
+									<Link href={`/post/${data.id}`}locale={locale}>
 										<a>{data.title}</a>
 									</Link>
 									</h3>
@@ -111,7 +111,7 @@ const PostSectionSix = ({ postData }) => {
 									<div className="post-meta">
 										<div className="content">
 										<h6 className="post-author-name">
-											<Link href={`/author/${slugify(data.author_name)}`}>
+											<Link href={`/author/${slugify(data.author_name)}`}locale={locale}>
 											<a className="hover-flip-item-wrapper">
 												<span className="hover-flip-item">
 												<span data-text={data.author_name}>
@@ -141,7 +141,7 @@ const PostSectionSix = ({ postData }) => {
 								</div>
 								{data.featureImg ? 
 								<div className="post-thumbnail">
-									<Link href={`/post/${data.id}`}>
+									<Link href={`/post/${data.id}`}locale={locale}>
 										<a>
 											<Image
 												src={data.featureImg}

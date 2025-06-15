@@ -10,6 +10,7 @@ import { useLocale } from "next-intl";
 const CategoryListSlide = ({ cateData }) => {
   const uniqueCategory = removeDuplicates(cateData, "cate");
   const locale = useLocale();
+  
 
   const { data: categories } = useQuery({
     queryKey: ["categories"],
@@ -88,7 +89,9 @@ const CategoryListSlide = ({ cateData }) => {
               {categories?.map((data, index) => (
                 <div className="single-cat" key={index}>
                   <div className="inner">
+
                     <Link href={`/${locale}/news?category=${data.id}`}>
+
                       <a>
                         <div className="thumbnail">
                           <Image
