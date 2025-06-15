@@ -94,7 +94,7 @@ const PostSectionNine = ({ news, bgColor }) => {
           )}
 
           {/* عرض باقي البوستات */}
-          <div className="col-xl-6 col-lg-6 col-md-12 col-md-6 col-12">
+          <div className="col-xl-6 col-lg-12 col-md-12 col-md-6 col-12">
             <div className="row">
               {slicedPosts.map((data, index) => {
                 const categoryData = categoriesQueries[index]?.data;

@@ -58,6 +58,7 @@ const PostLayoutThree = ({ dataPost = [], postStart = 0, show = 3, bgColor = "" 
             </div>
 
 
+
             <h5 className="title">
               <Link href={`/${locale}/post/${data.id}`}>
                 <a>{locale === "en" ? data.title_en : data.title_ar}</a>
@@ -91,6 +92,17 @@ const PostLayoutThree = ({ dataPost = [], postStart = 0, show = 3, bgColor = "" 
                   </span>
                 </a>
               </Link>
+
+        {thirdHomeAd && (
+          <div className="row">
+            <div className="col-lg-12">
+              <AddBanner
+                img={thirdHomeAd.image_url}
+                height="200"
+                width="1230"
+                pClass="mt--30"
+              />
+
             </div>
           </div>
         </div>

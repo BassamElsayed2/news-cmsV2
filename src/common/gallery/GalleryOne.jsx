@@ -31,7 +31,7 @@ const GalleryOne = ({ parentClass }) => {
             <ul className="instagram-post-list">
               {galleries?.map((data) => (
                 <li className="single-post" key={data.id}>
-                  <a href={"#"}>
+                  <a href={`/${locale}/gallery/${data.id}`}>
                     <Image
                       src={data.image_urls[0]}
                       height={190}

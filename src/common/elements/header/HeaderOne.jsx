@@ -57,6 +57,11 @@ const HeaderOne = ({ pClass, darkLogo, lightLogo, postData }) => {
               </div>
             </div>
             <div className="col-xl-3 col-lg-8 col-md-8 col-sm-9 col-12">
+              <ul className="social-share-transparent md-size justify-content-center justify-content-md-end">
+                <LanguageSwitcher />
+              </ul>
+            </div>
+            <div className="col-xl-3 col-lg-8 col-md-8 col-sm-9 col-12">
               <div className="header-search text-end d-flex align-items-center">
                 {/* Start Hamburger Menu  */}
                 <div className="hamburger-menu d-block d-xl-none">
