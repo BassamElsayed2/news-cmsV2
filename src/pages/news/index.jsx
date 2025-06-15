@@ -198,7 +198,7 @@ export default function NewsPage({ allPosts }) {
                     </Link>
                   </h5>
                   <p className="card-text text-muted">
-                    <i className="far fa-calendar-alt me-2"></i>
+                    <i className="far fa-calendar-alt me-2 ms-2"></i>
                     {formatDate(item.created_at)}
                   </p>
                 </div>
@@ -290,7 +290,7 @@ export default function NewsPage({ allPosts }) {
           border-radius: 12px;
           border: 2px solid #e9ecef;
           transition: all 0.3s ease;
-          font-size: 1rem;
+          font-size: 1.5rem;
           height: 55px;
           background-color: #f8f9fa;
         }

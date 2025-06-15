@@ -137,7 +137,7 @@ const PostSectionEleven = ({ filters = [] }) => {
                                   <div className="post-cat">
                                     <div className="post-cat-list">
                                       <Link
-                                        href={`/category/${slugify(data.cate)}`}
+                                        href={`/${locale}/news?category=${data?.category.id}`}
                                       >
                                         <a className="hover-flip-item-wrapper">
                                           <span className="hover-flip-item">
@@ -159,7 +159,7 @@ const PostSectionEleven = ({ filters = [] }) => {
                                   </div>
 
                                   <h4 className="title">
-                                    <Link href={`/post/${data.id}`}>
+                                    <Link href={`/${locale}/post/${data.id}`}>
                                       <a>
                                         {locale === "en"
                                           ? data.title_en
@@ -170,7 +170,7 @@ const PostSectionEleven = ({ filters = [] }) => {
                                 </div>
 
                                 <div className="post-thumbnail">
-                                  <Link href={`/post/${data.id}`}>
+                                  <Link href={`/${locale}/post/${data.id}`}>
                                     <a>
                                       <Image
                                         src={getImageSrc(data.images)}

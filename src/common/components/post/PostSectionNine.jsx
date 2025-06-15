@@ -53,7 +53,9 @@ const PostSectionNine = ({ news, bgColor }) => {
                   <div className="post-content">
                     <div className="post-cat">
                       <div className="post-cat-list">
-                        <Link href={`/`}>
+                        <Link
+                          href={`/${locale}/news?category=${firstPost?.category.id}`}
+                        >
                           <a className="hover-flip-item-wrapper">
                             <span className="hover-flip-item">
                               <span
@@ -115,7 +117,9 @@ const PostSectionNine = ({ news, bgColor }) => {
                       <div className="post-content">
                         <div className="post-cat">
                           <div className="post-cat-list">
-                            <Link href={`/`}>
+                            <Link
+                              href={`/${locale}/news?category=${data?.category.id}`}
+                            >
                               <a className="hover-flip-item-wrapper">
                                 <span className="hover-flip-item">
                                   <span
@@ -135,7 +139,7 @@ const PostSectionNine = ({ news, bgColor }) => {
                           </div>
                         </div>
                         <h5 className="title">
-                          <Link href={`/post/${data.id}`}>
+                          <Link href={`/${locale}/post/${data.id}`}>
                             <a>
                               {locale === "en" ? data.title_en : data.title_ar}
                             </a>

@@ -28,12 +28,12 @@ const defaultActiveCat = slugify(filters[0].cate);
 const Nav = ({ posts }) => {
   const locale = useLocale();
 
-  const defaultData = posts.filter(
-    (post) => slugify(post.cate) === defaultActiveCat
-  );
+  // const defaultData = posts.filter(
+  //   (post) => slugify(post.cate) === defaultActiveCat
+  // );
 
   const [activeNav, setActiveNav] = useState(defaultActiveCat);
-  const [tabPostData, setTabPostData] = useState(defaultData);
+  // const [tabPostData, setTabPostData] = useState(defaultData);
 
   const handleChange = (e) => {
     let filterText = slugify(e.target.textContent);
@@ -65,12 +65,12 @@ const Nav = ({ posts }) => {
       </li>
 
       <li className="menu-item-has-children">
-        <Link href="/">
+        <Link href={`/${locale}/gallery`}>
           <a>{locale === "en" ? "Gallery" : "معرض الصور"}</a>
         </Link>
       </li>
       <li>
-        <Link href="/lifestyle-blog">
+        <Link href={`/${locale}/about`}>
           <a>{locale === "en" ? "About Us" : "عنا"}</a>
         </Link>
       </li>

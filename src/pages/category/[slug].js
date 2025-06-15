@@ -1,42 +1,38 @@
+import { getAllPosts } from "../../../lib/api";
 
-import { getAllPosts } from '../../../lib/api';
-import GalleryOne from '../../common/gallery/InstagramOne';
-import PostLayoutTwo from '../../common/components/post/layout/PostLayoutTwo';
-import BreadcrumbOne from '../../common/elements/breadcrumb/breadcrumbOne';
-import FooterOne from '../../common/elements/footer/FooterOne';
+import PostLayoutTwo from "../../common/components/post/layout/PostLayoutTwo";
+import BreadcrumbOne from "../../common/elements/breadcrumb/breadcrumbOne";
+import FooterOne from "../../common/elements/footer/FooterOne";
 
 import HeadTitle from "../../common/elements/head/HeadTitle";
 import HeaderOne from "../../common/elements/header/HeaderOne";
 import SidebarOne from "../../common/components/sidebar/SidebarOne";
 import { slugify } from "../../common/utils";
+import GalleryOne from "../../common/gallery/GalleryOne";
 
 const PostCategory = ({ postData, allPosts }) => {
-
-	
-	return (
-		<>
-		<HeadTitle pageTitle="Category Archive"/>
-		<HeaderOne postData={allPosts} />
-		<BreadcrumbOne title={postData[0].cate} />
-		<div className="axil-post-list-area axil-section-gap bg-color-white">
-			<div className="container">
-				<div className="row">
-				<div className="col-lg-8 col-xl-8">
-					<PostLayoutTwo dataPost={postData} show="5"/>
-				</div>
-				<div className="col-lg-4 col-xl-4 mt_md--40 mt_sm--40">
-					<SidebarOne dataPost={allPosts}/>
-				</div>
-				</div>
-			</div>
-		</div>
-		<GalleryOne parentClass="bg-color-grey" />
-		<FooterOne />
-
-		</>
-	);
-}
-
+  return (
+    <>
+      <HeadTitle pageTitle="Category Archive" />
+      <HeaderOne postData={allPosts} />
+      <BreadcrumbOne title={postData[0].cate} />
+      <div className="axil-post-list-area axil-section-gap bg-color-white">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-8 col-xl-8">
+              <PostLayoutTwo dataPost={postData} show="5" />
+            </div>
+            <div className="col-lg-4 col-xl-4 mt_md--40 mt_sm--40">
+              <SidebarOne dataPost={allPosts} />
+            </div>
+          </div>
+        </div>
+      </div>
+      <GalleryOne parentClass="bg-color-grey" />
+      <FooterOne />
+    </>
+  );
+};
 
 export default PostCategory;
 

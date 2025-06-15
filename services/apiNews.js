@@ -19,7 +19,12 @@ export async function getNews() {
 export async function getNewsById(id) {
   const { data, error } = await supabase
     .from("news")
-    .select("*")
+    .select(
+      `
+      *,
+      category:categories(id, name_en, name_ar)
+    `
+    )
     .eq("id", id)
     .single(); // بيجيب عنصر واحد فقط
 
