@@ -16,12 +16,19 @@ const PostMetaOne = ({ metaData }) => {
           <div className="col-lg-12">
             <div className="content-block">
               <div className="post-thumbnail">
+                <div className="image-container">
                 <Image
-                  src={metaData.images[0]}
-                  alt={metaData.title_en}
-                  height={720}
-                  width={1440}
-                />
+  src={metaData.images[0]}
+  alt={metaData.title_en}
+  layout="fill"
+  objectFit="cover"
+  className="featured-image"
+  priority
+  quality={100}
+/>
+
+                  <div className="image-overlay"></div>
+                </div>
               </div>
 
               <div className="post-content">

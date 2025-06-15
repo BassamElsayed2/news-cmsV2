@@ -1,3 +1,4 @@
+
 import { useRouter } from "next/router";
 import PostMetaTwo from "../../common/components/post/format/element/PostMetaTwo";
 import { getAllPosts } from "../../../lib/api";
@@ -32,7 +33,6 @@ const NewsDetailsPage = ({ allPosts, initialData }) => {
     return <div>Loading...</div>;
   }
 
-  // Get additional images excluding the first one (feature image)
   const additionalImages = details?.images?.slice(1) || [];
 
   return (
@@ -43,32 +43,38 @@ const NewsDetailsPage = ({ allPosts, initialData }) => {
       />
 
       <PostMetaOne metaData={details} />
+
       <div className="post-single-wrapper axil-section-gap bg-color-white">
         <div className="container">
           <div className="row">
             <div className="col-lg-8">
               <div className="axil-post-details">
-                {details?.yt_code ? (
+
+                {/* YouTube Video */}
+                {details?.yt_code && (
                   <div className="embed-responsive embed-responsive-16by9 mb-4">
                     <iframe
                       src={`https://www.youtube.com/embed/${details.yt_code}`}
-                      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      className="w-full aspect-video"
                       title="YouTube video player"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="w-100"
                     />
                   </div>
-                ) : null}
+                )}
 
+                {/* Post Content */}
                 <div
                   className="post-details-content"
                   dangerouslySetInnerHTML={{
                     __html:
-                      locale === "en" ? details.content_en : details.content_ar,
+                      locale === "en"
+                        ? details.content_en
+                        : details.content_ar,
                   }}
                 ></div>
 
-                {/* Additional Images Gallery */}
+                {/* Additional Images */}
                 {additionalImages.length > 0 && (
                   <div className="additional-images-gallery mt-5">
                     <h3 className="mb-4">
@@ -76,7 +82,7 @@ const NewsDetailsPage = ({ allPosts, initialData }) => {
                     </h3>
                     <div className="row g-4">
                       {additionalImages.map((image, index) => (
-                        <div key={index} className="col-md-4">
+                        <div key={index} className="col-12 col-sm-6 col-md-4">
                           <div className="gallery-item">
                             <Image
                               src={image}
@@ -84,7 +90,12 @@ const NewsDetailsPage = ({ allPosts, initialData }) => {
                               width={400}
                               height={300}
                               className="img-fluid rounded"
-                              style={{ objectFit: "cover" }}
+                              style={{
+                                objectFit: "cover",
+                                width: "100%",
+                                height: "auto",
+                              }}
+                              loading="lazy"
                             />
                           </div>
                         </div>
@@ -94,6 +105,8 @@ const NewsDetailsPage = ({ allPosts, initialData }) => {
                 )}
               </div>
             </div>
+
+            {/* Sidebar */}
             <div className="col-lg-4">
               <SidebarOne dataPost={postData} />
               <WidgetVideoPost postData={postData} />
@@ -101,6 +114,7 @@ const NewsDetailsPage = ({ allPosts, initialData }) => {
           </div>
         </div>
       </div>
+
       <FooterThree />
     </>
   );
@@ -109,24 +123,21 @@ const NewsDetailsPage = ({ allPosts, initialData }) => {
 export default NewsDetailsPage;
 
 export async function getStaticPaths() {
-  // Get all news IDs
   const news = await getNews();
 
-  // Create paths for each news item
   const paths = news.map((item) => ({
     params: { id: item.id.toString() },
-    locale: "en", // English version
+    locale: "en",
   }));
 
-  // Add Arabic versions
   const arabicPaths = news.map((item) => ({
     params: { id: item.id.toString() },
-    locale: "ar", // Arabic version
+    locale: "ar",
   }));
 
   return {
     paths: [...paths, ...arabicPaths],
-    fallback: "blocking", // Show a loading state while generating new pages
+    fallback: "blocking",
   };
 }
 
@@ -151,7 +162,6 @@ export async function getStaticProps({ params, locale }) {
 
     SortingByDate(allPosts);
 
-    // Get the initial data for the news item
     const initialData = await getNewsById(params.id);
 
     return {
@@ -160,11 +170,11 @@ export async function getStaticProps({ params, locale }) {
         initialData,
         ...(await serverSideTranslations(locale, ["common"])),
       },
-      revalidate: 60, // Revalidate every 60 seconds
+      revalidate: 60,
     };
   } catch (error) {
     return {
-      notFound: true, // This will show the 404 page
+      notFound: true,
     };
   }
 }

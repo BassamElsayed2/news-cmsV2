@@ -10,7 +10,6 @@ import { Tab, Nav } from "react-bootstrap";
 import { getNews } from "../../../../services/apiNews";
 import { SectionTitleOne } from "../../elements/sectionTitle/SectionTitle";
 import { useTranslation } from "react-i18next";
-import { slugify } from "../../utils";
 
 const PostSectionTen = () => {
   const {
@@ -21,9 +20,6 @@ const PostSectionTen = () => {
     queryKey: ["news"],
     queryFn: getNews,
   });
-
-
-
 
   const [activeNav, setActiveNav] = useState("");
   const [tabPostData, setTabPostData] = useState([]);
@@ -74,7 +70,12 @@ const PostSectionTen = () => {
     return locale === "en" ? category.name_en : category.name_ar;
   };
 
- 
+  const getSnippet = (text = "", length = 100) => {
+    const cleanText = text.replace(/<[^>]+>/g, "");
+    if (cleanText.length <= length) return cleanText;
+    const lastSpace = cleanText.lastIndexOf(" ", length);
+    return cleanText.slice(0, lastSpace > 0 ? lastSpace : length) + "...";
+  };
 
   return (
     <div className="axil-post-grid-area axil-section-gap bg-color-white">
@@ -93,12 +94,12 @@ const PostSectionTen = () => {
                     <Nav.Link eventKey={catId}>
                       {catId === "all"
                         ? locale === "en"
-                          ? "all"
+                          ? "All"
                           : "الكل"
                         : renderCategoryName(
-                            postData.find((post) => post.category?.id === catId)
-                              ?.category
-                          )}
+                          postData.find((post) => post.category?.id === catId)
+                            ?.category
+                        )}
                     </Nav.Link>
                   </Nav.Item>
                 ))}
@@ -144,20 +145,20 @@ const PostSectionTen = () => {
                             <div className="post-cat">
                               <div className="post-cat-list">
                                 <Link
-                                  href={`/${locale}/news?category=${firstPost?.category.id}`}
+                                  href={`/${locale}/news?category=${data?.category?.id}`}
                                 >
                                   <a className="hover-flip-item-wrapper">
                                     <span className="hover-flip-item">
                                       <span
                                         data-text={
                                           locale === "en"
-                                            ? firstPost?.category?.name_en
-                                            : firstPost?.category?.name_ar
+                                            ? data?.category?.name_en
+                                            : data?.category?.name_ar
                                         }
                                       >
                                         {locale === "en"
-                                          ? firstPost?.category?.name_en
-                                          : firstPost?.category?.name_ar}
+                                          ? data?.category?.name_en
+                                          : data?.category?.name_ar}
                                       </span>
                                     </span>
                                   </a>
@@ -174,22 +175,24 @@ const PostSectionTen = () => {
                               </Link>
                             </h4>
 
-                           <div className="content">
-  <p>
-    {(
-      locale === "en"
-        ? data.content_en
-        : data.content_ar
-    )
-      .replace(/<[^>]+>/g, "") // إزالة الوسوم
-      .slice(0, 100)}...        {/* قصّ المحتوى */}
-  </p>
-</div>
+                            <div className="content">
+                              <p>{getSnippet(locale === "en" ? data.content_en : data.content_ar)}</p>
+                              <Link href={`/${locale}/post/${data.id}`}>
+                                <a className="hover-flip-item-wrapper mt--5 d-inline-block">
+                                  <span className="hover-flip-item">
+                                    <span data-text={locale === "ar" ? "اقرأ المزيد" : "Read more"}>
+                                      {locale === "ar" ? "اقرأ المزيد" : "Read more"}
+                                    </span>
+                                  </span>
+                                </a>
 
+                              </Link>
+                            </div>
                           </div>
                         </div>
                       ))}
                     </div>
+
                     <div className="col-xl-7 col-lg-6 col-md-12 col-12 mt_md--40 mt_sm--40">
                       <div className="content-block content-block post-grid post-grid-transparent">
                         {getImageSrc(firstPost?.images) && (
@@ -245,8 +248,6 @@ const PostSectionTen = () => {
                                 </a>
                               </Link>
                             </h3>
-
-                            
                           </div>
                         </div>
                       </div>
