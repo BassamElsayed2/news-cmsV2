@@ -89,7 +89,9 @@ const PostSectionEleven = ({ filters = [] }) => {
   return (
     <div className="axil-post-grid-area axil-section-gapTop bg-color-grey">
       <div className="container">
-        <SectionTitleOne title="أخبار سابقة" />
+        <SectionTitleOne
+          title={locale === "en" ? "Previous News" : "الأخبار السابقة"}
+        />
 
         <div className="row">
           <div className="col-lg-12">
@@ -135,7 +137,8 @@ const PostSectionEleven = ({ filters = [] }) => {
                                   <div className="post-cat">
                                     <div className="post-cat-list">
                                       <Link
-                                        href={`/category/${slugify(data.cate)}`}locale={locale}>
+                                        href={`/${locale}/news?category=${data?.category.id}`}
+                                      >
                                         <a className="hover-flip-item-wrapper">
                                           <span className="hover-flip-item">
                                             <span
@@ -156,7 +159,7 @@ const PostSectionEleven = ({ filters = [] }) => {
                                   </div>
 
                                   <h4 className="title">
-                                    <Link href={`/post/${data.id}`}locale={locale}>
+                                    <Link href={`/${locale}/post/${data.id}`}>
                                       <a>
                                         {locale === "en"
                                           ? data.title_en
@@ -167,7 +170,7 @@ const PostSectionEleven = ({ filters = [] }) => {
                                 </div>
 
                                 <div className="post-thumbnail">
-                                  <Link href={`/post/${data.id}`}locale={locale}>
+                                  <Link href={`/${locale}/post/${data.id}`}>
                                     <a>
                                       <Image
                                         src={getImageSrc(data.images)}

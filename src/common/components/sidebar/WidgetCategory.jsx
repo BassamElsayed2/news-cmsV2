@@ -3,7 +3,6 @@ import Image from "next/image";
 import { removeDuplicates, slugify } from "../../utils";
 
 const WidgetCategory = ({ catData }) => {
-
   const uniqueCategory = removeDuplicates(catData, "cate");
 
   return (

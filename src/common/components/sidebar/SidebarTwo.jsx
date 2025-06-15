@@ -22,7 +22,7 @@ const SidebarTwo = ({ dataPost, tagData }) => {
       />
       <WidgetSocialShare />
       <WidgetInstagramPost />
-      <WidgetTags postTag={tagData}/>
+      <WidgetTags postTag={tagData} />
       <WidgetAd
         url="https://example.com/"
         image="/images/add-banner/banner-02.webp"

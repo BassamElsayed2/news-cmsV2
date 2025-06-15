@@ -7,10 +7,11 @@ const WidgetVideoPost = ({ postData }) => {
 
   const videoPosts = postData?.filter((post) => post.yt_code);
 
-
   return (
     <div className="axil-single-widget widget-style-2 widget widget_post mt--30">
-      <h5 className="widget-title">Featured Videos</h5>
+      <h5 className="widget-title">
+        {locale === "en" ? "Featured Videos" : "الفيديوهات المميزة"}
+      </h5>
       <div className="video-post-wrapepr">
         {videoPosts?.slice(-3).map((data) => (
           <div className="content-block image-rounded mt--20" key={data.id}>
@@ -27,6 +28,7 @@ const WidgetVideoPost = ({ postData }) => {
                     />
                   </a>
                 </Link>
+
                 <Link href={`/post/${data.id}`}>
                   <a className="video-popup size-medium position-top-center icon-color-secondary">
                     <span className="play-icon" />
