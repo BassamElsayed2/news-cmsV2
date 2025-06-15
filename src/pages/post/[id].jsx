@@ -11,6 +11,8 @@ import PostMetaOne from "../../common/components/post/format/element/PostMetaOne
 import Image from "next/image";
 import SidebarOne from "../../common/components/sidebar/SidebarOne";
 import WidgetVideoPost from "../../common/components/sidebar/WidgetVideoPost";
+import { getAds } from "../../../services/apiAds";
+import AddBanner from "../../common/components/ad-banner/AddBanner";
 
 const NewsDetailsPage = ({ allPosts, initialData }) => {
   const { query, locale } = useRouter();
@@ -27,6 +29,13 @@ const NewsDetailsPage = ({ allPosts, initialData }) => {
     queryKey: ["news"],
     queryFn: getNews,
   });
+
+  const { data: ads } = useQuery({
+    queryKey: ["ads"],
+    queryFn: getAds,
+  });
+
+  const otherads = ads?.filter((ad) => ad.location === "other");
 
   if (isLoadingPost) {
     return <div>Loading...</div>;
@@ -99,6 +108,18 @@ const NewsDetailsPage = ({ allPosts, initialData }) => {
               <WidgetVideoPost postData={postData} />
             </div>
           </div>
+          {otherads && (
+            <div className="row">
+              <div className="col-lg-12">
+                <AddBanner
+                  img={otherads[0].image_url}
+                  height="200"
+                  width="1230"
+                  pClass="mt--30"
+                />
+              </div>
+            </div>
+          )}
         </div>
       </div>
       <FooterThree />

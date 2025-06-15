@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getNews } from "../../../../services/apiNews";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
+import { useLocale } from "next-intl";
 
 const formatDate = (dateString, lang) => {
   const date = new Date(dateString);
@@ -18,7 +19,7 @@ const formatDate = (dateString, lang) => {
 };
 
 const WidgetPostList = () => {
-  const { t, i18n } = useTranslation("common");
+  const locale = useLocale();
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -35,18 +36,18 @@ const WidgetPostList = () => {
   });
 
   if (!isClient) {
-    return <div suppressHydrationWarning>{t("loading")}</div>; // يمنع التحذير
+    return <div suppressHydrationWarning>Loading ...</div>; // يمنع التحذير
   }
 
-  if (isLoading) return <div>{t("loading")}</div>;
-  if (error) return <div>{t("error")}</div>;
+  if (isLoading) return <div>Loading ...</div>;
 
-  const currentLang = i18n.language || "en";
   const importantPosts = dataPost.filter((post) => post.status === "important");
 
   return (
     <div className="axil-single-widget widget widget_postlist mb--30 ">
-      <h5 className="widget-title">{t("impTitle")}</h5>
+      <h5 className="widget-title">
+        {locale === "en" ? "Important News" : "الاخبار المهمة"}
+      </h5>
       <div className="post-medium-block">
         {importantPosts.slice(0, 3).map((data) => (
           <div className="content-block post-medium mb--20" key={data.id}>
@@ -56,7 +57,7 @@ const WidgetPostList = () => {
                   <a>
                     <Image
                       src={data.images[0]}
-                      alt={currentLang === "ar" ? data.title_ar : data.title_en}
+                      alt={locale === "ar" ? data.title_ar : data.title_en}
                       height={100}
                       width={100}
                       priority={true}
@@ -68,18 +69,20 @@ const WidgetPostList = () => {
             <div className="post-content">
               <h6 className="title">
                 <Link href={`/post/${data.id}`}>
-                  <a>{currentLang === "ar" ? data.title_ar : data.title_en}</a>
+                  <a>{locale === "ar" ? data.title_ar : data.title_en}</a>
                 </Link>
               </h6>
               <div className="post-meta">
                 <ul className="post-meta-list">
-                  <li>{formatDate(data.created_at, currentLang)}</li>
+                  <li>{formatDate(data.created_at, locale)}</li>
                 </ul>
               </div>
             </div>
           </div>
         ))}
-        {importantPosts.length === 0 && <p>{t("noImportantNews")}</p>}
+        {importantPosts.length === 0 && (
+          <p>{locale === "en" ? "Important News" : "الاخبار المهمة"}</p>
+        )}
       </div>
     </div>
   );

@@ -68,10 +68,16 @@ const PostSectionThree = ({ postData, adBanner, bgColor }) => {
                     >
                       <a className="hover-flip-item-wrapper">
                         <span className="hover-flip-item">
-                          <span data-text={firstPost?.category?.name_en}>
-                            {locale === "ar"
-                              ? firstPost?.category?.name_ar
-                              : firstPost?.category?.name_en}
+                          <span
+                            data-text={
+                              locale === "ar"
+                                ? firstPost?.category?.name_ar
+                                : firstPost?.category?.name_en
+                            }
+                          >
+                            {locale === "en"
+                              ? firstPost?.category?.name_en
+                              : firstPost?.category?.name_ar}
                           </span>
                         </span>
                       </a>
@@ -161,7 +167,13 @@ const PostSectionThree = ({ postData, adBanner, bgColor }) => {
                           >
                             <a className="hover-flip-item-wrapper">
                               <span className="hover-flip-item">
-                                <span data-text={data.category?.name_en}>
+                                <span
+                                  data-text={
+                                    locale === "ar"
+                                      ? data.category?.name_ar
+                                      : data.category?.name_en
+                                  }
+                                >
                                   {locale === "ar"
                                     ? data.category?.name_ar
                                     : data.category?.name_en}

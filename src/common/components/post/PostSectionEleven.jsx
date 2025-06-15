@@ -221,7 +221,7 @@ const PostSectionEleven = ({ filters = [] }) => {
           <div className="row">
             <div className="col-lg-12">
               <AddBanner
-                img={thirdHomeAd.image}
+                img={thirdHomeAd.image_url}
                 height="200"
                 width="1230"
                 pClass="mt--30"

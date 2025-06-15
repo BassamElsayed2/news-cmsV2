@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import MobileMenu from "./MobileMenu";
 import Nav from "./Nav";
+import LanguageSwitcher from "../LanguageSwitcher";
 
 const HeaderOne = ({ pClass, darkLogo, lightLogo, postData }) => {
   if (typeof window !== "undefined") {
@@ -51,6 +52,11 @@ const HeaderOne = ({ pClass, darkLogo, lightLogo, postData }) => {
                   <Nav />
                 </nav>
               </div>
+            </div>
+            <div className="col-xl-3 col-lg-8 col-md-8 col-sm-9 col-12">
+              <ul className="social-share-transparent md-size justify-content-center justify-content-md-end">
+                <LanguageSwitcher />
+              </ul>
             </div>
             <div className="col-xl-3 col-lg-8 col-md-8 col-sm-9 col-12">
               <div className="header-search text-end d-flex align-items-center">

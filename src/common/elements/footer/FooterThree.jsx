@@ -2,8 +2,11 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import SocialData from "../../../data/social/SocialData.json";
+import { useLocale } from "next-intl";
 
 const FooterThree = ({ bgColor, darkLogo, lightLogo }) => {
+  const locale = useLocale();
+
   if (typeof window !== "undefined") {
     var colorMode = window.localStorage.getItem("color-mode");
   }
@@ -79,7 +82,13 @@ const FooterThree = ({ bgColor, darkLogo, lightLogo }) => {
                     <Link href="/contact">
                       <a className="hover-flip-item-wrapper">
                         <span className="hover-flip-item">
-                          <span data-text="Contact Us">Contact Us</span>
+                          <span
+                            data-text={
+                              locale === "ar" ? "اتصل بنا" : "Contact Us"
+                            }
+                          >
+                            {locale === "en" ? "Contact Us" : "اتصل بنا"}
+                          </span>
                         </span>
                       </a>
                     </Link>
@@ -88,26 +97,16 @@ const FooterThree = ({ bgColor, darkLogo, lightLogo }) => {
                     <Link href="/privacy-policy">
                       <a className="hover-flip-item-wrapper">
                         <span className="hover-flip-item">
-                          <span data-text="Privacy Policy">Privacy Policy</span>
-                        </span>
-                      </a>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#">
-                      <a className="hover-flip-item-wrapper">
-                        <span className="hover-flip-item">
-                          <span data-text="AdChoices">AdChoices</span>
-                        </span>
-                      </a>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#">
-                      <a className="hover-flip-item-wrapper">
-                        <span className="hover-flip-item">
-                          <span data-text="Advertise with Us">
-                            Advertise with Us
+                          <span
+                            data-text={
+                              locale === "ar"
+                                ? "سياسة الخصوصية"
+                                : "Privacy Policy"
+                            }
+                          >
+                            {locale === "en"
+                              ? "Privacy Policy"
+                              : "سياسة الخصوصية"}
                           </span>
                         </span>
                       </a>
@@ -117,7 +116,36 @@ const FooterThree = ({ bgColor, darkLogo, lightLogo }) => {
                     <Link href="#">
                       <a className="hover-flip-item-wrapper">
                         <span className="hover-flip-item">
-                          <span data-text="Blogar Store">Blogar Store</span>
+                          <span
+                            data-text={
+                              locale === "en"
+                                ? "AdChoices"
+                                : "اختيارات الإعلانات"
+                            }
+                          >
+                            {locale === "en"
+                              ? "AdChoices"
+                              : "اختيارات الإعلانات"}
+                          </span>
+                        </span>
+                      </a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="#">
+                      <a className="hover-flip-item-wrapper">
+                        <span className="hover-flip-item">
+                          <span
+                            data-text={
+                              locale === "en"
+                                ? "Advertise with Us"
+                                : "اعلن معنا"
+                            }
+                          >
+                            {locale === "en"
+                              ? "Advertise with Us"
+                              : "اعلن معنا"}
+                          </span>
                         </span>
                       </a>
                     </Link>

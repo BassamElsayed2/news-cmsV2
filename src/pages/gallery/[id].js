@@ -12,6 +12,9 @@ import SidebarOne from "../../common/components/sidebar/SidebarOne";
 import WidgetVideoPost from "../../common/components/sidebar/WidgetVideoPost";
 import { getNews } from "../../../services/apiNews";
 
+import { getAds } from "../../../services/apiAds";
+import AddBanner from "../../common/components/ad-banner/AddBanner";
+
 export default function GalleryDetailsPage() {
   const { query, locale } = useRouter();
   const { id } = query;
@@ -26,6 +29,13 @@ export default function GalleryDetailsPage() {
     queryKey: ["news"],
     queryFn: getNews,
   });
+
+  const { data: ads } = useQuery({
+    queryKey: ["ads"],
+    queryFn: getAds,
+  });
+
+  const otherads = ads?.filter((ad) => ad.location === "other");
 
   const SlideGallery = () => {
     function SlickNextArrow(props) {
@@ -108,6 +118,18 @@ export default function GalleryDetailsPage() {
               <WidgetVideoPost postData={postData} />
             </div>
           </div>
+          {otherads && (
+            <div className="row">
+              <div className="col-lg-12">
+                <AddBanner
+                  img={otherads[0].image_url}
+                  height="200"
+                  width="1230"
+                  pClass="mt--30"
+                />
+              </div>
+            </div>
+          )}
         </div>
       </div>
       <FooterThree />
