@@ -9,7 +9,7 @@ import PostMetaTwo from "../../common/components/post/format/element/PostMetaTwo
 import Image from "next/image";
 import Slider from "react-slick";
 import SidebarOne from "../../common/components/sidebar/SidebarOne";
-import WidgetVideoPost from "../../common/components/sidebar/WidgetVideoPost";
+
 import { getNews } from "../../../services/apiNews";
 
 import { getAds } from "../../../services/apiAds";
@@ -115,7 +115,6 @@ export default function GalleryDetailsPage() {
             </div>
             <div className="col-lg-4">
               <SidebarOne dataPost={postData} />
-              <WidgetVideoPost postData={postData} />
             </div>
           </div>
           {otherads && (
