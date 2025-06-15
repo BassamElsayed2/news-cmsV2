@@ -6,9 +6,11 @@ import Image from "next/image";
 import { slugify } from "../../../utils";
 import { getNews } from "../../../../../services/apiNews";
 import { useRouter } from "next/router";
+import { useLocale } from "next-intl";
 
 const PostLayoutTwo = ({ postStart = 0, show = 5, bgColor = "" }) => {
   const { locale: lang } = useRouter();
+  const locale = useLocale();
   const {
     data: dataPost = [],
     isLoading,
@@ -111,6 +113,19 @@ const PostLayoutTwo = ({ postStart = 0, show = 5, bgColor = "" }) => {
                     </Link>
                   </h4>
                 )}
+                <Link href={`/${locale}/post/${data.id}`}>
+                  <a className="hover-flip-item-wrapper d-inline-block">
+                    <span className="hover-flip-item mt--10">
+                      <span
+                        data-text={
+                          locale === "ar" ? "اقرأ المزيد" : "Read more"
+                        }
+                      >
+                        {locale === "ar" ? "اقرأ المزيد" : "Read more"}
+                      </span>
+                    </span>
+                  </a>
+                </Link>
 
                 {/* issuse */}
                 <div className="post-meta-wrapper">

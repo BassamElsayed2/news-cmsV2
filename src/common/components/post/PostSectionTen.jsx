@@ -8,10 +8,8 @@ import Image from "next/image";
 import { Tab, Nav } from "react-bootstrap";
 
 import { getNews } from "../../../../services/apiNews";
-
 import { SectionTitleOne } from "../../elements/sectionTitle/SectionTitle";
 import { useTranslation } from "react-i18next";
-import { slugify } from "../../utils";
 
 const PostSectionTen = () => {
   const {
@@ -72,6 +70,13 @@ const PostSectionTen = () => {
     return locale === "en" ? category.name_en : category.name_ar;
   };
 
+  const getSnippet = (text = "", length = 50) => {
+    const cleanText = text.replace(/<[^>]+>/g, "");
+    if (cleanText.length <= length) return cleanText;
+    const lastSpace = cleanText.lastIndexOf(" ", length);
+    return cleanText.slice(0, lastSpace > 0 ? lastSpace : length) + "...";
+  };
+
   return (
     <div className="axil-post-grid-area axil-section-gap bg-color-white">
       <div className="container">
@@ -89,7 +94,7 @@ const PostSectionTen = () => {
                     <Nav.Link eventKey={catId}>
                       {catId === "all"
                         ? locale === "en"
-                          ? "all"
+                          ? "All"
                           : "الكل"
                         : renderCategoryName(
                             postData.find((post) => post.category?.id === catId)
@@ -140,20 +145,20 @@ const PostSectionTen = () => {
                             <div className="post-cat">
                               <div className="post-cat-list">
                                 <Link
-                                  href={`/${locale}/news?category=${firstPost?.category.id}`}
+                                  href={`/${locale}/news?category=${data?.category?.id}`}
                                 >
                                   <a className="hover-flip-item-wrapper">
                                     <span className="hover-flip-item">
                                       <span
                                         data-text={
                                           locale === "en"
-                                            ? firstPost?.category?.name_en
-                                            : firstPost?.category?.name_ar
+                                            ? data?.category?.name_en
+                                            : data?.category?.name_ar
                                         }
                                       >
                                         {locale === "en"
-                                          ? firstPost?.category?.name_en
-                                          : firstPost?.category?.name_ar}
+                                          ? data?.category?.name_en
+                                          : data?.category?.name_ar}
                                       </span>
                                     </span>
                                   </a>
@@ -169,10 +174,21 @@ const PostSectionTen = () => {
                                 </a>
                               </Link>
                             </h4>
+
+                            <div className="content">
+                              <p>
+                                {getSnippet(
+                                  locale === "en"
+                                    ? data.content_en
+                                    : data.content_ar
+                                )}
+                              </p>
+                            </div>
                           </div>
                         </div>
                       ))}
                     </div>
+
                     <div className="col-xl-7 col-lg-6 col-md-12 col-12 mt_md--40 mt_sm--40">
                       <div className="content-block content-block post-grid post-grid-transparent">
                         {getImageSrc(firstPost?.images) && (
