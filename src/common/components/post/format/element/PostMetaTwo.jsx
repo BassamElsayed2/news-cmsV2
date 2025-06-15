@@ -1,8 +1,10 @@
-import Image from 'next/image';
+"use client";
+
 import Link from "next/link";
-import { slugify } from '../../../../utils';
+import { useLocale } from "next-intl";
 
 const PostMetaTwo = ({ metaData }) => {
+  const locale = useLocale();
   if (!metaData) return null;
 
   return (
@@ -16,54 +18,41 @@ const PostMetaTwo = ({ metaData }) => {
               <div className="post-content">
                 <div className="post-cat">
                   <div className="post-cat-list">
-                    <Link href={`/category/${slugify(metaData.cate || "")}`}>
+                    <Link
+                      href={`/${locale}/news?category=${metaData?.category?.id}`}
+                    >
                       <a className="hover-flip-item-wrapper">
                         <span className="hover-flip-item">
-                          <span data-text={metaData.cate}>{metaData.cate}</span>
+                          <span data-text={metaData?.category?.name_en}>
+                            {locale === "en"
+                              ? metaData?.category?.name_en
+                              : metaData?.category?.name_ar}
+                          </span>
                         </span>
                       </a>
                     </Link>
                   </div>
                 </div>
-                <h1 className="title">{metaData.title}</h1>
+                <h1 className="title">
+                  {locale === "en" ? metaData?.title_en : metaData?.title_ar}
+                </h1>
                 {/* Post Meta  */}
                 <div className="post-meta-wrapper">
                   <div className="post-meta">
-                    <div className="post-author-avatar border-rounded">
-                      <Image
-                        src={metaData.author_img || "/images/default-avatar.png"}
-                        alt={metaData.author_name || "Author"}
-                        height={50}
-                        width={50}
-                      />
-                    </div>
                     <div className="content">
-                      <h6 className="post-author-name">
-                        <Link href={`/author/${slugify(metaData.author_name || "")}`}>
+                      {metaData?.publisher_name && (
+                        <h6 className="post-author-name">
                           <a className="hover-flip-item-wrapper">
                             <span className="hover-flip-item">
-                              <span data-text={metaData.author_name}>{metaData.author_name}</span>
+                              <span data-text={metaData?.publisher_name}>
+                                {metaData?.publisher_name}
+                              </span>
                             </span>
                           </a>
-                        </Link>
-                      </h6>
-                      <ul className="post-meta-list">
-                        <li>{metaData.date}</li>
-                        <li>{metaData.post_views}</li>
-                      </ul>
+                        </h6>
+                      )}
                     </div>
                   </div>
-                  {Array.isArray(metaData.author_social) && (
-                    <ul className="social-share-transparent justify-content-end">
-                      {metaData.author_social.map((social) => (
-                        <li key={social.url}>
-                          <a href={social.url}>
-                            <i className={social.icon} />
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
                 </div>
               </div>
               {/* End Post Content  */}

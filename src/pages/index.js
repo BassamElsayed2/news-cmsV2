@@ -1,6 +1,3 @@
-
-import GalleryOne from "../common/gallery/InstagramOne";
-
 import FooterThree from "../common/elements/footer/FooterThree";
 import { getAllPosts } from "../../lib/api";
 import HeaderThree from "../common/elements/header/HeaderThree";
@@ -15,7 +12,7 @@ import PostSectionEleven from "../common/components/post/PostSectionEleven";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useQuery } from "@tanstack/react-query";
 import { getNews } from "../../services/apiNews";
-import GalleryOne from "../common/components/gallery/InstagramOne";
+import GalleryOne from "../common/gallery/GalleryOne";
 
 const TechBlog = ({ allPosts }) => {
   const { data: news } = useQuery({
@@ -27,7 +24,6 @@ const TechBlog = ({ allPosts }) => {
     (post) =>
       slugify(post.cate) === "technology" || slugify(post.cate) === "leadership"
   );
-  const videoPost = allPosts.filter((post) => post.postFormat === "video");
 
   return (
     <>
@@ -39,9 +35,7 @@ const TechBlog = ({ allPosts }) => {
       <PostSectionThree postData={news} />
       <PostSectionFour postData={techPost} adBanner={true} />
 
-      
-      <PostSectionEleven  />
-      
+      <PostSectionEleven />
 
       <GalleryOne parentClass="bg-color-grey" />
       <FooterThree />

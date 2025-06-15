@@ -1,64 +1,182 @@
+
 import { useRouter } from "next/router";
-import PostAuthor from "../../common/components/post/format/element/PostAuthor";
-import SidebarTwo from "../../common/components/sidebar/SidebarTwo";
 import PostMetaTwo from "../../common/components/post/format/element/PostMetaTwo";
-import PostComment from "../../common/components/post/format/element/PostComment";
-import PostTagShare from "../../common/components/post/format/element/PostTagShare";
+import { getAllPosts } from "../../../lib/api";
+import { getNewsById, getNews } from "../../../services/apiNews";
+import { useQuery } from "@tanstack/react-query";
+import HeaderOne from "../../common/elements/header/HeaderOne";
+import FooterThree from "../../common/elements/footer/FooterThree";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { SortingByDate } from "../../common/utils";
+import PostMetaOne from "../../common/components/post/format/element/PostMetaOne";
+import Image from "next/image";
+import SidebarOne from "../../common/components/sidebar/SidebarOne";
+import WidgetVideoPost from "../../common/components/sidebar/WidgetVideoPost";
 
-import { getNewsById } from "../../../services/apiNews";
-
-const NewsDetailsPage = ({ postData = {}, allData = [] }) => {
+const NewsDetailsPage = ({ allPosts, initialData }) => {
   const { query, locale } = useRouter();
   const { id } = query;
 
-  const basePathLink =
-    process.env.NODE_ENV === "production"
-      ? process.env.NEXT_PUBLIC_BASEPATH ?? ""
-      : "";
+  const { data: details = initialData, isLoading: isLoadingPost } = useQuery({
+    queryKey: ["news", id],
+    queryFn: () => getNewsById(id),
+    enabled: !!id,
+    initialData,
+  });
 
-  const postContent =
-    postData?.content?.replaceAll("/images/", basePathLink + "/images/") || "";
+  const { data: postData } = useQuery({
+    queryKey: ["news"],
+    queryFn: getNews,
+  });
 
+  if (isLoadingPost) {
+    return <div>Loading...</div>;
+  }
+
+
+  const additionalImages = details?.images?.slice(1) || [];
 
 
   return (
     <>
-    {postData.featureImg ? <PostMetaOne metaData={postData} /> : ""}
+      <HeaderOne
+        pClass="header-light header-sticky header-with-shadow"
+        postData={allPosts}
+      />
+
+      <PostMetaOne metaData={details} />
 
       <div className="post-single-wrapper axil-section-gap bg-color-white">
         <div className="container">
           <div className="row">
             <div className="col-lg-8">
-            <PostMetaTwo metaData={postData} />
-            <div className="axil-post-details">
-              {postData?.videoLink ? (
-                <div className="embed-responsive embed-responsive-16by9">
-                  <iframe
-                    src={postData.videoLink}
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  ></iframe>
-                </div>
-              ) : null}
+              <div className="axil-post-details">
 
-              <div
-                className="post-details-content"
-                dangerouslySetInnerHTML={{ __html: postContent }}
-              ></div>
+                {/* YouTube Video */}
+                {details?.yt_code && (
+                  <div className="embed-responsive embed-responsive-16by9 mb-4">
+                    <iframe
+                      src={`https://www.youtube.com/embed/${details.yt_code}`}
+                      title="YouTube video player"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="w-100"
+                    />
+                  </div>
+                )}
 
-              <PostTagShare postTags={postData} />
-              <PostAuthor dataAuthor={postData} />
-              <PostComment />
+                {/* Post Content */}
+                <div
+                  className="post-details-content"
+                  dangerouslySetInnerHTML={{
+                    __html:
+                      locale === "en"
+                        ? details.content_en
+                        : details.content_ar,
+                  }}
+                ></div>
+
+                {/* Additional Images */}
+                {additionalImages.length > 0 && (
+                  <div className="additional-images-gallery mt-5">
+                    <h3 className="mb-4">
+                      {locale === "en" ? "More Images" : "المزيد من الصور"}
+                    </h3>
+                    <div className="row g-4">
+                      {additionalImages.map((image, index) => (
+                        <div key={index} className="col-12 col-sm-6 col-md-4">
+                          <div className="gallery-item">
+                            <Image
+                              src={image}
+                              alt={`${details.title_en} - Image ${index + 2}`}
+                              width={400}
+                              height={300}
+                              className="img-fluid rounded"
+                              style={{
+                                objectFit: "cover",
+                                width: "100%",
+                                height: "auto",
+                              }}
+                              loading="lazy"
+                            />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-          <div className="col-lg-4">
-            <SidebarTwo dataPost={allData} tagData={postData} />
+
+            {/* Sidebar */}
+            <div className="col-lg-4">
+              <SidebarOne dataPost={postData} />
+              <WidgetVideoPost postData={postData} />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+
+      <FooterThree />
     </>
   );
 };
 
 export default NewsDetailsPage;
+
+export async function getStaticPaths() {
+  const news = await getNews();
+
+  const paths = news.map((item) => ({
+    params: { id: item.id.toString() },
+    locale: "en",
+  }));
+
+  const arabicPaths = news.map((item) => ({
+    params: { id: item.id.toString() },
+    locale: "ar",
+  }));
+
+  return {
+    paths: [...paths, ...arabicPaths],
+    fallback: "blocking",
+  };
+}
+
+export async function getStaticProps({ params, locale }) {
+  try {
+    const allPosts = getAllPosts([
+      "postFormat",
+      "title",
+      "featureImg",
+      "featured",
+      "date",
+      "slug",
+      "pCate",
+      "cate",
+      "cate_img",
+      "author_img",
+      "author_name",
+      "post_views",
+      "read_time",
+      "author_social",
+    ]);
+
+    SortingByDate(allPosts);
+
+    const initialData = await getNewsById(params.id);
+
+    return {
+      props: {
+        allPosts,
+        initialData,
+        ...(await serverSideTranslations(locale, ["common"])),
+      },
+      revalidate: 60,
+    };
+  } catch (error) {
+    return {
+      notFound: true,
+    };
+  }
+}
