@@ -27,6 +27,8 @@ const PostSectionNine = ({ news, bgColor }) => {
 
   const firstCategory = categoriesQueries[0]?.data;
 
+
+
   return (
     <div className={`axil-tech-post-banner ${bgColor || "bg-color-grey"}`}>
       <div className="container">
@@ -53,9 +55,11 @@ const PostSectionNine = ({ news, bgColor }) => {
                   <div className="post-content">
                     <div className="post-cat">
                       <div className="post-cat-list">
+
                         <Link
                           href={`/${locale}/news?category=${firstPost?.category.id}`}
                         >
+
                           <a className="hover-flip-item-wrapper">
                             <span className="hover-flip-item">
                               <span
@@ -117,9 +121,11 @@ const PostSectionNine = ({ news, bgColor }) => {
                       <div className="post-content">
                         <div className="post-cat">
                           <div className="post-cat-list">
+
                             <Link
                               href={`/${locale}/news?category=${data?.category.id}`}
                             >
+
                               <a className="hover-flip-item-wrapper">
                                 <span className="hover-flip-item">
                                   <span
@@ -139,7 +145,9 @@ const PostSectionNine = ({ news, bgColor }) => {
                           </div>
                         </div>
                         <h5 className="title">
+
                           <Link href={`/${locale}/post/${data.id}`}>
+
                             <a>
                               {locale === "en" ? data.title_en : data.title_ar}
                             </a>

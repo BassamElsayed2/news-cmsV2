@@ -44,7 +44,9 @@ const PostSectionThree = ({ postData, adBanner, bgColor }) => {
             <div className="content-block post-default image-rounded mt--30">
               {firstPost?.images[0] && (
                 <div className="post-thumbnail">
+
                   <Link href={`/${locale}/post/${firstPost?.id}`}>
+
                     <a>
                       <Image
                         src={firstPost.images[0]}
@@ -55,7 +57,9 @@ const PostSectionThree = ({ postData, adBanner, bgColor }) => {
                       />
                     </a>
                   </Link>
+
                   <Link href={`/${locale}/post/${firstPost?.id}`}>
+
                     <a className="video-popup position-top-center">
                       <span className="play-icon" />
                     </a>
@@ -65,9 +69,11 @@ const PostSectionThree = ({ postData, adBanner, bgColor }) => {
               <div className="post-content text-light">
                 <div className="post-cat">
                   <div className="post-cat-list">
+
                     <Link
                       href={`/${locale}/news?category=${firstPost?.category.id}`}
                     >
+
                       <a className="hover-flip-item-wrapper">
                         <span className="hover-flip-item">
                           <span data-text={firstPost?.category?.name_en}>
@@ -80,8 +86,10 @@ const PostSectionThree = ({ postData, adBanner, bgColor }) => {
                     </Link>
                   </div>
                 </div>
+
                 <h3 className="title text-light">
                   <Link href={`/${locale}/post/${firstPost?.id}`}>
+
                     <a>
                       {locale === "ar"
                         ? firstPost?.title_ar
@@ -117,8 +125,10 @@ const PostSectionThree = ({ postData, adBanner, bgColor }) => {
                     <div className="post-meta">
                       <div className="content">
                         <h6 className="post-author-name">
+
                           <Link href={`/author`} locale={locale}>
                             <a className="hover-flip-item-wrapper text-light">
+
                               <span className="hover-flip-item">
                                 <span data-text={firstPost?.author_name}>
                                   {firstPost?.author_name}
@@ -159,7 +169,9 @@ const PostSectionThree = ({ postData, adBanner, bgColor }) => {
                   <div className="content-block post-default image-rounded mt--30">
                     {data.images[0] && (
                       <div className="post-thumbnail">
+
                         <Link href={`/${locale}/post/${data?.id}`}>
+
                           <a>
                             <Image
                               src={data.images[0]}
@@ -170,7 +182,9 @@ const PostSectionThree = ({ postData, adBanner, bgColor }) => {
                             />
                           </a>
                         </Link>
+
                         <Link href={`/${locale}/post/${data?.id}`}>
+
                           <a className="video-popup size-medium position-top-center">
                             <span className="play-icon" />
                           </a>
@@ -180,9 +194,11 @@ const PostSectionThree = ({ postData, adBanner, bgColor }) => {
                     <div className="post-content text-light">
                       <div className="post-cat">
                         <div className="post-cat-list">
+
                           <Link
                             href={`/${locale}/news?category=${data?.category.id}`}
                           >
+
                             <a className="hover-flip-item-wrapper">
                               <span className="hover-flip-item">
                                 <span data-text={data.category?.name_en}>
@@ -195,8 +211,10 @@ const PostSectionThree = ({ postData, adBanner, bgColor }) => {
                           </Link>
                         </div>
                       </div>
+
                       <h5 className="title text-light">
                         <Link href={`/${locale}/post/${data?.id}`}>
+
                           <a>
                             {locale === "ar"
                               ? data.title_ar

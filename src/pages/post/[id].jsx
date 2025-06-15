@@ -33,7 +33,9 @@ const NewsDetailsPage = ({ allPosts, initialData }) => {
     return <div>Loading...</div>;
   }
 
+
   const additionalImages = details?.images?.slice(1) || [];
+
 
   return (
     <>

@@ -46,6 +46,7 @@ const PostLayoutThree = ({ dataPost = [], postStart = 0, show = 3, bgColor = "" 
                             : data.category?.name_ar
                         }
                       >
+
                         {locale === "en"
                           ? data.category?.name_en
                           : data.category?.name_ar}
@@ -55,6 +56,7 @@ const PostLayoutThree = ({ dataPost = [], postStart = 0, show = 3, bgColor = "" 
                 </Link>
               </div>
             </div>
+
 
             <h5 className="title">
               <Link href={`/${locale}/post/${data.id}`}>
