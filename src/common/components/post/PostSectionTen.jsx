@@ -21,6 +21,9 @@ const PostSectionTen = () => {
     queryFn: getNews,
   });
 
+
+
+
   const [activeNav, setActiveNav] = useState("");
   const [tabPostData, setTabPostData] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -70,12 +73,16 @@ const PostSectionTen = () => {
     return locale === "en" ? category.name_en : category.name_ar;
   };
 
+
   const getSnippet = (text = "", length = 50) => {
+
     const cleanText = text.replace(/<[^>]+>/g, "");
     if (cleanText.length <= length) return cleanText;
     const lastSpace = cleanText.lastIndexOf(" ", length);
     return cleanText.slice(0, lastSpace > 0 ? lastSpace : length) + "...";
   };
+
+
 
   return (
     <div className="axil-post-grid-area axil-section-gap bg-color-white">
@@ -115,7 +122,9 @@ const PostSectionTen = () => {
                           key={data.id}
                         >
                           <div className="post-thumbnail">
+
                             <Link href={`/${locale}/post/${data.id}`}>
+
                               <a>
                                 {getImageSrc(data.images) ? (
                                   <Image
@@ -145,7 +154,9 @@ const PostSectionTen = () => {
                             <div className="post-cat">
                               <div className="post-cat-list">
                                 <Link
+
                                   href={`/${locale}/news?category=${data?.category?.id}`}
+
                                 >
                                   <a className="hover-flip-item-wrapper">
                                     <span className="hover-flip-item">
@@ -166,7 +177,9 @@ const PostSectionTen = () => {
                               </div>
                             </div>
                             <h4 className="title">
+
                               <Link href={`/${locale}/post/${data.id}`}>
+
                                 <a>
                                   {locale === "en"
                                     ? data.title_en
@@ -174,6 +187,7 @@ const PostSectionTen = () => {
                                 </a>
                               </Link>
                             </h4>
+
 
                             <div className="content">
                               <p>
@@ -184,6 +198,7 @@ const PostSectionTen = () => {
                                 )}
                               </p>
                             </div>
+
                           </div>
                         </div>
                       ))}
@@ -193,7 +208,9 @@ const PostSectionTen = () => {
                       <div className="content-block content-block post-grid post-grid-transparent">
                         {getImageSrc(firstPost?.images) && (
                           <div className="post-thumbnail">
+
                             <Link href={`/${locale}/post/${firstPost?.id}`}>
+
                               <a>
                                 <Image
                                   src={getImageSrc(firstPost?.images)}
@@ -215,7 +232,9 @@ const PostSectionTen = () => {
                             <div className="post-cat">
                               <div className="post-cat-list">
                                 <Link
+
                                   href={`/${locale}/news?category=${firstPost?.category.id}`}
+
                                 >
                                   <a className="hover-flip-item-wrapper">
                                     <span className="hover-flip-item">
@@ -236,7 +255,9 @@ const PostSectionTen = () => {
                               </div>
                             </div>
                             <h3 className="title">
+
                               <Link href={`/${locale}/post/${firstPost?.id}`}>
+
                                 <a>
                                   {locale === "en"
                                     ? firstPost?.title_en
@@ -244,6 +265,8 @@ const PostSectionTen = () => {
                                 </a>
                               </Link>
                             </h3>
+
+                            
                           </div>
                         </div>
                       </div>

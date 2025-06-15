@@ -22,22 +22,22 @@ const PostLayoutTwo = ({ postStart = 0, show = 5, bgColor = "" }) => {
 
   if (isLoading) return <p>Loading posts...</p>;
   if (error) return <p>Error loading posts: {error.message}</p>;
-
   if (!dataPost || dataPost.length === 0) return <p>لا يوجد بيانات لعرضها.</p>;
 
   return (
     <>
-      {/* hi* */}
-
       {dataPost
         .filter((data) => data.category?.name_ar === "سياسة")
         .slice(postStart, postStart + show)
         .map((data, index) => {
           const title = lang === "en" ? data.title_en : data.title_ar;
+          const description =
+            lang === "en" ? data.description_en : data.description_ar;
           const featureImg = data.images?.length > 0 ? data.images[0] : null;
           const categoryName =
             lang === "en" ? data.category?.name_en : data.category?.name_ar;
           const createdAt = data.created_at;
+
           let formattedDate = "";
           if (createdAt) {
             const dateObj = new Date(createdAt);
@@ -62,7 +62,7 @@ const PostLayoutTwo = ({ postStart = 0, show = 5, bgColor = "" }) => {
                 data.sticky ? "sticky" : ""
               } ${data.postFormat === "quote" ? "format-quote" : ""}`}
             >
-              {featureImg ? (
+              {featureImg && (
                 <div className="post-thumbnail">
                   <Link href={`/post/${data.id}`}>
                     <a>
@@ -75,7 +75,7 @@ const PostLayoutTwo = ({ postStart = 0, show = 5, bgColor = "" }) => {
                       />
                     </a>
                   </Link>
-                  {data.playBtn === true && (
+                  {data.playBtn && (
                     <Link href={`/post/${data.id}`}>
                       <a className="video-popup size-medium position-top-center icon-color-secondary">
                         <span className="play-icon"></span>
@@ -83,7 +83,7 @@ const PostLayoutTwo = ({ postStart = 0, show = 5, bgColor = "" }) => {
                     </Link>
                   )}
                 </div>
-              ) : null}
+              )}
 
               <div className="post-content">
                 <div className="post-cat">
@@ -127,14 +127,31 @@ const PostLayoutTwo = ({ postStart = 0, show = 5, bgColor = "" }) => {
                   </a>
                 </Link>
 
-                {/* issuse */}
+                {/* وصف المقال أو الفيديو */}
+                {description && (
+                  <p className="post-excerpt mt--15">
+                    {description}
+                  </p>
+                )}
+
+                {/* زر اقرأ المزيد */}
+                <div className="mt--10">
+                  <Link href={`/post/${data.id}`}>
+                    <a className="hover-flip-item-wrapper d-inline-block">
+                      <span className="hover-flip-item">
+                        <span data-text={lang === "ar" ? "اقرأ المزيد" : "Read more"}>
+                          {lang === "ar" ? "اقرأ المزيد" : "Read more"}
+                        </span>
+                      </span>
+                    </a>
+                  </Link>
+                </div>
+
                 <div className="post-meta-wrapper">
                   <div className="post-meta">
                     <div className="content">
                       <h6 className="post-author-name">
-                        <Link
-                          href={`/author/${slugify(data.author_name || "")}`}
-                        >
+                        <Link href={`/author/${slugify(data.author_name || "")}`}>
                           <a className="hover-flip-item-wrapper">
                             <span className="hover-flip-item">
                               <span data-text={data.author_name || " "}>

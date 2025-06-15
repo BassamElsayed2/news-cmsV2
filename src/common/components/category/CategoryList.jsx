@@ -2,10 +2,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { SectionTitleTwo } from "../../elements/sectionTitle/SectionTitle";
 import {removeDuplicates, slugify} from '../../utils';
+import { useRouter } from "next/router";
 
 const CategoryList = ({cateData}) => {
 
   const uniqueCategory = removeDuplicates(cateData, "cate");
+    const { locale } = useRouter();
     
   return (
     <div className="axil-categories-list axil-section-gap bg-color-grey">
@@ -20,7 +22,7 @@ const CategoryList = ({cateData}) => {
               {uniqueCategory.slice(0, 6).map((data, index) => (
                 <div className="single-cat" key={index}>
                 <div className="inner">
-                <Link href={`/category/${slugify(data.cate)}`}>
+                <Link href={`/category/${slugify(data.cate)}`}locale={locale}>
                   <a>
                     <div className="thumbnail">
                     <Image

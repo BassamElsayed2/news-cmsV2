@@ -48,8 +48,11 @@ const HeaderOne = ({ pClass, darkLogo, lightLogo, postData }) => {
             </div>
             <div className="col-xl-6 d-none d-xl-block">
               <div className="mainmenu-wrapper">
-                <nav className="mainmenu-nav">
+                <nav className="mainmenu-nav d-flex justify-content-between align-items-center">
                   <Nav />
+                  <div className="language-switcher-wrapper">
+                    <LanguageSwitcher />
+                  </div>
                 </nav>
               </div>
             </div>
@@ -74,7 +77,6 @@ const HeaderOne = ({ pClass, darkLogo, lightLogo, postData }) => {
           </div>
         </div>
       </header>
-
       <MobileMenu menuShow={showMMenu} menuHide={MobileHideHandler} />
     </>
   );
