@@ -60,8 +60,11 @@ const Nav = ({ posts }) => {
       </li>
       <li className="menu-item-has-children">
         <Link href={`/${locale}/news`}>
-          {locale === "en" ? "All News" : "جميع الأخبار"}
+          <a className="nav-link" onClick={() => setSelectedCategory(null)}>
+            {locale === "en" ? "All News" : "جميع الأخبار"}
+          </a>
         </Link>
+
       </li>
 
       <li className="menu-item-has-children">
