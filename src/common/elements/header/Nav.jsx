@@ -62,8 +62,12 @@ const Nav = ({ posts }) => {
       </li>
       <li className="menu-item">
         <Link href={`/${locale}/news`}>
-          <a className="nav-link">{locale === "en" ? "All News" : "جميع الأخبار"}</a>
+
+          <a className="nav-link" onClick={() => setSelectedCategory(null)}>
+            {locale === "en" ? "All News" : "جميع الأخبار"}
+          </a>
         </Link>
+
       </li>
       <li className="menu-item">
         <Link href={`/${locale}/gallery`}>

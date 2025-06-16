@@ -15,12 +15,12 @@ const WidgetInstagramPost = () => {
   return (
     <div className="axil-single-widget widget widget_instagram mb--30">
       <h5 className="widget-title">
-        {locale === "en" ? "Our Galleries" : "معارضنا"}
+        {locale === "en" ? "Our Gallery" : "معرضنا"}
       </h5>
       <ul className="instagram-post-list-wrapper">
         {gallery?.map((data) => (
           <li className="instagram-post-list" key={data.id}>
-            <a href={`/gallery/${data.id}`}>
+            <a href={`/${locale}/gallery/${data.id}`}>
               <Image
                 src={data.image_urls[0]}
                 height={105}

@@ -74,13 +74,12 @@ const PostSectionTen = () => {
   };
 
 
-  const getSnippet = (text = "", length = 100) => {
+  const getSnippet = (text = "", length = 50) => {
     const cleanText = text.replace(/<[^>]+>/g, "");
     if (cleanText.length <= length) return cleanText;
     const lastSpace = cleanText.lastIndexOf(" ", length);
     return cleanText.slice(0, lastSpace > 0 ? lastSpace : length) + "...";
   };
-
 
   return (
     <div className="axil-post-grid-area axil-section-gap bg-color-white">
@@ -152,9 +151,13 @@ const PostSectionTen = () => {
                             <div className="post-cat">
                               <div className="post-cat-list">
                                 <Link
+<<<<<<< HEAD
 
                                   href={`/${locale}/news?category=${data?.category?.id}`}
 
+=======
+                                  href={`/${locale}/news?category=${data?.category?.id}`}
+>>>>>>> main
                                 >
                                   <a className="hover-flip-item-wrapper">
                                     <span className="hover-flip-item">
@@ -186,6 +189,7 @@ const PostSectionTen = () => {
                               </Link>
                             </h4>
 
+<<<<<<< HEAD
 
                             <div className="content">
                               <p>{getSnippet(locale === "en" ? data.content_en : data.content_ar)}</p>
@@ -201,6 +205,17 @@ const PostSectionTen = () => {
                               </Link>
                             </div>
 
+=======
+                            <div className="content">
+                              <p>
+                                {getSnippet(
+                                  locale === "en"
+                                    ? data.content_en
+                                    : data.content_ar
+                                )}
+                              </p>
+                            </div>
+>>>>>>> main
                           </div>
                         </div>
                       ))}
