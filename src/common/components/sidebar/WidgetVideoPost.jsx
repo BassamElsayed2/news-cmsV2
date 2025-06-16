@@ -7,6 +7,7 @@ const WidgetVideoPost = ({ postData }) => {
 
   const videoPosts = postData?.filter((post) => post.yt_code);
 
+
   return (
     <div className="axil-single-widget widget-style-2 widget widget_post mt--30">
       <h5 className="widget-title">

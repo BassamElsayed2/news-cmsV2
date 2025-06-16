@@ -54,24 +54,29 @@ const Nav = ({ posts }) => {
   };
 
   return (
-    <ul className="mainmenu">
-      <li className="menu-item-has-children">
-        <Link href="/">{locale === "en" ? "Home" : "الرئيسية"}</Link>
+    <ul className="mainmenu d-flex align-items-center">
+      <li className="menu-item">
+        <Link href="/">
+          <a className="nav-link">{locale === "en" ? "Home" : "الرئيسية"}</a>
+        </Link>
       </li>
-      <li className="menu-item-has-children">
+      <li className="menu-item">
         <Link href={`/${locale}/news`}>
-          {locale === "en" ? "All News" : "جميع الأخبار"}
-        </Link>
-      </li>
 
-      <li className="menu-item-has-children">
+          <a className="nav-link" onClick={() => setSelectedCategory(null)}>
+            {locale === "en" ? "All News" : "جميع الأخبار"}
+          </a>
+        </Link>
+
+      </li>
+      <li className="menu-item">
         <Link href={`/${locale}/gallery`}>
-          <a>{locale === "en" ? "Gallery" : "معرض الصور"}</a>
+          <a className="nav-link">{locale === "en" ? "Gallery" : "معرض الصور"}</a>
         </Link>
       </li>
-      <li>
+      <li className="menu-item">
         <Link href={`/${locale}/about`}>
-          <a>{locale === "en" ? "About Us" : "عنا"}</a>
+          <a className="nav-link">{locale === "en" ? "About Us" : "عنا"}</a>
         </Link>
       </li>
     </ul>

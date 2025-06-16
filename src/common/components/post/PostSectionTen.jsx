@@ -21,6 +21,9 @@ const PostSectionTen = () => {
     queryFn: getNews,
   });
 
+
+
+
   const [activeNav, setActiveNav] = useState("");
   const [tabPostData, setTabPostData] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -70,6 +73,7 @@ const PostSectionTen = () => {
     return locale === "en" ? category.name_en : category.name_ar;
   };
 
+
   const getSnippet = (text = "", length = 50) => {
     const cleanText = text.replace(/<[^>]+>/g, "");
     if (cleanText.length <= length) return cleanText;
@@ -115,7 +119,9 @@ const PostSectionTen = () => {
                           key={data.id}
                         >
                           <div className="post-thumbnail">
+
                             <Link href={`/${locale}/post/${data.id}`}>
+
                               <a>
                                 {getImageSrc(data.images) ? (
                                   <Image
@@ -145,7 +151,13 @@ const PostSectionTen = () => {
                             <div className="post-cat">
                               <div className="post-cat-list">
                                 <Link
+<<<<<<< HEAD
+
                                   href={`/${locale}/news?category=${data?.category?.id}`}
+
+=======
+                                  href={`/${locale}/news?category=${data?.category?.id}`}
+>>>>>>> main
                                 >
                                   <a className="hover-flip-item-wrapper">
                                     <span className="hover-flip-item">
@@ -166,7 +178,9 @@ const PostSectionTen = () => {
                               </div>
                             </div>
                             <h4 className="title">
+
                               <Link href={`/${locale}/post/${data.id}`}>
+
                                 <a>
                                   {locale === "en"
                                     ? data.title_en
@@ -175,6 +189,23 @@ const PostSectionTen = () => {
                               </Link>
                             </h4>
 
+<<<<<<< HEAD
+
+                            <div className="content">
+                              <p>{getSnippet(locale === "en" ? data.content_en : data.content_ar)}</p>
+                              <Link href={`/${locale}/post/${data.id}`}>
+                                <a className="hover-flip-item-wrapper mt--5 d-inline-block">
+                                  <span className="hover-flip-item">
+                                    <span data-text={locale === "ar" ? "اقرأ المزيد" : "Read more"}>
+                                      {locale === "ar" ? "اقرأ المزيد" : "Read more"}
+                                    </span>
+                                  </span>
+                                </a>
+
+                              </Link>
+                            </div>
+
+=======
                             <div className="content">
                               <p>
                                 {getSnippet(
@@ -184,6 +215,7 @@ const PostSectionTen = () => {
                                 )}
                               </p>
                             </div>
+>>>>>>> main
                           </div>
                         </div>
                       ))}
@@ -193,7 +225,9 @@ const PostSectionTen = () => {
                       <div className="content-block content-block post-grid post-grid-transparent">
                         {getImageSrc(firstPost?.images) && (
                           <div className="post-thumbnail">
+
                             <Link href={`/${locale}/post/${firstPost?.id}`}>
+
                               <a>
                                 <Image
                                   src={getImageSrc(firstPost?.images)}
@@ -215,7 +249,9 @@ const PostSectionTen = () => {
                             <div className="post-cat">
                               <div className="post-cat-list">
                                 <Link
+
                                   href={`/${locale}/news?category=${firstPost?.category.id}`}
+
                                 >
                                   <a className="hover-flip-item-wrapper">
                                     <span className="hover-flip-item">
@@ -236,7 +272,9 @@ const PostSectionTen = () => {
                               </div>
                             </div>
                             <h3 className="title">
+
                               <Link href={`/${locale}/post/${firstPost?.id}`}>
+
                                 <a>
                                   {locale === "en"
                                     ? firstPost?.title_en
@@ -244,6 +282,8 @@ const PostSectionTen = () => {
                                 </a>
                               </Link>
                             </h3>
+
+                            
                           </div>
                         </div>
                       </div>
