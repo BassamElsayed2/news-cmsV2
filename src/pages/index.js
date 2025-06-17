@@ -27,7 +27,7 @@ const TechBlog = ({ allPosts }) => {
 
   return (
     <>
-      <HeadTitle pageTitle="Tech Blog" />
+      <HeadTitle />
       <HeaderThree postData={allPosts} />
       <PostSectionNine news={news} />
       <CategoryListSlide cateData={allPosts} />
