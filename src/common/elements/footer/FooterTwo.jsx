@@ -12,14 +12,14 @@ const FooterTwo = () => {
             <div className="col-lg-4 col-md-4">
               <div className="logo">
                 <Link href="/">
-                    <a>
+                  <a>
                     <Image
-                        src="/images/logo/logo-white2.webp"
-                        alt="Logo Images"
-                        height={35}
-                        width={134}
+                      src="/images/logo/logo.jpg"
+                      alt="Logo Images"
+                      height={35}
+                      width={134}
                     />
-                    </a>
+                  </a>
                 </Link>
               </div>
             </div>
@@ -64,50 +64,50 @@ const FooterTwo = () => {
               <div className="copyright-left">
                 <ul className="mainmenu justify-content-start">
                   <li>
-                  <Link href="/about">
-                    <a className="hover-flip-item-wrapper">
-                      <span className="hover-flip-item">
-                        <span data-text="Contact Us">Contact Us</span>
-                      </span>
-                    </a>
-                    </Link>
-                  </li>
-                  <li>
-                  <Link href="/privacy-policy">
-                    <a className="hover-flip-item-wrapper">
-                      <span className="hover-flip-item">
-                        <span data-text="Privacy Policy">Privacy Policy</span>
-                      </span>
-                    </a>
-                    </Link>
-                  </li>
-                  <li>
-                  <Link href="#">
-                    <a className="hover-flip-item-wrapper">
-                      <span className="hover-flip-item">
-                        <span data-text="AdChoices">AdChoices</span>
-                      </span>
-                    </a>
-                    </Link>
-                  </li>
-                  <li>
-                  <Link href="#">
-                    <a className="hover-flip-item-wrapper">
-                      <span className="hover-flip-item">
-                        <span data-text="Advertise with Us">
-                          Advertise with Us
+                    <Link href="/about">
+                      <a className="hover-flip-item-wrapper">
+                        <span className="hover-flip-item">
+                          <span data-text="Contact Us">Contact Us</span>
                         </span>
-                      </span>
-                    </a>
+                      </a>
                     </Link>
                   </li>
                   <li>
-                  <Link href="#">
-                    <a className="hover-flip-item-wrapper">
-                      <span className="hover-flip-item">
-                        <span data-text="Blogar Store">Blogar Store</span>
-                      </span>
-                    </a>
+                    <Link href="/privacy-policy">
+                      <a className="hover-flip-item-wrapper">
+                        <span className="hover-flip-item">
+                          <span data-text="Privacy Policy">Privacy Policy</span>
+                        </span>
+                      </a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="#">
+                      <a className="hover-flip-item-wrapper">
+                        <span className="hover-flip-item">
+                          <span data-text="AdChoices">AdChoices</span>
+                        </span>
+                      </a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="#">
+                      <a className="hover-flip-item-wrapper">
+                        <span className="hover-flip-item">
+                          <span data-text="Advertise with Us">
+                            Advertise with Us
+                          </span>
+                        </span>
+                      </a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="#">
+                      <a className="hover-flip-item-wrapper">
+                        <span className="hover-flip-item">
+                          <span data-text="Blogar Store">Blogar Store</span>
+                        </span>
+                      </a>
                     </Link>
                   </li>
                 </ul>
@@ -115,7 +115,9 @@ const FooterTwo = () => {
             </div>
             <div className="col-lg-3 col-md-12">
               <div className="copyright-right text-start text-lg-end mt_md--20 mt_sm--20">
-                <p className="b3">All Rights Reserved © {new Date().getFullYear()}</p>
+                <p className="b3">
+                  All Rights Reserved © {new Date().getFullYear()}
+                </p>
               </div>
             </div>
           </div>

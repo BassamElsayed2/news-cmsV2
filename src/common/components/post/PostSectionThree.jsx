@@ -14,6 +14,7 @@ const PostSectionThree = ({ postData, adBanner, bgColor }) => {
 
   return (
     <div
+      id="videos"
       className={`axil-video-post-area axil-section-gap ${
         bgColor || "bg-color-black"
       }`}

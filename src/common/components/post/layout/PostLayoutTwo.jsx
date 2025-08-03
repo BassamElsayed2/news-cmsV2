@@ -112,6 +112,7 @@ const PostLayoutTwo = ({ postStart = 0, show = 5, bgColor = "" }) => {
                   </h4>
                 )}
                 <div
+                  className="post-details-content"
                   style={{ paddingBottom: "10px", marginTop: "10px" }}
                   dangerouslySetInnerHTML={{
                     __html:

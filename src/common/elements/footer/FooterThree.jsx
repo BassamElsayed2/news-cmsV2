@@ -67,11 +67,7 @@ const FooterThree = ({ bgColor, darkLogo, lightLogo }) => {
                         className="dark-logo"
                         width={141}
                         height={37}
-                        src={
-                          colorMode === "Dark"
-                            ? lightLogo || "/images/logo/logo-white2.webp"
-                            : darkLogo || "/images/logo/logo-black.webp"
-                        }
+                        src="/images/logo/logo.jpg"
                         alt="Blogar logo"
                       />
                     </a>

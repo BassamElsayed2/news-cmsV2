@@ -59,16 +59,14 @@ const HeaderThree = ({ darkLogo, lightLogo, postData }) => {
         <div className="header-top">
           <div className="container">
             <div className="row align-items-center">
-              <div className="col-lg-6 col-md-8 col-sm-12">
+              <div className="col-lg-6 col-md-8 col-6">
                 <div className="header-top-bar d-flex flex-wrap align-items-center justify-content-center justify-content-md-start">
-                  <ul className="header-top-date liststyle d-flex flrx-wrap align-items-center mr--20">
-                    <li>
+                  <ul className="header-top-nav liststyle d-flex flrx-wrap align-items-center">
+                    <li className="d-none d-md-block">
                       <Link href="#">
                         <a>{dateFormate()}</a>
                       </Link>
                     </li>
-                  </ul>
-                  <ul className="header-top-nav liststyle d-flex flrx-wrap align-items-center">
                     <li>
                       <Link href="#">
                         <a>{t("advertisement")}</a>
@@ -87,9 +85,18 @@ const HeaderThree = ({ darkLogo, lightLogo, postData }) => {
                   </ul>
                 </div>
               </div>
-              <div className="col-lg-6 col-md-4 col-sm-12">
+              <div className="col-lg-6 col-md-4 col-6">
                 <ul className="social-share-transparent md-size justify-content-center justify-content-md-end">
                   <LanguageSwitcher />
+                  {/* Start Hamburger Menu  */}
+                  <div className="hamburger-menu d-block d-xl-none mr--10">
+                    <div className="hamburger-inner">
+                      <div className="icon" onClick={MobileShowHandler}>
+                        <i className="fal fa-bars" />
+                      </div>
+                    </div>
+                  </div>
+                  {/* End Hamburger Menu  */}
                 </ul>
               </div>
             </div>
@@ -120,7 +127,7 @@ const HeaderThree = ({ darkLogo, lightLogo, postData }) => {
                 </div>
               </div>
               <div className="col-lg-9 col-md-8 col-sm-6">
-                <div className="banner-add">
+                <div className="banner-add d-none d-md-block">
                   {homeAds?.[0] && (
                     <Link href={homeAds[0].link || "#"}>
                       <a>

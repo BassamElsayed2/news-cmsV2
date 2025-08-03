@@ -32,7 +32,7 @@ const HeaderOne = ({ pClass, darkLogo, lightLogo, postData }) => {
       <header className={`header axil-header ${pClass || ""}`}>
         <div className="header-wrap">
           <div className="row justify-content-between align-items-center">
-            <div className="col-xl-3 col-lg-3 col-md-4 col-sm-3 col-12">
+            <div className="col-xl-2 col-lg-2 col-md-3 col-sm-2 col-12">
               <div className="logo">
                 <Link href="/">
                   <a>
@@ -40,19 +40,14 @@ const HeaderOne = ({ pClass, darkLogo, lightLogo, postData }) => {
                       className={logo?.logo_url || "dark-logo"}
                       width={141}
                       height={37}
-                      src={
-                        (colorMode === "Dark"
-                          ? lightLogo || "/images/logo/logo-white2.webp"
-                          : darkLogo || "/images/logo/logo-black.webp") ||
-                        "/images/logo/logo-black.webp"
-                      }
+                      src="/images/logo/logo.jpg"
                       alt="Blogar logo"
                     />
                   </a>
                 </Link>
               </div>
             </div>
-            <div className="col-xl-6 d-none d-xl-block">
+            <div className="col-xl-7 d-none d-xl-block">
               <div className="mainmenu-wrapper">
                 <nav className="mainmenu-nav">
                   <Nav />

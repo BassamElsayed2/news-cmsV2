@@ -65,8 +65,18 @@ const Nav = ({ posts }) => {
       </li>
 
       <li className="menu-item-has-children">
+        <Link href={`/${locale}/#videos`}>
+          <a>{locale === "en" ? "Videos" : "جميع الفديوهات"}</a>
+        </Link>
+      </li>
+      <li className="menu-item-has-children">
         <Link href={`/${locale}/gallery`}>
           <a>{locale === "en" ? "Gallery" : "معرض الصور"}</a>
+        </Link>
+      </li>
+      <li className="menu-item-has-children">
+        <Link href={`/${locale}/#`}>
+          <a>{locale === "en" ? "Contact us" : "تواصل معنا"}</a>
         </Link>
       </li>
       <li>

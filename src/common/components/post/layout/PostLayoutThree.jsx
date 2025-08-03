@@ -101,7 +101,7 @@ const PostLayoutThree = ({
               )}
 
               <div
-                className="mt-5"
+                className="mt-5 post-details-content"
                 style={{ paddingBottom: "10px" }}
                 dangerouslySetInnerHTML={{
                   __html:

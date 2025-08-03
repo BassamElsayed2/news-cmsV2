@@ -74,7 +74,7 @@ Post List Style
       a {
         position: relative;
         display: inline;
-        font-size: 9pt;
+        font-size: 11pt;
         font-weight: normal;
         color: #727272;
         background-image: -webkit-gradient(
@@ -131,10 +131,10 @@ Post List Style
     .hover-flip-item {
       span {
         &::before {
-          color: var(--color-heading);
+          color: var(--color-midgray);
         }
         &::after {
-          color: var(--color-primary);
+          color: #06877a;
         }
       }
     }
@@ -599,7 +599,7 @@ Post List Style
                       color: var(--color-white);
                     }
                     &::after {
-                      color: var(--color-primary);
+                      color: #06877a;
                     }
                   }
                 }
@@ -978,7 +978,7 @@ Post Category
         &.hover-flip-item-wrapper {
           span {
             &::after {
-              color: var(--color-primary);
+              color: #06877a;
             }
           }
         }
@@ -1025,10 +1025,10 @@ Post Category
   .hover-flip-item {
     span {
       &::before {
-        color: var(--color-heading);
+        color: var(--color-midgray);
       }
       &::after {
-        color: var(--color-primary);
+        color: #06877a;
       }
     }
   }

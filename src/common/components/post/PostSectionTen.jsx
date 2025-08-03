@@ -176,13 +176,23 @@ const PostSectionTen = () => {
                             </h4>
 
                             <div className="content">
-                              <p>
-                                {getSnippet(
-                                  locale === "en"
-                                    ? data.content_en
-                                    : data.content_ar
-                                )}
-                              </p>
+                              <div
+                                className="post-details-content"
+                                style={{
+                                  paddingBottom: "10px",
+                                  marginTop: "10px",
+                                }}
+                                dangerouslySetInnerHTML={{
+                                  __html:
+                                    (locale === "en"
+                                      ? data.content_en
+                                      : data.content_ar
+                                    )
+                                      ?.split(" ")
+                                      .slice(0, 20)
+                                      .join(" ") + "...",
+                                }}
+                              ></div>
                             </div>
                           </div>
                         </div>
