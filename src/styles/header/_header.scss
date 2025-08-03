@@ -1,6 +1,9 @@
 /*--------------------
 Header Styles  
 -----------------------*/
+.banner-add{border-radius: 20px;}
+.Ads{border-radius: 7px;}
+.logoz{padding-right:50px}
 .axil-header {
     padding: 0 60px;
     background: #fff;
@@ -9,7 +12,7 @@ Header Styles
     @media #{$laptop-device} {
         padding: 0 30px;
     }
-    @media only screen and (max-width: 1199px) {
+    @media only screen and (max-width: 1199px) { 
         padding: 20px 30px;
     }
 
@@ -385,8 +388,8 @@ button {
                         margin: 0 5px;
                     }
                     a {
-                        color: #878787;
-                        font-size: 14px;
+                        color: #09897C;
+                        font-size: 12px;
                         line-height: 22px;
                         display: inline-block;
                         transition: 0.3s;
@@ -396,8 +399,10 @@ button {
                     }
                 }
             }
-
+           
+            
             .header-top-date {
+                padding-right:50px;
                 @media #{$sm-layout} {
                     margin-right: 5px !important;
                 }
@@ -406,7 +411,7 @@ button {
                     margin-bottom: 0;
                     a {
                         color: #878787;
-                        font-size: 14px;
+                        font-size: 12px;
                         line-height: 22px;
                         display: inline-block;
                     }

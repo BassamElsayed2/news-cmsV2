@@ -4,11 +4,11 @@
 a {
     &.axil-link-button {
         text-decoration: none;
-        @extend %color-primary;
+        color:rgb(40, 40, 40);
         @extend %transition;
         font-weight: var(--p-medium);
-        font-size: var(--font-size-b2);
-        line-height: 22px;
+        font-size: 10pt;
+        line-height: 12px;
 
         &:hover {
             color: var(--color-secondary);

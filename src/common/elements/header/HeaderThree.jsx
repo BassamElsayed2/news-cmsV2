@@ -100,17 +100,17 @@ const HeaderThree = ({ darkLogo, lightLogo, postData }) => {
           <div className="container">
             <div className="row align-items-center">
               <div className="col-lg-3 col-md-4 col-sm-6">
-                <div className="logo">
+                <div className="logoz">
                   <Link href="/">
                     <a>
                       <Image
                         className={logo?.logo_url || "dark-logo"}
-                        width={141}
-                        height={37}
+                        width={200}
+                        height={52}
                         src={
                           (colorMode === "Dark"
-                            ? lightLogo || "/images/logo/logo-white2.webp"
-                            : darkLogo || "/images/logo/logo-black.webp") ||
+                            ? lightLogo || "/images/logo/logo.jpg"
+                            : darkLogo || "/images/logo/logo.jpg") ||
                           "/images/logo/logo-black.webp"
                         }
                         alt="Blogar logo"
@@ -120,7 +120,7 @@ const HeaderThree = ({ darkLogo, lightLogo, postData }) => {
                 </div>
               </div>
               <div className="col-lg-9 col-md-8 col-sm-6">
-                <div className="banner-add text-end">
+                <div className="banner-add">
                   {homeAds?.[0] && (
                     <Link href={homeAds[0].link || "#"}>
                       <a>
@@ -128,6 +128,7 @@ const HeaderThree = ({ darkLogo, lightLogo, postData }) => {
                           src={homeAds[0].image_url}
                           width={728}
                           height={92}
+                          className="Ads"
                           alt={homeAds[0].title_en}
                         />
                       </a>

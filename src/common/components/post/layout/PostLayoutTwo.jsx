@@ -111,6 +111,16 @@ const PostLayoutTwo = ({ postStart = 0, show = 5, bgColor = "" }) => {
                     </Link>
                   </h4>
                 )}
+                <div
+                  style={{ paddingBottom: "10px", marginTop: "10px" }}
+                  dangerouslySetInnerHTML={{
+                    __html:
+                      (lang === "en" ? data.content_en : data.content_ar)
+                        ?.split(" ")
+                        .slice(0, 40)
+                        .join(" ") + "...",
+                  }}
+                ></div>
 
                 {/* issuse */}
                 <div className="post-meta-wrapper">

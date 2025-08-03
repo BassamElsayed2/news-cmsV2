@@ -18,12 +18,17 @@ const HeadTitle = () => {
       <title>
         {locale === "ar" ? pageTitle?.site_name_ar : pageTitle?.site_name_en}
       </title>
+      
       <meta name="robots" content="noindex, follow" />
       <meta name="description" content="Personal Blog Next JS Template" />
       <meta
         name="viewport"
         content="width=device-width, initial-scale=1, shrink-to-fit=no"
       />
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      </link>
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin></link>
+      <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@100..900&display=swap" rel="stylesheet"></link>
       <link
         rel="icon"
         type="image/x-icon"

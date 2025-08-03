@@ -50,16 +50,21 @@ Category Styles
             }
         }
         .content {
+            background:#024d46;
+            font-family: "Noto Kufi Arabic", sans-serif;
             padding-left: 5px;
             padding-right: 5px;
             position: absolute;
             width: 100%;
             text-align: center;
             bottom: 0;
-            padding-bottom: 22px;
+           
             z-index: 2;
             .title {
+                 font-family: "Noto Kufi Arabic", sans-serif;
                 margin-bottom: 0;
+                font-size:11pt;
+                font-weight: normal;
                 color: var(--color-white);
             }
         }

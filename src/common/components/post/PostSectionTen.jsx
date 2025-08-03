@@ -109,7 +109,7 @@ const PostSectionTen = () => {
                 <Tab.Pane className="single-post-grid" eventKey={activeNav}>
                   <div className="row mt--40">
                     <div className="col-xl-5 col-lg-6 col-md-12 col-12">
-                      {tabPostData.slice(-5).map((data) => (
+                      {tabPostData.slice(-4).map((data) => (
                         <div
                           className="content-block post-medium post-medium-border border-thin"
                           key={data.id}
